@@ -171,6 +171,18 @@
         <p class="wheel-hint">Drag to rotate &middot; Tap a category to open it</p>
       </div>
 
+      <!-- Horizontal sliding category carousel (mobile-friendly alternative to the wheel) -->
+      <div class="container">
+        <div class="slider-stage">
+          <button class="slider-arrow slider-arrow-left" id="slider-prev" aria-label="Previous categories">&larr;</button>
+          <div class="slider-track" id="slider-track">
+            <!-- category slide cards injected by JS -->
+          </div>
+          <button class="slider-arrow slider-arrow-right" id="slider-next" aria-label="Next categories">&rarr;</button>
+        </div>
+        <p class="wheel-hint">Swipe or drag &middot; Tap a card to open it</p>
+      </div>
+
       <!-- Detail card -->
       <div class="container">
         <div class="category-detail" id="category-detail" aria-live="polite">
@@ -280,22 +292,22 @@
         </div>
 
         <div class="future-grid">
-          <div class="future-card reveal" data-reveal="up" style="--d:0ms">
+          <div class="future-card reveal" data-reveal="up" style="--d:0ms" data-category="car" role="button" tabindex="0">
             <div class="future-icon">🚗</div>
             <h3>Car Rentals</h3>
             <p>Self-drive and chauffeur options for every trip.</p>
           </div>
-          <div class="future-card reveal" data-reveal="up" style="--d:60ms">
+          <div class="future-card reveal" data-reveal="up" style="--d:60ms" data-category="bike" role="button" tabindex="0">
             <div class="future-icon">🏍️</div>
             <h3>Bike Rentals</h3>
             <p>Daily and hourly two-wheeler rentals nearby.</p>
           </div>
-          <div class="future-card reveal" data-reveal="up" style="--d:120ms">
+          <div class="future-card reveal" data-reveal="up" style="--d:120ms" data-category="electronics" role="button" tabindex="0">
             <div class="future-icon">💻</div>
             <h3>Electronics</h3>
             <p>Laptops, cameras and gadgets, rented not bought.</p>
           </div>
-          <div class="future-card reveal" data-reveal="up" style="--d:180ms">
+          <div class="future-card reveal" data-reveal="up" style="--d:180ms" data-category="hall" role="button" tabindex="0">
             <div class="future-icon">💍</div>
             <h3>Marriage Hall</h3>
             <p>Book verified venues for weddings and events.</p>

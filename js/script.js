@@ -24,8 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- 2. PARTICLE BACKGROUND ---------- */
-  initParticles();
+  /* ---------- 2. PARTICLE BACKGROUND ----------
+     Disabled as part of the premium white theme (no glowing
+     particles/stars). initParticles() is left defined below,
+     untouched, in case it's ever needed again — it's simply
+     not invoked here. */
+  // initParticles();
   initHeroSlideshow();
 
   /* ---------- 3. HEADER + MOBILE NAV ---------- */
@@ -90,6 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- 7. CIRCULAR CATEGORY WHEEL ---------- */
   initCategoryWheel();
+
+  /* ---------- 7b. HORIZONTAL CATEGORY SLIDER ---------- */
+  initCategorySlider();
 
   /* ---------- 8. ANY OTHER CATEGORY CARDS (e.g. future-services grid) ----------
      Any element on the page with a [data-category] attribute goes through
@@ -234,6 +241,117 @@ function openCategory(key) {
     return;
   }
   // Everything else -> unchanged "Coming Soon" behavior handled by caller.
+}
+
+/* =========================================================
+   Horizontal sliding category carousel
+   - Mobile-friendly alternative sitting right below the wheel.
+   - Same categories, same LIVE_CATEGORIES navigation rule:
+     Room/Apartment/PG/Hostel -> navigate straight to their page.
+     Car/Bike/Scooter/Electronics/Marriage Hall -> open the
+     existing "Coming Soon" detail card (unchanged behavior).
+   - Drag-to-scroll on desktop (mouse) + native touch swipe on
+     mobile, with scroll-snap for a clean settle.
+   ========================================================= */
+function initCategorySlider() {
+  const track = document.getElementById('slider-track');
+  const prevBtn = document.getElementById('slider-prev');
+  const nextBtn = document.getElementById('slider-next');
+  const detail = document.getElementById('category-detail');
+  const detailTitle = document.getElementById('detail-title');
+  const detailDesc = document.getElementById('detail-desc');
+  const detailIcon = document.getElementById('detail-icon');
+  if (!track) return;
+
+  // Same category list used by the wheel — kept in sync manually
+  // since the wheel builds its own DOM separately.
+  const categories = [
+    { key: 'room', label: 'Room', icon: '🛏️', desc: 'Find verified single and shared rooms near you, ready to move in.' },
+    { key: 'apartment', label: 'Apartment', icon: '🏢', desc: 'Fully furnished apartments for short or long-term stays.' },
+    { key: 'hostel', label: 'Hostel', icon: '🏨', desc: 'Budget-friendly beds for students and travellers, verified and safe.' },
+    { key: 'pg', label: 'PG', icon: '🏠', desc: 'Paying-guest accommodations with meals and amenities included.' },
+    { key: 'bike', label: 'Bike', icon: '🏍️', desc: 'Hourly and daily two-wheeler rentals wherever you are.' },
+    { key: 'car', label: 'Car', icon: '🚗', desc: 'Self-drive and chauffeur cars, booked in a couple of taps.' },
+    { key: 'scooter', label: 'Scooter', icon: '🛵', desc: 'Quick, affordable scooter rentals for short city trips.' },
+    { key: 'electronics', label: 'Electronics', icon: '💻', desc: 'Laptops, cameras and gadgets available to rent by the day.' },
+    { key: 'hall', label: 'Marriage Hall', icon: '💍', desc: 'Book verified venues and halls for weddings and events.' }
+  ];
+
+  categories.forEach(cat => {
+    const isLive = LIVE_CATEGORIES.includes(cat.key);
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = `slide-card ${isLive ? 'is-live' : 'is-soon'}`;
+    card.setAttribute('aria-label', `Open ${cat.label} category`);
+    card.innerHTML = `
+      <div class="slide-icon">${cat.icon}</div>
+      <div class="slide-label">${cat.label}</div>
+      <span class="slide-badge">${isLive ? 'Available' : 'Coming Soon'}</span>
+    `;
+    card.addEventListener('click', () => {
+      if (isLive) {
+        openCategory(cat.key); // navigates directly, no popup
+        return;
+      }
+      // Non-live categories: same "Coming Soon" detail card as the wheel.
+      detailIcon.textContent = cat.icon;
+      detailTitle.textContent = cat.label;
+      detailDesc.textContent = cat.desc;
+      detail.classList.add('is-open');
+      detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+    track.appendChild(card);
+  });
+
+  /* ---- arrow buttons ---- */
+  function scrollByCard(dir) {
+    const card = track.querySelector('.slide-card');
+    const gap = 18;
+    const distance = card ? (card.offsetWidth + gap) * 2 : 300;
+    track.scrollBy({ left: dir * distance, behavior: 'smooth' });
+  }
+  const prevBtnEl = document.getElementById('slider-prev');
+  const nextBtnEl = document.getElementById('slider-next');
+  if (prevBtnEl) prevBtnEl.addEventListener('click', () => scrollByCard(-1));
+  if (nextBtnEl) nextBtnEl.addEventListener('click', () => scrollByCard(1));
+
+  /* ---- mouse drag-to-scroll (desktop) ---- */
+  let isDown = false;
+  let startX = 0;
+  let scrollStart = 0;
+  let draggedDistance = 0;
+
+  track.addEventListener('pointerdown', (e) => {
+    isDown = true;
+    draggedDistance = 0;
+    startX = e.clientX;
+    scrollStart = track.scrollLeft;
+    track.classList.add('is-dragging');
+    track.setPointerCapture(e.pointerId);
+  });
+
+  track.addEventListener('pointermove', (e) => {
+    if (!isDown) return;
+    const dx = e.clientX - startX;
+    draggedDistance = Math.abs(dx);
+    track.scrollLeft = scrollStart - dx;
+  });
+
+  function stopDrag() {
+    isDown = false;
+    track.classList.remove('is-dragging');
+  }
+  track.addEventListener('pointerup', stopDrag);
+  track.addEventListener('pointercancel', stopDrag);
+  track.addEventListener('pointerleave', () => { if (isDown) stopDrag(); });
+
+  // Prevent a drag ending on a card from being read as a click.
+  track.addEventListener('click', (e) => {
+    if (draggedDistance > 6) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  }, true);
 }
 
 function initCategoryWheel() {

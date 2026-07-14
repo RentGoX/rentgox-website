@@ -347,6 +347,75 @@ section{ position:relative; z-index:1; padding:100px 0; }
 }
 .wheel-hint{ margin-top:18px; font-size:13px; color:var(--text-muted); font-family:var(--font-mono); letter-spacing:.02em; }
 
+/* =========================== HORIZONTAL CATEGORY SLIDER =========================== */
+.slider-stage{
+  position:relative;
+  display:flex; align-items:center; gap:14px;
+  margin-top:44px;
+}
+.slider-track{
+  display:flex; gap:18px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding:8px 4px 20px;
+  -webkit-overflow-scrolling:touch;
+  cursor:grab;
+  user-select:none;
+}
+.slider-track.is-dragging{ cursor:grabbing; scroll-behavior:auto; }
+.slider-track::-webkit-scrollbar{ height:6px; }
+.slider-track::-webkit-scrollbar-thumb{ background:var(--border); border-radius:6px; }
+.slider-track::-webkit-scrollbar-track{ background:transparent; }
+
+.slide-card{
+  flex:0 0 auto;
+  scroll-snap-align:center;
+  width:150px;
+  background:#FFFFFF;
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:var(--shadow-sm);
+  padding:26px 18px;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  text-align:center;
+  cursor:pointer;
+  transition:transform .35s var(--ease-premium), box-shadow .35s var(--ease-premium), border-color .3s;
+}
+.slide-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-md);
+  border-color:rgba(14,165,183,.35);
+}
+.slide-card .slide-icon{ font-size:30px; }
+.slide-card .slide-label{ font-family:var(--font-body); font-weight:600; font-size:14px; color:var(--text); }
+.slide-card.is-live{ border-color:rgba(14,165,183,.3); }
+.slide-card.is-live .slide-badge{
+  font-family:var(--font-mono); font-size:9.5px; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--teal); background:rgba(14,165,183,.1); padding:3px 8px; border-radius:999px;
+}
+.slide-card.is-soon .slide-badge{
+  font-family:var(--font-mono); font-size:9.5px; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--amber); background:rgba(245,165,36,.12); padding:3px 8px; border-radius:999px;
+}
+
+.slider-arrow{
+  flex:none;
+  width:42px; height:42px; border-radius:50%;
+  background:#FFFFFF; border:1px solid var(--border);
+  box-shadow:var(--shadow-sm);
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; color:var(--text); cursor:pointer;
+  transition:background .25s, transform .25s, box-shadow .25s;
+}
+.slider-arrow:hover{ background:var(--surface-strong); box-shadow:var(--shadow-md); }
+.slider-arrow:active{ transform:scale(.94); }
+
+@media (max-width: 620px){
+  .slide-card{ width:128px; padding:22px 14px; }
+  .slider-arrow{ display:none; } /* rely on native swipe on touch devices */
+}
+
 /* detail card ("Coming Soon" popup for Car / Bike / Scooter / Electronics / Marriage Hall) */
 .category-detail{
   max-width:640px; margin:40px auto 0;

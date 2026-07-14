@@ -171,6 +171,18 @@
         <p class="wheel-hint">Drag to rotate &middot; Tap a category to open it</p>
       </div>
 
+      <!-- Horizontal sliding category carousel (mobile-friendly alternative to the wheel) -->
+      <div class="container">
+        <div class="slider-stage">
+          <button class="slider-arrow slider-arrow-left" id="slider-prev" aria-label="Previous categories">&larr;</button>
+          <div class="slider-track" id="slider-track">
+            <!-- category slide cards injected by JS -->
+          </div>
+          <button class="slider-arrow slider-arrow-right" id="slider-next" aria-label="Next categories">&rarr;</button>
+        </div>
+        <p class="wheel-hint">Swipe or drag &middot; Tap a card to open it</p>
+      </div>
+
       <!-- Detail card -->
       <div class="container">
         <div class="category-detail" id="category-detail" aria-live="polite">
