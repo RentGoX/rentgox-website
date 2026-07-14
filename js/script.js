@@ -91,6 +91,25 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- 7. CIRCULAR CATEGORY WHEEL ---------- */
   initCategoryWheel();
 
+  /* ---------- 8. ANY OTHER CATEGORY CARDS (e.g. future-services grid) ----------
+     Any element on the page with a [data-category] attribute goes through
+     the same openCategory() rule: Room/Apartment/PG/Hostel navigate straight
+     to their listings page, everything else keeps existing behavior
+     (currently these cards have no Coming Soon popup of their own, so
+     nothing changes for Car/Bike/Electronics/Marriage Hall here). */
+  document.querySelectorAll('[data-category]').forEach(card => {
+    const key = card.dataset.category;
+    if (!LIVE_CATEGORIES.includes(key)) return; // leave non-live cards untouched
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => openCategory(key));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openCategory(key);
+      }
+    });
+  });
+
 });
 
 /* =========================================================
@@ -190,7 +209,33 @@ function initHeroSlideshow() {
      so the nearest category settles at the front.
    - Front item scales up + glows; clicking any item spins
      it to the front and opens the detail card.
+
+   ---------------------------------------------------------
+   CATEGORY NAVIGATION RULES (added):
+   - Room, Apartment, PG, Hostel are LIVE categories.
+     Clicking them (from the wheel, or from any other section
+     that calls openCategory) navigates straight to that
+     category's listings page — no "Coming Soon" popup.
+   - Car, Bike, Scooter, Electronics, Marriage Hall keep the
+     existing "Coming Soon" detail-card behavior, unchanged.
    ========================================================= */
+
+// Keys that are fully implemented and should navigate directly
+// to a listings page instead of showing the Coming Soon card.
+const LIVE_CATEGORIES = ['room', 'apartment', 'pg', 'hostel'];
+
+// Central place that decides what happens when ANY category is
+// clicked, from ANY part of the site (wheel, future-services grid,
+// etc). Other sections should call this instead of duplicating logic.
+function openCategory(key) {
+  if (LIVE_CATEGORIES.includes(key)) {
+    // Live category -> go straight to its listings page.
+    window.location.href = `category.html?type=${encodeURIComponent(key)}`;
+    return;
+  }
+  // Everything else -> unchanged "Coming Soon" behavior handled by caller.
+}
+
 function initCategoryWheel() {
   const outer = document.getElementById('wheel-outer');
   const ring = document.getElementById('wheel-ring');
@@ -299,6 +344,18 @@ function initCategoryWheel() {
 
   function openDetail(index) {
     const cat = categories[index];
+
+    // LIVE categories (Room, Apartment, PG, Hostel) skip the
+    // "Coming Soon" detail card entirely and navigate directly
+    // to their listings page.
+    if (LIVE_CATEGORIES.includes(cat.key)) {
+      openCategory(cat.key);
+      return;
+    }
+
+    // All other categories (Car, Bike, Scooter, Electronics,
+    // Marriage Hall) keep the exact same "Coming Soon" behavior
+    // as before: open the detail card.
     detailIcon.textContent = cat.icon;
     detailTitle.textContent = cat.label;
     detailDesc.textContent = cat.desc;
@@ -429,8 +486,15 @@ function initCategoryWheel() {
     // taps here directly instead of relying on each item's click listener.
     if (!moved && pressedItem) {
       const index = Number(pressedItem.dataset.index);
-      spinToIndex(index);
-      openDetail(index);
+      // For LIVE categories we navigate immediately (no point spinning
+      // the wheel to the front first, since we're about to leave the page).
+      const cat = categories[index];
+      if (LIVE_CATEGORIES.includes(cat.key)) {
+        openDetail(index); // will redirect
+      } else {
+        spinToIndex(index);
+        openDetail(index);
+      }
     }
     pressedItem = null;
 
