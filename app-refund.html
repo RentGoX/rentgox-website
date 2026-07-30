@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RentGoX Android App — Refund &amp; Cancellation Policy</title>
+<meta name="description" content="Official Refund and Cancellation Policy for the RentGoX Android application, covering Premium Membership payments processed through the PhonePe Payment Gateway.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="RentGoX">
+<meta name="theme-color" content="#123B44">
+<style>
+  :root{
+    --ink:#1F2A2C;
+    --ink-soft:#4B5B5D;
+    --primary:#123B44;
+    --primary-dark:#0B2A31;
+    --accent:#C7912F;
+    --accent-soft:#E9D6AC;
+    --paper:#FAF9F6;
+    --panel:#FFFFFF;
+    --line:#E4E1D8;
+    --radius:10px;
+    --good:#2E6E4E;
+    --bad:#A5402E;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65;
+    font-size:16px;
+  }
+  h1,h2,h3{
+    font-family:Georgia,"Times New Roman",serif;
+    color:var(--primary-dark);
+    line-height:1.25;
+    margin:0 0 .5em;
+  }
+  a{color:var(--primary);}
+  a:focus,button:focus,summary:focus{outline:3px solid var(--accent-soft);outline-offset:2px;}
+
+  .ribbon{
+    background:var(--primary-dark);
+    color:#EFE9DA;
+    font-size:.8rem;
+    text-align:center;
+    padding:.5rem 1rem;
+    letter-spacing:.03em;
+  }
+  .ribbon strong{color:var(--accent);}
+
+  header.masthead{
+    background:linear-gradient(155deg,var(--primary) 0%,var(--primary-dark) 100%);
+    color:#F4F1E8;
+    padding:2.6rem 1.25rem 3.4rem;
+    position:relative;
+  }
+  .wrap{max-width:1100px;margin:0 auto;}
+  .brandline{
+    display:flex;align-items:center;gap:.6rem;
+    font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--accent-soft);margin-bottom:1rem;
+  }
+  .brandline .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;}
+  header.masthead h1{color:#FFFDF8;font-size:2.3rem;margin-bottom:.35rem;}
+  header.masthead p.sub{color:#D9D3C2;max-width:640px;font-size:1.02rem;margin:0;}
+  .meta-strip{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem;}
+  .meta-chip{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.18);
+    color:#EFE9DA;
+    padding:.4rem .8rem;
+    border-radius:999px;
+    font-size:.8rem;
+  }
+  .meta-chip b{color:var(--accent-soft);}
+
+  .layout{
+    max-width:1100px;margin:0 auto;
+    padding:0 1.25rem 4rem;
+    display:grid;
+    grid-template-columns:250px 1fr;
+    gap:2.5rem;
+    margin-top:-1.6rem;
+  }
+  nav.toc{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1.1rem 1.2rem;
+    align-self:start;
+    position:sticky;
+    top:1.25rem;
+    box-shadow:0 8px 24px -18px rgba(18,59,68,.4);
+  }
+  nav.toc h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);font-family:inherit;margin-bottom:.7rem;}
+  nav.toc ol{margin:0;padding:0 0 0 1.1rem;}
+  nav.toc li{margin-bottom:.5rem;font-size:.88rem;}
+  nav.toc a{text-decoration:none;color:var(--ink);}
+  nav.toc a:hover{color:var(--primary);text-decoration:underline;}
+
+  main.doc{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:2.2rem 2.4rem;
+    box-shadow:0 8px 24px -18px rgba(18,59,68,.4);
+  }
+  main.doc section{padding:1.4rem 0;border-bottom:1px dashed var(--line);}
+  main.doc section:last-of-type{border-bottom:none;}
+  .num-tag{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:28px;height:28px;
+    background:var(--primary);color:#fff;
+    border-radius:6px;font-size:.85rem;font-weight:700;
+    margin-right:.6rem;flex:none;
+  }
+  section h2{display:flex;align-items:center;font-size:1.28rem;}
+  section h3{font-size:1.05rem;margin-top:1rem;color:var(--primary);}
+  section p, section li{color:var(--ink);font-size:.98rem;}
+  section ul{padding-left:1.4rem;margin:.5rem 0;}
+  section li{margin-bottom:.4rem;}
+  .callout{
+    background:#FBF6E9;
+    border:1px solid var(--accent-soft);
+    border-left:4px solid var(--accent);
+    padding:.9rem 1.1rem;
+    border-radius:6px;
+    font-size:.92rem;
+    margin-top:.8rem;
+  }
+  table.info{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.92rem;}
+  table.info th,table.info td{border:1px solid var(--line);padding:.55rem .7rem;text-align:left;vertical-align:top;}
+  table.info th{background:#F3F1E9;color:var(--primary-dark);}
+
+  .status-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.8rem;}
+  .status-card{border-radius:8px;padding:1rem 1.1rem;border:1px solid var(--line);}
+  .status-card.yes{border-left:4px solid var(--good);}
+  .status-card.no{border-left:4px solid var(--bad);}
+  .status-card h3{margin-top:0;font-size:.95rem;}
+  .status-card.yes h3{color:var(--good);}
+  .status-card.no h3{color:var(--bad);}
+  .status-card ul{padding-left:1.1rem;margin:.4rem 0 0;}
+  .status-card li{font-size:.9rem;margin-bottom:.35rem;}
+
+  .steps{counter-reset:step;list-style:none;padding-left:0;margin-top:.8rem;}
+  .steps li{
+    counter-increment:step;
+    position:relative;
+    padding:.5rem 0 .5rem 2.4rem;
+    font-size:.95rem;
+  }
+  .steps li::before{
+    content:counter(step);
+    position:absolute;left:0;top:.45rem;
+    width:24px;height:24px;
+    background:var(--accent);color:#fff;
+    border-radius:50%;
+    font-size:.78rem;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  details.mobile-toc{display:none;}
+
+  footer.site-footer{
+    background:var(--primary-dark);
+    color:#CFC9B8;
+    padding:2.4rem 1.25rem;
+    margin-top:2rem;
+    text-align:center;
+    font-size:.85rem;
+  }
+  footer.site-footer .wrap{display:flex;flex-direction:column;gap:.5rem;align-items:center;}
+  footer.site-footer strong{color:#F4F1E8;}
+  footer.site-footer a{color:var(--accent-soft);text-decoration:none;}
+  footer.site-footer a:hover{text-decoration:underline;}
+  .footer-links{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:.4rem;}
+  .footer-rule{width:60px;height:2px;background:var(--accent);border:none;margin:.8rem 0;}
+
+  @media (max-width:860px){
+    .layout{grid-template-columns:1fr;margin-top:-1.2rem;}
+    nav.toc{display:none;}
+    details.mobile-toc{
+      display:block;background:var(--panel);border:1px solid var(--line);
+      border-radius:var(--radius);padding:.9rem 1.1rem;margin-bottom:1.2rem;
+      box-shadow:0 8px 24px -18px rgba(18,59,68,.4);
+    }
+    details.mobile-toc summary{cursor:pointer;font-weight:700;color:var(--primary-dark);font-size:.92rem;}
+    details.mobile-toc ol{margin:.8rem 0 0;padding-left:1.2rem;}
+    details.mobile-toc li{margin-bottom:.5rem;font-size:.9rem;}
+    main.doc{padding:1.5rem 1.25rem;}
+    header.masthead h1{font-size:1.7rem;}
+    .status-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">RentGoX Android App &nbsp;•&nbsp; Policy Document for <strong>Google Play</strong> &amp; <strong>PhonePe Merchant Verification</strong></div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandline"><span class="dot"></span> RentGoX — Legal &amp; Compliance</div>
+    <h1>Refund &amp; Cancellation Policy</h1>
+    <p class="sub">This Policy explains when payments made within the RentGoX Android app — including Premium Membership fees processed through PhonePe — are eligible for a refund.</p>
+    <div class="meta-strip">
+      <span class="meta-chip"><b>Effective Date:</b> 30 July 2026</span>
+      <span class="meta-chip"><b>Last Updated:</b> 30 July 2026</span>
+      <span class="meta-chip"><b>Payment Gateway:</b> PhonePe</span>
+      <span class="meta-chip"><b>Governing Law:</b> India</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+
+  <details class="mobile-toc">
+    <summary>Jump to a section</summary>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#premium-refund">Premium Membership Refund Rules</a></li>
+      <li><a href="#duplicate">Duplicate Payment</a></li>
+      <li><a href="#failed">Failed / Pending Transaction</a></li>
+      <li><a href="#eligible">Refund Eligibility Summary</a></li>
+      <li><a href="#nonrefundable">Non-Refundable Cases</a></li>
+      <li><a href="#process">How to Request a Refund</a></li>
+      <li><a href="#timeline">Refund Timeline &amp; Mode</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </details>
+
+  <nav class="toc" aria-label="Table of contents">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#premium-refund">Premium Membership Refund Rules</a></li>
+      <li><a href="#duplicate">Duplicate Payment</a></li>
+      <li><a href="#failed">Failed / Pending Transaction</a></li>
+      <li><a href="#eligible">Refund Eligibility Summary</a></li>
+      <li><a href="#nonrefundable">Non-Refundable Cases</a></li>
+      <li><a href="#process">How to Request a Refund</a></li>
+      <li><a href="#timeline">Refund Timeline &amp; Mode</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </nav>
+
+  <main class="doc">
+
+    <section id="intro">
+      <h2><span class="num-tag">1</span>Introduction</h2>
+      <p>This Refund &amp; Cancellation Policy applies to all payments made within the RentGoX Android application for Premium Membership, processed through the PhonePe Payment Gateway. By making a payment in the App, you agree to the terms set out in this Policy in addition to our Terms of Service.</p>
+    </section>
+
+    <section id="premium-refund">
+      <h2><span class="num-tag">2</span>Premium Membership Refund Rules</h2>
+      <ul>
+        <li>Premium Membership is a paid, benefit-based subscription that unlocks additional listing benefits within the App immediately upon successful payment.</li>
+        <li>Because the benefits of Premium Membership are activated instantly upon successful payment confirmation, requests for a refund solely due to a change of mind, after the benefits have been activated and used, are not ordinarily granted.</li>
+        <li>If you did not use any part of the Premium Membership benefit and raise a refund request within <strong>24 hours</strong> of a successful payment, RentGoX will review the request in good faith and may approve a full or partial refund at its discretion.</li>
+        <li>If a technical or App-side error caused you to be charged for Premium Membership without the corresponding benefit being activated on your account, you are entitled to a full refund upon verification.</li>
+      </ul>
+    </section>
+
+    <section id="duplicate">
+      <h2><span class="num-tag">3</span>Duplicate Payment</h2>
+      <p>If you are charged more than once for the same Premium Membership purchase due to a technical error, network issue, or accidental repeat submission, the duplicate amount is fully refundable. To process a duplicate payment refund, please share both transaction reference IDs (from your PhonePe payment confirmation or SMS/App notification) when contacting our support team. Once verified against our payment records, the duplicate charge will be refunded in full.</p>
+    </section>
+
+    <section id="failed">
+      <h2><span class="num-tag">4</span>Failed / Pending Transaction</h2>
+      <p>In some cases, an amount may be debited from your bank account, UPI app, or card, but the corresponding Premium Membership is not activated in the App due to a failed, timed-out, or pending transaction status at PhonePe or your bank's end.</p>
+      <ul>
+        <li>Such amounts are automatically reversed by PhonePe/your bank as per standard banking timelines, typically within 5–7 business days, even without any action from RentGoX.</li>
+        <li>If the amount is not auto-reversed within 7 business days of the failed transaction, please contact our support team with your transaction reference ID so we can investigate and coordinate with PhonePe on your behalf.</li>
+      </ul>
+    </section>
+
+    <section id="eligible">
+      <h2><span class="num-tag">5</span>Refund Eligibility Summary</h2>
+      <div class="status-grid">
+        <div class="status-card yes">
+          <h3>✔ Eligible for Refund</h3>
+          <ul>
+            <li>Duplicate payment for the same Premium Membership purchase</li>
+            <li>Amount debited but Premium Membership not activated</li>
+            <li>Payment failed but amount not auto-reversed within 7 business days</li>
+            <li>Verified technical/App error resulting in an incorrect charge</li>
+            <li>Unused Premium Membership, refund requested within 24 hours of purchase</li>
+          </ul>
+        </div>
+        <div class="status-card no">
+          <h3>✘ Not Eligible for Refund</h3>
+          <ul>
+            <li>Premium Membership benefits already used (e.g., additional listings already created)</li>
+            <li>Change of mind after 24 hours of successful, activated payment</li>
+            <li>Account suspended or terminated for violation of our Terms of Service</li>
+            <li>Refund requests unsupported by a valid transaction reference ID</li>
+            <li>Dissatisfaction with rental outcomes between a Property Owner and a Rent Seeker (RentGoX is not a party to such transactions)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="nonrefundable">
+      <h2><span class="num-tag">6</span>Non-Refundable Cases</h2>
+      <p>Payments are strictly non-refundable in the following circumstances:</p>
+      <ul>
+        <li>Where the Premium Membership benefit has already been fully or partially availed by the User.</li>
+        <li>Where the refund request is raised after the applicable window described in Section 2 without a valid technical justification.</li>
+        <li>Where the User's account has been suspended or terminated due to a breach of our Terms of Service, including fraudulent activity or posting of false Listings.</li>
+        <li>Where the payment was made toward a third party (such as rent, security deposit, or brokerage paid directly to a Property Owner) outside of the App — RentGoX does not process or refund such peer-to-peer payments, as they do not occur through the App's Payment Gateway.</li>
+      </ul>
+    </section>
+
+    <section id="process">
+      <h2><span class="num-tag">7</span>How to Request a Refund</h2>
+      <ol class="steps">
+        <li>Email our support team at <strong>payments@rentgox.com</strong> with the subject line "Refund Request".</li>
+        <li>Include your registered mobile number or Google account email, the PhonePe transaction reference ID, the date of payment, and the reason for your refund request.</li>
+        <li>Our team will review your request against the eligibility criteria in Section 5 and may contact you for additional verification.</li>
+        <li>You will receive a decision on your refund request, typically within 5–7 business days of submission.</li>
+      </ol>
+    </section>
+
+    <section id="contact">
+      <h2><span class="num-tag">9</span>Contact Us</h2>
+      <p>For all refund, payment, or transaction-related queries, please contact us:</p>
+      <table class="info">
+        <tr><th>Payments Support Email</th><td>payments@rentgox.com</td></tr>
+        <tr><th>General Support Email</th><td>support@rentgox.com</td></tr>
+        <tr><th>App Name</th><td>RentGoX (Android)</td></tr>
+        <tr><th>Payment Gateway</th><td>PhonePe</td></tr>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <strong>RentGoX</strong>
+    <span>Rental Property Listing Platform — Android App</span>
+    <hr class="footer-rule">
+    <div class="footer-links">
+      <a href="app-terms.html">Terms of Service</a>
+      <a href="app-privacy.html">Privacy Policy</a>
+      <a href="app-refund.html">Refund Policy</a>
+    </div>
+    <span>© 2026 RentGoX. All rights reserved.</span>
+  </div>
+</footer>
+
+</body>
+</html>
+
+    <section id="timeline">
+      <h2><span class="num-tag">8</span>Refund Timeline &amp; Mode</h2>
+      <p>Approved refunds are processed back through the PhonePe Payment Gateway to the original payment source (the same UPI ID, card, or bank account used for the original transaction). Once initiated, refunds typically reflect in your account within <strong>5–10 business days</strong>, depending on your bank's or payment provider's processing timelines. RentGoX does not process refunds in cash or to a different account/payment method than the one originally used.</p>
+      <div class="callout">RentGoX does not control PhonePe's or your bank's internal processing times and cannot guarantee a refund will reflect before the timelines stated above.</div>
+  </section>
