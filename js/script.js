@@ -10,6 +10,8 @@
    7. Circular category wheel (drag + momentum + snap)
    ========================================================= */
 
+const APP_LINK = 'https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share';
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- 1. LOADER ---------- */
@@ -224,7 +226,9 @@ function initHeroSlideshow() {
      that calls openCategory) navigates straight to that
      category's listings page — no "Coming Soon" popup.
    - Car, Bike, Scooter, Electronics, Marriage Hall keep the
-     existing "Coming Soon" detail-card behavior, unchanged.
+     existing "Coming Soon" detail-card behavior, unchanged,
+     and that popup now includes a "Get the App" button that
+     links straight to the Play Store.
    ========================================================= */
 
 // Keys that are fully implemented and should navigate directly
@@ -249,7 +253,8 @@ function openCategory(key) {
    - Same categories, same LIVE_CATEGORIES navigation rule:
      Room/Apartment/PG/Hostel -> navigate straight to their page.
      Car/Bike/Scooter/Electronics/Marriage Hall -> open the
-     existing "Coming Soon" detail card (unchanged behavior).
+     existing "Coming Soon" detail card (unchanged behavior),
+     which now also shows a "Get the App" link.
    - Drag-to-scroll on desktop (mouse) + native touch swipe on
      mobile, with scroll-snap for a clean settle.
    ========================================================= */
@@ -261,6 +266,7 @@ function initCategorySlider() {
   const detailTitle = document.getElementById('detail-title');
   const detailDesc = document.getElementById('detail-desc');
   const detailIcon = document.getElementById('detail-icon');
+  const detailAppLink = document.getElementById('detail-app-link');
   if (!track) return;
 
   // Same category list used by the wheel — kept in sync manually
@@ -297,6 +303,7 @@ function initCategorySlider() {
       detailIcon.textContent = cat.icon;
       detailTitle.textContent = cat.label;
       detailDesc.textContent = cat.desc;
+      if (detailAppLink) detailAppLink.href = APP_LINK;
       detail.classList.add('is-open');
       detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
@@ -363,6 +370,7 @@ function initCategoryWheel() {
   const detailTitle = document.getElementById('detail-title');
   const detailDesc = document.getElementById('detail-desc');
   const detailIcon = document.getElementById('detail-icon');
+  const detailAppLink = document.getElementById('detail-app-link');
   if (!outer || !ring) return;
 
   const categories = [
@@ -473,10 +481,12 @@ function initCategoryWheel() {
 
     // All other categories (Car, Bike, Scooter, Electronics,
     // Marriage Hall) keep the exact same "Coming Soon" behavior
-    // as before: open the detail card.
+    // as before: open the detail card. It now also carries a
+    // "Get the App" button linking straight to the Play Store.
     detailIcon.textContent = cat.icon;
     detailTitle.textContent = cat.label;
     detailDesc.textContent = cat.desc;
+    if (detailAppLink) detailAppLink.href = APP_LINK;
     detail.classList.add('is-open');
   }
 
