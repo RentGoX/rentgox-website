@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RentGoX Property</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container" style="padding-top:120px; text-align:center;">
+    <h1 style="color:var(--text);">Opening RentGoX...</h1>
+    <p style="color:var(--text-muted);">যদি অ্যাপ automatic না খোলে, নিচের বাটনে চাপুন।</p>
+    <a id="fallback-link" href="#" class="btn btn-primary" style="margin-top:20px;">
+      <span>Get RentGoX App</span>
+    </a>
+  </div>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const propertyId = params.get('id');
+      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.rentgox.com' +
+        (propertyId ? '&referrer=property_id%3D' + encodeURIComponent(propertyId) : '');
+
+      document.getElementById('fallback-link').href = playStoreUrl;
+
+      if (!propertyId) return;
+
+      // Try opening the app via the same https App Link — Android will
+      // intercept this if the app is installed and verified.
+      const appLink = 'https://rentgox.github.io/rentgox-website/property.html?id=' +
+        encodeURIComponent(propertyId);
+
+      // Give the OS a moment to hand off to the app. If we're still here
+      // after ~1.5s, the app isn't installed (or verification failed),
+      // so redirect to the Play Store automatically.
+      const fallbackTimer = setTimeout(function () {
+        window.location.href = playStoreUrl;
+      }, 1500);
+
+      // If the page becomes hidden (app took over), cancel the fallback.
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) clearTimeout(fallbackTimer);
+      });
+
+      window.location.href = appLink;
+    })();
+  </script>
+</body>
+</html>
