@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rentgox.github.io/rentgox-website/sitemap.xml
