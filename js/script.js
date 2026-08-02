@@ -16,11 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- 1. LOADER ---------- */
   const loader = document.getElementById('loader');
-  window.addEventListener('load', () => {
-    setTimeout(() => loader.classList.add('is-hidden'), 350);
-  });
-  // Fallback in case 'load' already fired
-  setTimeout(() => loader && loader.classList.add('is-hidden'), 2200);
+  if (loader) {
+    window.addEventListener('load', () => {
+      setTimeout(() => loader.classList.add('is-hidden'), 350);
+    });
+    // Fallback in case 'load' already fired
+    setTimeout(() => loader.classList.add('is-hidden'), 2200);
+  }
 
   /* ---------- footer year ---------- */
   const yearEl = document.getElementById('year');
@@ -99,6 +101,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- 7b. HORIZONTAL CATEGORY SLIDER ---------- */
   initCategorySlider();
+
+  /* ---------- 9. ANIMATED STAT COUNTERS ---------- */
+  initStatCounters();
+
+  /* ---------- 10. TESTIMONIAL CAROUSEL ---------- */
+  initTestimonials();
+
+  /* ---------- 11. BACK TO TOP ---------- */
+  initBackToTop();
+
+  /* ---------- 12. SCREENSHOT SKELETON -> LOADED STATE ---------- */
+  document.querySelectorAll('.screenshot-img').forEach(img => {
+    const reveal = () => img.classList.add('is-loaded');
+    if (img.complete && img.naturalWidth > 0) {
+      reveal();
+    } else {
+      img.addEventListener('load', reveal);
+    }
+  });
 
   /* ---------- 8. ANY OTHER CATEGORY CARDS (e.g. future-services grid) ----------
      Any element on the page with a [data-category] attribute goes through
@@ -652,3 +673,116 @@ function initCategoryWheel() {
     resizeTimer = setTimeout(init, 200);
   });
 }
+
+/* =========================================================
+   Animated stat counters (hero-stats)
+   - Counts up any .stat-num that has a [data-count] attribute
+     the moment it scrolls into view, once, then leaves the
+     original text (e.g. "100%", "24/7") completely alone for
+     any stat that doesn't opt in via data-count.
+   ========================================================= */
+function initStatCounters() {
+  const nums = document.querySelectorAll('.stat-num[data-count]');
+  if (!nums.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const animate = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    if (prefersReducedMotion || isNaN(target)) {
+      el.textContent = target + suffix;
+      return;
+    }
+    const duration = 1200;
+    const startTime = performance.now();
+    function step(now) {
+      const t = Math.min(1, (now - startTime) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const value = Math.round(target * eased);
+      el.textContent = value + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  nums.forEach(el => observer.observe(el));
+}
+
+/* =========================================================
+   Testimonial carousel
+   - Autoplays every 6s, pauses on hover/focus, and supports
+     manual navigation via the dot controls.
+   ========================================================= */
+function initTestimonials() {
+  const viewport = document.getElementById('testimonial-viewport');
+  if (!viewport) return;
+  const slides = Array.from(viewport.querySelectorAll('.testimonial-slide'));
+  const dotsWrap = document.getElementById('testimonial-dots');
+  if (slides.length <= 1) return;
+
+  let current = 0;
+  let timer = null;
+
+  const dots = slides.map((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'testimonial-dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('aria-label', `Show testimonial ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+
+  function goTo(index) {
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+  }
+
+  function next() { goTo(current + 1); }
+
+  function start() {
+    stop();
+    timer = setInterval(next, 6000);
+  }
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  start();
+  viewport.addEventListener('mouseenter', stop);
+  viewport.addEventListener('mouseleave', start);
+  viewport.addEventListener('focusin', stop);
+  viewport.addEventListener('focusout', start);
+}
+
+/* =========================================================
+   Back-to-top button
+   - Fades in after the person scrolls past one viewport height,
+     smooth-scrolls back to #top on click.
+   ========================================================= */
+function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.6);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+                                 }
