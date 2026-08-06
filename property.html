@@ -19,7 +19,7 @@
     (function () {
       const params = new URLSearchParams(window.location.search);
       const propertyId = params.get('id');
-      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.rentgox.app' +
+      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.rentgox.com' +
         (propertyId ? '&referrer=property_id%3D' + encodeURIComponent(propertyId) : '');
 
       document.getElementById('fallback-link').href = playStoreUrl;
