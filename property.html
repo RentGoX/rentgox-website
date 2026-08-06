@@ -19,31 +19,28 @@
     (function () {
       const params = new URLSearchParams(window.location.search);
       const propertyId = params.get('id');
-      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.rentgox.com' +
-        (propertyId ? '&referrer=property_id%3D' + encodeURIComponent(propertyId) : '');
+      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.rentgox.com';
 
       document.getElementById('fallback-link').href = playStoreUrl;
 
       if (!propertyId) return;
 
-      // Try opening the app via the same https App Link — Android will
-      // intercept this if the app is installed and verified.
-      const appLink = 'https://rentgox.github.io/rentgox-website/property.html?id=' +
-        encodeURIComponent(propertyId);
+      const isAndroid = /android/i.test(navigator.userAgent);
 
-      // Give the OS a moment to hand off to the app. If we're still here
-      // after ~1.5s, the app isn't installed (or verification failed),
-      // so redirect to the Play Store automatically.
-      const fallbackTimer = setTimeout(function () {
-        window.location.href = playStoreUrl;
-      }, 1500);
+      if (isAndroid) {
+        // Android intent:// scheme — app thakle সরাসরি app khole, na
+        // thakle browser nijei (kono button click chara) Play Store-e
+        // pathiye dey. Eta age-r https+timeout system-er cheye onek
+        // beshi reliable, karon eta browser-er nijoshsho "chip" dekhanor
+        // upor nirbhor kore na.
+        const intentUrl =
+          'intent://rentgox.github.io/rentgox-website/property.html?id=' +
+          encodeURIComponent(propertyId) +
+          '#Intent;scheme=https;package=com.rentgox.com;' +
+          'S.browser_fallback_url=' + encodeURIComponent(playStoreUrl) + ';end';
 
-      // If the page becomes hidden (app took over), cancel the fallback.
-      document.addEventListener('visibilitychange', function () {
-        if (document.hidden) clearTimeout(fallbackTimer);
-      });
-
-      window.location.href = appLink;
+        window.location.href = intentUrl;
+      }
     })();
   </script>
 </body>
