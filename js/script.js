@@ -229,7 +229,7 @@ function initHeroSlideshow() {
 
 /* =========================================================
    3D category carousel — data + navigation rules
-   - CATEGORY_DATA below is the single source of truth for every
+   - CAROUSEL_CATEGORIES below is the single source of truth for every
      category shown on the site (previously duplicated between
      the old wheel and slider — now defined once and reused).
 
@@ -266,7 +266,7 @@ function openCategory(key) {
 // carried over unchanged from the previous wheel/slider implementation
 // (which duplicated this same list in two places) — nothing new was
 // added or renamed here, it was only consolidated into one array.
-const CATEGORY_DATA = [
+const CAROUSEL_CATEGORIES = [
   { key: 'room', label: 'Room', icon: '🛏️', desc: 'Find verified single and shared rooms near you, ready to move in.' },
   { key: 'apartment', label: 'Apartment', icon: '🏢', desc: 'Fully furnished apartments for short or long-term stays.' },
   { key: 'hostel', label: 'Hostel', icon: '🏨', desc: 'Budget-friendly beds for students and travellers, verified and safe.' },
@@ -313,7 +313,7 @@ function initCategoryCarousel3D() {
   const detailAppLink = document.getElementById('detail-app-link');
   if (!stage || !track) return;
 
-  const categories = CATEGORY_DATA;
+  const categories = CAROUSEL_CATEGORIES;
   const n = categories.length;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
