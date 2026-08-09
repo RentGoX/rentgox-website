@@ -96,11 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- 7. CIRCULAR CATEGORY WHEEL ---------- */
-  initCategoryWheel();
-
-  /* ---------- 7b. HORIZONTAL CATEGORY SLIDER ---------- */
-  initCategorySlider();
+  /* ---------- 7. 3D CATEGORY CAROUSEL ---------- */
+  initCategoryCarousel3D();
 
   /* ---------- 9. ANIMATED STAT COUNTERS ---------- */
   initStatCounters();
@@ -231,19 +228,15 @@ function initHeroSlideshow() {
 }
 
 /* =========================================================
-   Circular category wheel
-   - Items positioned around a circle, angle measured
-     clockwise from the top (0deg = top / "front").
-   - Drag (mouse or touch) rotates the whole ring.
-   - Releasing applies momentum, then eases into a snap
-     so the nearest category settles at the front.
-   - Front item scales up + glows; clicking any item spins
-     it to the front and opens the detail card.
+   3D category carousel — data + navigation rules
+   - CATEGORY_DATA below is the single source of truth for every
+     category shown on the site (previously duplicated between
+     the old wheel and slider — now defined once and reused).
 
    ---------------------------------------------------------
-   CATEGORY NAVIGATION RULES (added):
+   CATEGORY NAVIGATION RULES (unchanged from before):
    - Room, Apartment, PG, Hostel are LIVE categories.
-     Clicking them (from the wheel, or from any other section
+     Clicking them (from the carousel, or from any other section
      that calls openCategory) navigates straight to that
      category's listings page — no "Coming Soon" popup.
    - Car, Bike, Scooter, Electronics, Marriage Hall keep the
@@ -268,410 +261,254 @@ function openCategory(key) {
   // Everything else -> unchanged "Coming Soon" behavior handled by caller.
 }
 
+// Single source of truth for every category card shown in the
+// #categories carousel. Keys, labels, icons and descriptions are
+// carried over unchanged from the previous wheel/slider implementation
+// (which duplicated this same list in two places) — nothing new was
+// added or renamed here, it was only consolidated into one array.
+const CATEGORY_DATA = [
+  { key: 'room', label: 'Room', icon: '🛏️', desc: 'Find verified single and shared rooms near you, ready to move in.' },
+  { key: 'apartment', label: 'Apartment', icon: '🏢', desc: 'Fully furnished apartments for short or long-term stays.' },
+  { key: 'hostel', label: 'Hostel', icon: '🏨', desc: 'Budget-friendly beds for students and travellers, verified and safe.' },
+  { key: 'pg', label: 'PG', icon: '🏠', desc: 'Paying-guest accommodations with meals and amenities included.' },
+  { key: 'bike', label: 'Bike', icon: '🏍️', desc: 'Hourly and daily two-wheeler rentals wherever you are.' },
+  { key: 'car', label: 'Car', icon: '🚗', desc: 'Self-drive and chauffeur cars, booked in a couple of taps.' },
+  { key: 'scooter', label: 'Scooter', icon: '🛵', desc: 'Quick, affordable scooter rentals for short city trips.' },
+  { key: 'electronics', label: 'Electronics', icon: '💻', desc: 'Laptops, cameras and gadgets available to rent by the day.' },
+  { key: 'hall', label: 'Marriage Hall', icon: '💍', desc: 'Book verified venues and halls for weddings and events.' }
+];
+
 /* =========================================================
-   Horizontal sliding category carousel
-   - Mobile-friendly alternative sitting right below the wheel.
-   - Same categories, same LIVE_CATEGORIES navigation rule:
-     Room/Apartment/PG/Hostel -> navigate straight to their page.
-     Car/Bike/Scooter/Electronics/Marriage Hall -> open the
-     existing "Coming Soon" detail card (unchanged behavior),
-     which now also shows a "Get the App" link.
-   - Drag-to-scroll on desktop (mouse) + native touch swipe on
-     mobile, with scroll-snap for a clean settle.
+   3D category carousel (coverflow-style)
+   - Cards are laid out around a shared center: the active card
+     sits front-and-center at full scale, neighbours fan out to
+     either side with a perspective rotation, shrinking and
+     fading the further they sit from center — depth is done
+     with CSS transforms driven by a single "offset" per card,
+     recalculated on every index change.
+   - Autoplay slowly advances the active card; it pauses on
+     hover/focus/touch and resumes afterwards, and is skipped
+     entirely for prefers-reduced-motion.
+   - Drag (mouse) and swipe (touch) both work via Pointer Events;
+     a small drag threshold tells a genuine swipe apart from a tap.
+   - Arrow buttons, dot indicators and Left/Right arrow keys all
+     move the same shared "active index" state.
+   - Clicking the active/front card triggers the exact same
+     openCategory()/"Coming Soon" behavior as the old wheel and
+     slider did. Clicking a side card simply brings it to the
+     front first (matches the reference carousel's behavior).
    ========================================================= */
-function initCategorySlider() {
-  const track = document.getElementById('slider-track');
-  const prevBtn = document.getElementById('slider-prev');
-  const nextBtn = document.getElementById('slider-next');
-  const detail = document.getElementById('category-detail');
-  const detailTitle = document.getElementById('detail-title');
-  const detailDesc = document.getElementById('detail-desc');
-  const detailIcon = document.getElementById('detail-icon');
-  const detailAppLink = document.getElementById('detail-app-link');
-  if (!track) return;
-
-  // Same category list used by the wheel — kept in sync manually
-  // since the wheel builds its own DOM separately.
-  const categories = [
-    { key: 'room', label: 'Room', icon: '🛏️', desc: 'Find verified single and shared rooms near you, ready to move in.' },
-    { key: 'apartment', label: 'Apartment', icon: '🏢', desc: 'Fully furnished apartments for short or long-term stays.' },
-    { key: 'hostel', label: 'Hostel', icon: '🏨', desc: 'Budget-friendly beds for students and travellers, verified and safe.' },
-    { key: 'pg', label: 'PG', icon: '🏠', desc: 'Paying-guest accommodations with meals and amenities included.' },
-    { key: 'bike', label: 'Bike', icon: '🏍️', desc: 'Hourly and daily two-wheeler rentals wherever you are.' },
-    { key: 'car', label: 'Car', icon: '🚗', desc: 'Self-drive and chauffeur cars, booked in a couple of taps.' },
-    { key: 'scooter', label: 'Scooter', icon: '🛵', desc: 'Quick, affordable scooter rentals for short city trips.' },
-    { key: 'electronics', label: 'Electronics', icon: '💻', desc: 'Laptops, cameras and gadgets available to rent by the day.' },
-    { key: 'hall', label: 'Marriage Hall', icon: '💍', desc: 'Book verified venues and halls for weddings and events.' }
-  ];
-
-  categories.forEach(cat => {
-    const isLive = LIVE_CATEGORIES.includes(cat.key);
-    const card = document.createElement('button');
-    card.type = 'button';
-    card.className = `slide-card ${isLive ? 'is-live' : 'is-soon'}`;
-    card.setAttribute('aria-label', `Open ${cat.label} category`);
-    card.innerHTML = `
-      <div class="slide-icon">${cat.icon}</div>
-      <div class="slide-label">${cat.label}</div>
-      <span class="slide-badge">${isLive ? 'Available' : 'Coming Soon'}</span>
-    `;
-    card.addEventListener('click', () => {
-      if (isLive) {
-        openCategory(cat.key); // navigates directly, no popup
-        return;
-      }
-      // Non-live categories: same "Coming Soon" detail card as the wheel.
-      detailIcon.textContent = cat.icon;
-      detailTitle.textContent = cat.label;
-      detailDesc.textContent = cat.desc;
-      if (detailAppLink) detailAppLink.href = APP_LINK;
-      detail.classList.add('is-open');
-      detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-    track.appendChild(card);
-  });
-
-  /* ---- arrow buttons ---- */
-  function scrollByCard(dir) {
-    const card = track.querySelector('.slide-card');
-    const gap = 18;
-    const distance = card ? (card.offsetWidth + gap) * 2 : 300;
-    track.scrollBy({ left: dir * distance, behavior: 'smooth' });
-  }
-  const prevBtnEl = document.getElementById('slider-prev');
-  const nextBtnEl = document.getElementById('slider-next');
-  if (prevBtnEl) prevBtnEl.addEventListener('click', () => scrollByCard(-1));
-  if (nextBtnEl) nextBtnEl.addEventListener('click', () => scrollByCard(1));
-
-  /* ---- mouse drag-to-scroll (desktop) ---- */
-  let isDown = false;
-  let startX = 0;
-  let scrollStart = 0;
-  let draggedDistance = 0;
-
-  track.addEventListener('pointerdown', (e) => {
-    isDown = true;
-    draggedDistance = 0;
-    startX = e.clientX;
-    scrollStart = track.scrollLeft;
-    track.classList.add('is-dragging');
-    track.setPointerCapture(e.pointerId);
-  });
-
-  track.addEventListener('pointermove', (e) => {
-    if (!isDown) return;
-    const dx = e.clientX - startX;
-    draggedDistance = Math.abs(dx);
-    track.scrollLeft = scrollStart - dx;
-  });
-
-  function stopDrag() {
-    isDown = false;
-    track.classList.remove('is-dragging');
-  }
-  track.addEventListener('pointerup', stopDrag);
-  track.addEventListener('pointercancel', stopDrag);
-  track.addEventListener('pointerleave', () => { if (isDown) stopDrag(); });
-
-  // Prevent a drag ending on a card from being read as a click.
-  track.addEventListener('click', (e) => {
-    if (draggedDistance > 6) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-  }, true);
-}
-
-function initCategoryWheel() {
-  const outer = document.getElementById('wheel-outer');
-  const ring = document.getElementById('wheel-ring');
-  const hubLabel = document.getElementById('wheel-hub-label');
+function initCategoryCarousel3D() {
+  const stage = document.getElementById('carousel3d-stage');
+  const viewport = document.getElementById('carousel3d-viewport');
+  const track = document.getElementById('carousel3d-track');
+  const prevBtn = document.getElementById('carousel3d-prev');
+  const nextBtn = document.getElementById('carousel3d-next');
+  const dotsWrap = document.getElementById('carousel3d-dots');
   const detail = document.getElementById('category-detail');
   const detailClose = document.getElementById('detail-close');
   const detailTitle = document.getElementById('detail-title');
   const detailDesc = document.getElementById('detail-desc');
   const detailIcon = document.getElementById('detail-icon');
   const detailAppLink = document.getElementById('detail-app-link');
-  if (!outer || !ring) return;
+  if (!stage || !track) return;
 
-  const categories = [
-    { key: 'room', label: 'Room', icon: '🛏️', desc: 'Find verified single and shared rooms near you, ready to move in.' },
-    { key: 'apartment', label: 'Apartment', icon: '🏢', desc: 'Fully furnished apartments for short or long-term stays.' },
-    { key: 'hostel', label: 'Hostel', icon: '🏨', desc: 'Budget-friendly beds for students and travellers, verified and safe.' },
-    { key: 'pg', label: 'PG', icon: '🏠', desc: 'Paying-guest accommodations with meals and amenities included.' },
-    { key: 'bike', label: 'Bike', icon: '🏍️', desc: 'Hourly and daily two-wheeler rentals wherever you are.' },
-    { key: 'car', label: 'Car', icon: '🚗', desc: 'Self-drive and chauffeur cars, booked in a couple of taps.' },
-    { key: 'scooter', label: 'Scooter', icon: '🛵', desc: 'Quick, affordable scooter rentals for short city trips.' },
-    { key: 'electronics', label: 'Electronics', icon: '💻', desc: 'Laptops, cameras and gadgets available to rent by the day.' },
-    { key: 'hall', label: 'Marriage Hall', icon: '💍', desc: 'Book verified venues and halls for weddings and events.' }
-  ];
-
+  const categories = CATEGORY_DATA;
   const n = categories.length;
-  const anglePerItem = 360 / n;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Build DOM items
-  const items = categories.map((cat, i) => {
-    const el = document.createElement('button');
-    el.type = 'button';
-    el.className = 'wheel-item';
-    el.dataset.index = i;
-    el.dataset.base = i * anglePerItem;
-    el.innerHTML = `<div class="wheel-item-icon">${cat.icon}</div><span>${cat.label}</span>`;
-    el.setAttribute('aria-label', `Open ${cat.label} category`);
-    ring.appendChild(el);
-    return el;
+  let active = 0;
+  let autoplayTimer = null;
+
+  /* ---- build cards ---- */
+  const cards = categories.map((cat, i) => {
+    const isLive = LIVE_CATEGORIES.includes(cat.key);
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = `carousel3d-card ${isLive ? 'is-live' : 'is-soon'}`;
+    card.dataset.index = i;
+    card.setAttribute('aria-label', `${isLive ? 'Open' : 'Preview'} ${cat.label} category`);
+    card.innerHTML = `
+      <div class="carousel3d-card-icon">${cat.icon}</div>
+      <div class="carousel3d-card-label">${cat.label}</div>
+      <span class="carousel3d-card-badge">${isLive ? 'Available' : 'Coming Soon'}</span>
+    `;
+    track.appendChild(card);
+    return card;
   });
 
-  let rotation = 0;        // current rotation in degrees
-  let velocity = 0;        // deg per frame
-  let radius = 0;
-  let dragging = false;
-  let lastAngle = 0;       // last pointer angle relative to wheel center
-  let lastTime = 0;
-  let momentumFrame = null;
-  let snapFrame = null;
+  /* ---- dot indicators ---- */
+  const dots = categories.map((cat, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel3d-dot';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `Go to ${cat.label}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
 
-  function computeRadius() {
-    const size = outer.clientWidth;
-    radius = size / 2 - (size < 400 ? 40 : 62); // keep items inside the ring
+  /* ---- shortest-path offset of card i relative to active, in [-n/2, n/2] ---- */
+  function offsetOf(i) {
+    let d = i - active;
+    if (d > n / 2) d -= n;
+    if (d < -n / 2) d += n;
+    return d;
   }
 
-  function pointerAngle(clientX, clientY) {
-    const rect = outer.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    // atan2 with y first gives angle from top(0) clockwise when adjusted
-    const dx = clientX - cx;
-    const dy = clientY - cy;
-    let deg = Math.atan2(dx, -dy) * (180 / Math.PI); // 0 = top, clockwise positive
-    return deg;
-  }
+  const MAX_VISIBLE = 3; // how many cards deep the fan shows on either side
 
-  function normalize(angle) {
-    let a = angle % 360;
-    if (a < 0) a += 360;
-    return a;
-  }
-
-  function layout() {
-    items.forEach((el, i) => {
-      const base = i * anglePerItem;
-      const current = base + rotation;
-      const rad = (current * Math.PI) / 180;
-      const x = radius * Math.sin(rad);
-      const y = -radius * Math.cos(rad);
-
-      const norm = normalize(current);
-      const distToFront = Math.min(norm, 360 - norm);
-      const isFront = distToFront < anglePerItem / 2;
-
-      el.style.transform = `translate(${x}px, ${y}px)`;
-      el.classList.toggle('is-front', isFront);
-
-      if (isFront) {
-        hubLabel.textContent = categories[i].label;
-        el.dataset.front = 'true';
-      } else {
-        delete el.dataset.front;
-      }
+  function render() {
+    cards.forEach((card, i) => {
+      const o = offsetOf(i);
+      const abs = Math.abs(o);
+      const clampedAbs = Math.min(abs, MAX_VISIBLE);
+      card.style.setProperty('--o', o);
+      card.style.setProperty('--ao', clampedAbs); // pre-computed |offset|, clamped — avoids relying on CSS abs()
+      card.classList.toggle('is-active', o === 0);
+      card.classList.toggle('is-hidden', abs > MAX_VISIBLE);
+      card.setAttribute('aria-current', o === 0 ? 'true' : 'false');
+      card.tabIndex = abs > MAX_VISIBLE ? -1 : 0;
     });
+    dots.forEach((dot, i) => dot.classList.toggle('is-active', i === active));
+    const cat = categories[active];
+    stage.setAttribute('aria-label', `Property and rental categories, showing ${cat.label}`);
   }
 
-  function getFrontIndex() {
-    let closest = 0;
-    let minDist = Infinity;
-    items.forEach((el, i) => {
-      const base = i * anglePerItem;
-      const norm = normalize(base + rotation);
-      const dist = Math.min(norm, 360 - norm);
-      if (dist < minDist) { minDist = dist; closest = i; }
-    });
-    return closest;
+  function goTo(index, { userInitiated = true } = {}) {
+    active = ((index % n) + n) % n;
+    render();
+    if (userInitiated) restartAutoplay();
   }
 
-  function openDetail(index) {
-    const cat = categories[index];
+  function next() { goTo(active + 1); }
+  function prev() { goTo(active - 1); }
 
-    // LIVE categories (Room, Apartment, PG, Hostel) skip the
-    // "Coming Soon" detail card entirely and navigate directly
-    // to their listings page.
+  /* ---- activating a card: same rules as the old wheel/slider ---- */
+  function activateCategory(i) {
+    const cat = categories[i];
     if (LIVE_CATEGORIES.includes(cat.key)) {
-      openCategory(cat.key);
+      openCategory(cat.key); // navigates directly, no popup
       return;
     }
-
-    // All other categories (Car, Bike, Scooter, Electronics,
-    // Marriage Hall) keep the exact same "Coming Soon" behavior
-    // as before: open the detail card. It now also carries a
-    // "Get the App" button linking straight to the Play Store.
     detailIcon.textContent = cat.icon;
     detailTitle.textContent = cat.label;
     detailDesc.textContent = cat.desc;
     if (detailAppLink) detailAppLink.href = APP_LINK;
     detail.classList.add('is-open');
+    detail.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
   }
 
-  function closeDetail() {
-    detail.classList.remove('is-open');
-  }
-
-  function spinToIndex(index) {
-    // find rotation that brings this item's base angle to 0 (front),
-    // choosing the shortest path from current rotation.
-    const base = index * anglePerItem;
-    let targetRotation = -base;
-    // normalize target relative to current rotation for shortest path
-    const diff = ((targetRotation - rotation + 540) % 360) - 180;
-    animateRotationBy(diff);
-  }
-
-  function animateRotationBy(delta) {
-    cancelMomentum();
-    cancelSnap();
-    const start = rotation;
-    const end = rotation + delta;
-    const duration = 650;
-    const startTime = performance.now();
-    function step(now) {
-      const t = Math.min(1, (now - startTime) / duration);
-      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
-      rotation = start + (end - start) * eased;
-      layout();
-      if (t < 1) {
-        snapFrame = requestAnimationFrame(step);
+  // NOTE: tapping/clicking a card is handled centrally via pointerdown/up
+  // below rather than a plain 'click' listener per card. Once the viewport
+  // captures the pointer (for dragging), the browser retargets the
+  // resulting click event to the capturing element instead of the card
+  // that was actually pressed — so a per-card click listener would silently
+  // never fire. Keyboard activation isn't affected by pointer capture, so
+  // that stays as a simple per-card listener.
+  cards.forEach((card, i) => {
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (i === active) activateCategory(i); else goTo(i);
       }
-    }
-    snapFrame = requestAnimationFrame(step);
-  }
-
-  function cancelMomentum() {
-    if (momentumFrame) cancelAnimationFrame(momentumFrame);
-    momentumFrame = null;
-  }
-  function cancelSnap() {
-    if (snapFrame) cancelAnimationFrame(snapFrame);
-    snapFrame = null;
-  }
-
-  function runMomentum() {
-    cancelSnap();
-    function step() {
-      velocity *= 0.945; // friction
-      rotation += velocity;
-      layout();
-      if (Math.abs(velocity) > 0.02) {
-        momentumFrame = requestAnimationFrame(step);
-      } else {
-        momentumFrame = null;
-        snapToNearest();
-      }
-    }
-    momentumFrame = requestAnimationFrame(step);
-  }
-
-  function snapToNearest() {
-    const idx = getFrontIndex();
-    const base = idx * anglePerItem;
-    const targetRotation = -base;
-    const diff = ((targetRotation - rotation + 540) % 360) - 180;
-    if (Math.abs(diff) > 0.3) {
-      animateRotationBy(diff);
-    }
-  }
-
-  /* ---- pointer interaction (mouse + touch via Pointer Events) ---- */
-  let moved = false;
-  let startClientX = 0;
-  let startClientY = 0;
-  let pressedItem = null; // the wheel-item actually pressed on pointerdown
-
-  outer.addEventListener('pointerdown', (e) => {
-    dragging = true;
-    moved = false;
-    startClientX = e.clientX;
-    startClientY = e.clientY;
-    pressedItem = e.target.closest('.wheel-item');
-    cancelMomentum();
-    cancelSnap();
-    outer.classList.add('is-dragging');
-    outer.setPointerCapture(e.pointerId);
-    lastAngle = pointerAngle(e.clientX, e.clientY);
-    lastTime = performance.now();
-    velocity = 0;
+    });
   });
 
-  outer.addEventListener('pointermove', (e) => {
+  if (prevBtn) prevBtn.addEventListener('click', prev);
+  if (nextBtn) nextBtn.addEventListener('click', next);
+
+  stage.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activateCategory(active); }
+  });
+
+  /* ---- autoplay: slow, gentle, pauses on any interaction ---- */
+  function startAutoplay() {
+    if (prefersReducedMotion) return;
+    stopAutoplay();
+    autoplayTimer = setInterval(() => goTo(active + 1, { userInitiated: false }), 4200);
+  }
+  function stopAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  }
+  function restartAutoplay() { startAutoplay(); }
+
+  [stage, viewport].forEach(el => {
+    el.addEventListener('mouseenter', stopAutoplay);
+    el.addEventListener('mouseleave', startAutoplay);
+    el.addEventListener('focusin', stopAutoplay);
+    el.addEventListener('focusout', startAutoplay);
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAutoplay(); else startAutoplay();
+  });
+
+  /* ---- drag (mouse) + swipe (touch) via Pointer Events ----
+     Also handles taps: since the viewport captures the pointer for
+     dragging, the browser retargets the resulting 'click' event to the
+     viewport instead of the card under the finger/cursor — so taps on a
+     card are detected here directly (comparing total travel distance
+     against a small threshold) rather than via a 'click' listener. */
+  let dragging = false;
+  let startX = 0;
+  let startY = 0;
+  let dragDistance = 0;
+  let pressedIndex = null; // index of the card actually pressed on pointerdown
+  const TAP_MAX_DISTANCE = 8;  // px of travel still counted as a tap, not a drag
+  const DRAG_THRESHOLD = 45;   // px before a drag counts as a swipe to next/prev
+
+  viewport.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    dragDistance = 0;
+    startX = e.clientX;
+    startY = e.clientY;
+    const pressedCard = e.target.closest('.carousel3d-card');
+    pressedIndex = pressedCard ? Number(pressedCard.dataset.index) : null;
+    stopAutoplay();
+    viewport.classList.add('is-dragging');
+    viewport.setPointerCapture(e.pointerId);
+  });
+
+  viewport.addEventListener('pointermove', (e) => {
     if (!dragging) return;
-    const angle = pointerAngle(e.clientX, e.clientY);
-    let delta = angle - lastAngle;
-    // handle wrap-around (crossing the 180/-180 boundary)
-    if (delta > 180) delta -= 360;
-    if (delta < -180) delta += 360;
-
-    // Use total pixel distance from the initial touch/click point to decide
-    // whether this is a genuine drag or just a tap (avoids false positives
-    // from tiny finger jitter on touchscreens).
-    const pixelDist = Math.hypot(e.clientX - startClientX, e.clientY - startClientY);
-    if (pixelDist > 8) moved = true;
-
-    const now = performance.now();
-    const dt = Math.max(now - lastTime, 1);
-    velocity = (delta / dt) * 16; // normalize to ~60fps step
-
-    rotation += delta;
-    layout();
-
-    lastAngle = angle;
-    lastTime = now;
+    dragDistance = e.clientX - startX;
+    // Subtle live-follow: nudge the whole fan with the pointer while
+    // dragging, without changing the active index until release.
+    track.style.setProperty('--drag', `${dragDistance * 0.35}px`);
   });
 
   function endDrag(e) {
     if (!dragging) return;
     dragging = false;
-    outer.classList.remove('is-dragging');
+    viewport.classList.remove('is-dragging');
+    track.style.setProperty('--drag', '0px');
 
-    // Handle tap ourselves: pointer capture on `outer` can prevent the
-    // native click event from firing on the individual item, so we detect
-    // taps here directly instead of relying on each item's click listener.
-    if (!moved && pressedItem) {
-      const index = Number(pressedItem.dataset.index);
-      // For LIVE categories we navigate immediately (no point spinning
-      // the wheel to the front first, since we're about to leave the page).
-      const cat = categories[index];
-      if (LIVE_CATEGORIES.includes(cat.key)) {
-        openDetail(index); // will redirect
-      } else {
-        spinToIndex(index);
-        openDetail(index);
-      }
-    }
-    pressedItem = null;
+    const traveled = e ? Math.hypot(e.clientX - startX, e.clientY - startY) : Math.abs(dragDistance);
+    const wasTap = traveled <= TAP_MAX_DISTANCE;
 
-    if (Math.abs(velocity) > 0.15) {
-      runMomentum();
+    if (wasTap && pressedIndex !== null) {
+      if (pressedIndex === active) activateCategory(pressedIndex); else goTo(pressedIndex);
+    } else if (dragDistance <= -DRAG_THRESHOLD) {
+      next();
+    } else if (dragDistance >= DRAG_THRESHOLD) {
+      prev();
     } else {
-      snapToNearest();
+      restartAutoplay();
     }
+    pressedIndex = null;
+    dragDistance = 0;
   }
 
-  outer.addEventListener('pointerup', endDrag);
-  outer.addEventListener('pointercancel', endDrag);
-  outer.addEventListener('pointerleave', (e) => { if (dragging && e.buttons === 0) endDrag(e); });
+  viewport.addEventListener('pointerup', endDrag);
+  viewport.addEventListener('pointercancel', () => endDrag());
+  viewport.addEventListener('pointerleave', (e) => { if (dragging && e.buttons === 0) endDrag(e); });
 
-  detailClose.addEventListener('click', closeDetail);
-
-  /* ---- init ---- */
-  function init() {
-    computeRadius();
-    layout();
-  }
-  init();
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(init, 200);
-  });
+  render();
+  startAutoplay();
 }
 
 /* =========================================================
