@@ -14,6 +14,15 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
   /* Page-specific styles only — reuses the same design tokens/vars from style.css */
+
+  /* The skeleton grid and listing grid below are toggled via the `hidden`
+     attribute in the inline script. Author CSS like `.skeleton-grid{
+     display:grid }` normally overrides the browser's default `[hidden]{
+     display:none }` rule (same specificity, author styles win), so
+     without this explicit override the skeleton would stay visible even
+     after JS marks it hidden. */
+  [hidden]{ display:none !important; }
+
   .category-page{ padding:150px 0 100px; min-height:60vh; }
   .category-header{ display:flex; align-items:center; gap:18px; margin-bottom:40px; flex-wrap:wrap; }
   .category-header .cat-icon-lg{
@@ -58,7 +67,27 @@
   }
   .empty-state .empty-icon{ font-size:44px; margin-bottom:18px; }
   .empty-state h2{ font-size:22px; margin-bottom:10px; }
-  .empty-state p{ max-width:420px; margin:0 auto 26px; }
+  .empty-state p{ max-width:460px; margin:0 auto; }
+
+  /* Owner / Seeker CTA cards shown inside the empty state, explaining
+     that real listings live in the app and pointing each kind of user
+     toward the right next step. */
+  .role-cta-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:20px;
+    max-width:640px; margin:34px auto 0; text-align:left;
+  }
+  .role-cta-card{
+    background:#FFFFFF; border:1px solid var(--border); border-radius:20px;
+    padding:26px 24px; display:flex; flex-direction:column; gap:10px;
+    box-shadow:var(--shadow-sm);
+    transition:transform .35s var(--ease-premium), box-shadow .35s var(--ease-premium), border-color .3s;
+  }
+  .role-cta-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:rgba(14,165,183,.35); }
+  .role-cta-icon{ font-size:30px; }
+  .role-cta-card h3{ font-size:16.5px; margin:0; color:var(--text); }
+  .role-cta-card p{ font-size:13.5px; line-height:1.55; margin:0; color:var(--text-muted); flex:1; }
+  .role-cta-card .btn{ align-self:flex-start; margin-top:6px; }
+  @media (max-width: 620px){ .role-cta-grid{ grid-template-columns:1fr; } }
 
   @media (max-width: 980px){ .listing-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width: 620px){ .listing-grid{ grid-template-columns:1fr; } }
@@ -149,9 +178,23 @@
       <div id="listing-grid" class="listing-grid fade-in-content" hidden></div>
       <div id="empty-state" class="empty-state fade-in-content" hidden>
         <div class="empty-icon">📭</div>
-        <h2>No listings here yet</h2>
-        <p>We're onboarding verified hosts in this category right now. Check back soon, or download the app to be notified the moment listings go live.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" class="btn btn-primary ripple" target="_blank" rel="noopener"><span>Get the App</span></a>
+        <h2 id="empty-state-title">No listings live here on the website yet</h2>
+        <p id="empty-state-desc">New listings in this category go live on the RentGoX Android app first. Download the app to browse everything that's currently available, or list your own property in minutes.</p>
+
+        <div class="role-cta-grid">
+          <div class="role-cta-card">
+            <div class="role-cta-icon">🏠</div>
+            <h3>I'm a Property Owner</h3>
+            <p>List your room, apartment, PG or hostel and start getting genuine enquiries &mdash; verified, direct, no middlemen.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" class="btn btn-primary ripple btn-sm" target="_blank" rel="noopener"><span>Upload a Property</span></a>
+          </div>
+          <div class="role-cta-card">
+            <div class="role-cta-icon">🔍</div>
+            <h3>I'm Looking to Rent</h3>
+            <p>Browse verified listings near you, filter by category and budget, and message owners directly inside the app.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" class="btn btn-ghost ripple btn-sm" target="_blank" rel="noopener"><span>Find a Place</span></a>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -192,12 +235,18 @@
 
     /* ---------------------------------------------------------
        Category data. Each of Room / Apartment / PG / Hostel is a
-       LIVE category, so this page is what the wheel/other sections
+       LIVE category, so this page is what the carousel/other sections
        link to instead of showing a "Coming Soon" popup.
 
        Replace the empty `listings` arrays below with real data
        (or fetch from an API) as soon as it's available — the
        rendering logic already supports it.
+
+       NOTE: this is a page-local `CATEGORY_DATA` (listings per
+       category), separate from `CAROUSEL_CATEGORIES` in js/script.js
+       (the carousel's own card list) — keep the names distinct so a
+       future edit doesn't reintroduce a duplicate-declaration clash
+       between this inline script and js/script.js on this page.
     --------------------------------------------------------- */
     const CATEGORY_DATA = {
       room: {
@@ -234,6 +283,15 @@
     document.getElementById('cat-title').textContent = data.title;
     document.getElementById('cat-subtitle').textContent = data.subtitle;
     document.title = data.title + ' — RentGoX';
+
+    // Empty-state copy references the specific category so it's clear
+    // this isn't a broken page — it's simply that this category's real
+    // listings live in the app first.
+    document.getElementById('empty-state-title').textContent =
+      `No ${data.title} listings live here on the website yet`;
+    document.getElementById('empty-state-desc').textContent =
+      `New ${data.title.toLowerCase()} listings go live on the RentGoX Android app first. ` +
+      `Download the app to browse everything that's currently available, or list your own property in minutes.`;
 
     const grid = document.getElementById('listing-grid');
     const emptyState = document.getElementById('empty-state');
