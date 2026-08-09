@@ -318,131 +318,143 @@ p{ margin:0 0 1em; color:var(--text-muted); }
 
 section{ position:relative; z-index:1; padding:100px 0; }
 
-/* =========================== WHEEL SECTION =========================== */
-.wheel-section{ padding-top:60px; padding-bottom:60px; background:var(--ink); }
-.wheel-stage{
-  position:relative; display:flex; flex-direction:column; align-items:center;
-  padding:40px 0 20px;
-  touch-action:pan-y;
-}
-.wheel-glow{ display:none; }
-.wheel-outer{
-  position:relative; width:min(520px, 90vw); height:min(520px, 90vw);
-  border-radius:50%;
-  border:1px dashed var(--border);
-  display:flex; align-items:center; justify-content:center;
-  cursor:grab;
-  user-select:none;
-}
-.wheel-outer.is-dragging{ cursor:grabbing; }
-.wheel-ring{ position:absolute; inset:0; will-change:transform; }
+/* =========================== 3D CATEGORY CAROUSEL =========================== */
+.categories-3d{ padding-top:60px; padding-bottom:60px; background:var(--ink); }
 
-.wheel-item{
-  position:absolute; top:50%; left:50%;
-  width:88px; height:88px; margin:-44px 0 0 -44px;
-  border-radius:22px;
-  background:#FFFFFF;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow-sm);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:6px;
-  font-size:26px;
-  color:var(--text-muted);
-  cursor:pointer;
-  transition:transform .5s var(--ease-premium), box-shadow .5s var(--ease-premium), background .4s, color .4s, border-color .4s;
-}
-.wheel-item span{ font-family:var(--font-body); font-size:11px; font-weight:600; color:inherit; }
-.wheel-item.is-front{
-  width:118px; height:118px; margin:-59px 0 0 -59px;
-  background:linear-gradient(160deg, rgba(245,165,36,.14), rgba(245,165,36,.04));
-  border-color:rgba(245,165,36,.55);
-  color:var(--text);
-  box-shadow:0 0 0 1px rgba(245,165,36,.2), 0 18px 36px -16px rgba(245,165,36,.35);
-  font-size:32px;
-  animation:frontFloat 2.6s ease-in-out infinite;
-  z-index:5;
-}
-@keyframes frontFloat{ 0%,100%{ margin-top:-59px; } 50%{ margin-top:-69px; } }
-.wheel-hub{
-  position:relative; width:96px; height:96px; border-radius:50%;
-  background:#FFFFFF;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow-sm);
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--font-mono); font-size:12px; color:var(--text-muted); letter-spacing:.06em;
-  pointer-events:none;
-  z-index:2;
-}
-.wheel-hint{ margin-top:18px; font-size:13px; color:var(--text-muted); font-family:var(--font-mono); letter-spacing:.02em; }
-
-/* =========================== HORIZONTAL CATEGORY SLIDER =========================== */
-.slider-stage{
+.carousel3d-stage{
   position:relative;
-  display:flex; align-items:center; gap:14px;
-  margin-top:44px;
+  display:flex; align-items:center; justify-content:center;
+  gap:14px;
+  max-width:var(--container);
+  margin:44px auto 0;
+  padding:0 16px;
 }
-.slider-track{
-  display:flex; gap:18px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  padding:8px 4px 20px;
-  -webkit-overflow-scrolling:touch;
+.carousel3d-stage:focus-visible{ outline:none; }
+.carousel3d-stage:focus-visible .carousel3d-viewport{
+  outline:2.5px solid var(--teal); outline-offset:6px; border-radius:24px;
+}
+
+.carousel3d-viewport{
+  position:relative;
+  flex:1 1 auto;
+  height:300px;
+  perspective:1400px;
+  touch-action:pan-y;
   cursor:grab;
   user-select:none;
 }
-.slider-track.is-dragging{ cursor:grabbing; scroll-behavior:auto; }
-.slider-track::-webkit-scrollbar{ height:6px; }
-.slider-track::-webkit-scrollbar-thumb{ background:var(--border); border-radius:6px; }
-.slider-track::-webkit-scrollbar-track{ background:transparent; }
+.carousel3d-viewport.is-dragging{ cursor:grabbing; }
 
-.slide-card{
-  flex:0 0 auto;
-  scroll-snap-align:center;
-  width:150px;
+.carousel3d-track{
+  position:absolute; inset:0;
+  transform-style:preserve-3d;
+  pointer-events:none; /* see .carousel3d-card below */
+}
+
+.carousel3d-card{
+  position:absolute; top:50%; left:50%;
+  width:190px; height:220px;
+  margin:-110px 0 0 -95px;
+  border-radius:24px;
   background:#FFFFFF;
   border:1px solid var(--border);
-  border-radius:20px;
-  box-shadow:var(--shadow-sm);
-  padding:26px 18px;
-  display:flex; flex-direction:column; align-items:center; gap:10px;
-  text-align:center;
-  cursor:pointer;
-  transition:transform .35s var(--ease-premium), box-shadow .35s var(--ease-premium), border-color .3s;
-}
-.slide-card:hover{
-  transform:translateY(-6px);
   box-shadow:var(--shadow-md);
-  border-color:rgba(14,165,183,.35);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:12px;
+  cursor:pointer;
+  color:var(--text-muted);
+  pointer-events:auto; /* the track above opts out of hit-testing; cards opt back in
+                           so a 3D-depth click always resolves to the correct card,
+                           never to the flat, full-size track container behind them */
+  transform:
+    translateX(calc(var(--o) * 148px + var(--drag, 0px)))
+    translateZ(calc(var(--ao) * -110px))
+    rotateY(calc(var(--o) * -26deg))
+    scale(calc(1 - var(--ao) * 0.14));
+  z-index:calc(20 - var(--ao));
+  opacity:calc(1 - var(--ao) * 0.3);
+  transition:transform .6s var(--ease-premium), opacity .6s var(--ease-premium), box-shadow .4s, border-color .4s;
 }
-.slide-card .slide-icon{ font-size:30px; }
-.slide-card .slide-label{ font-family:var(--font-body); font-weight:600; font-size:14px; color:var(--text); }
-.slide-card.is-live{ border-color:rgba(14,165,183,.3); }
-.slide-card.is-live .slide-badge{
-  font-family:var(--font-mono); font-size:9.5px; letter-spacing:.05em; text-transform:uppercase;
-  color:var(--teal); background:rgba(14,165,183,.1); padding:3px 8px; border-radius:999px;
-}
-.slide-card.is-soon .slide-badge{
-  font-family:var(--font-mono); font-size:9.5px; letter-spacing:.05em; text-transform:uppercase;
-  color:var(--amber); background:rgba(245,165,36,.12); padding:3px 8px; border-radius:999px;
-}
+.carousel3d-viewport.is-dragging .carousel3d-card{ transition:opacity .6s var(--ease-premium), box-shadow .4s, border-color .4s; }
 
-.slider-arrow{
+.carousel3d-card-icon{ font-size:38px; }
+.carousel3d-card-label{ font-family:var(--font-body); font-weight:600; font-size:15px; color:var(--text); }
+.carousel3d-card-badge{
+  font-family:var(--font-mono); font-size:9.5px; letter-spacing:.05em; text-transform:uppercase;
+  padding:3px 8px; border-radius:999px;
+}
+.carousel3d-card.is-live .carousel3d-card-badge{ color:var(--teal); background:rgba(14,165,183,.1); }
+.carousel3d-card.is-soon .carousel3d-card-badge{ color:var(--amber); background:rgba(245,165,36,.12); }
+
+.carousel3d-card.is-active{
+  color:var(--text);
+  border-color:rgba(79,70,229,.35);
+  box-shadow:0 0 0 1px rgba(79,70,229,.14), var(--shadow-lg);
+}
+.carousel3d-card.is-active .carousel3d-card-icon{ font-size:44px; }
+.carousel3d-card.is-hidden{ opacity:0; pointer-events:none; }
+
+.carousel3d-arrow{
   flex:none;
-  width:42px; height:42px; border-radius:50%;
+  width:44px; height:44px; border-radius:50%;
   background:#FFFFFF; border:1px solid var(--border);
   box-shadow:var(--shadow-sm);
   display:flex; align-items:center; justify-content:center;
   font-size:16px; color:var(--text); cursor:pointer;
   transition:background .25s, transform .25s, box-shadow .25s;
 }
-.slider-arrow:hover{ background:var(--surface-strong); box-shadow:var(--shadow-md); }
-.slider-arrow:active{ transform:scale(.94); }
+.carousel3d-arrow:hover{ background:var(--surface-strong); box-shadow:var(--shadow-md); }
+.carousel3d-arrow:active{ transform:scale(.94); }
+
+.carousel3d-dots{
+  display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+  gap:9px;
+  max-width:520px; margin:26px auto 0;
+}
+.carousel3d-dot{
+  width:8px; height:8px; border-radius:50%;
+  background:var(--border); border:none; padding:0; cursor:pointer;
+  transition:background .3s, transform .3s;
+}
+.carousel3d-dot.is-active{ background:var(--violet); transform:scale(1.35); }
+
+.wheel-hint{ margin-top:18px; text-align:center; font-size:13px; color:var(--text-muted); font-family:var(--font-mono); letter-spacing:.02em; }
+
+@media (max-width: 980px){
+  .carousel3d-viewport{ height:270px; }
+  .carousel3d-card{
+    width:160px; height:190px; margin:-95px 0 0 -80px;
+    transform:
+      translateX(calc(var(--o) * 118px + var(--drag, 0px)))
+      translateZ(calc(var(--ao) * -100px))
+      rotateY(calc(var(--o) * -26deg))
+      scale(calc(1 - var(--ao) * 0.16));
+  }
+  .carousel3d-card-icon{ font-size:32px; }
+  .carousel3d-card.is-active .carousel3d-card-icon{ font-size:38px; }
+}
 
 @media (max-width: 620px){
-  .slide-card{ width:128px; padding:22px 14px; }
-  .slider-arrow{ display:none; } /* rely on native swipe on touch devices */
+  .carousel3d-stage{ gap:6px; }
+  .carousel3d-arrow{ width:36px; height:36px; font-size:14px; }
+  .carousel3d-viewport{ height:230px; }
+  .carousel3d-card{
+    width:132px; height:158px; margin:-79px 0 0 -66px; gap:8px;
+    transform:
+      translateX(calc(var(--o) * 88px + var(--drag, 0px)))
+      translateZ(calc(var(--ao) * -90px))
+      rotateY(calc(var(--o) * -24deg))
+      scale(calc(1 - var(--ao) * 0.18));
+  }
+  .carousel3d-card-icon{ font-size:26px; }
+  .carousel3d-card.is-active .carousel3d-card-icon{ font-size:32px; }
+  .carousel3d-card-label{ font-size:13px; }
 }
+
+/* Note: the global prefers-reduced-motion rule near the top of this file
+   already collapses every transition/animation duration to ~0, and the
+   carousel's autoplay timer is skipped entirely in JS for that preference
+   — so no extra override is needed here. */
 
 /* detail card ("Coming Soon" popup for Car / Bike / Scooter / Electronics / Marriage Hall) */
 .category-detail{
@@ -689,9 +701,5 @@ section{ position:relative; z-index:1; padding:100px 0; }
 @media (max-width: 620px){
   .feature-grid, .screens-grid, .future-grid, .why-grid{ grid-template-columns:1fr; }
   .hero-stats{ gap:22px; }
-  .wheel-item{ width:66px; height:66px; margin:-33px 0 0 -33px; font-size:20px; }
-  .wheel-item span{ font-size:9.5px; }
-  .wheel-item.is-front{ width:92px; height:92px; margin:-46px 0 0 -46px; font-size:26px; }
-  @keyframes frontFloat{ 0%,100%{ margin-top:-46px; } 50%{ margin-top:-54px; } }
   .category-detail.is-open{ padding:26px; }
 }
