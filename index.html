@@ -155,41 +155,31 @@
       </div>
     </section>
 
-    <!-- ===================== CIRCULAR CATEGORY WHEEL ===================== -->
-    <section class="wheel-section" id="categories">
+    <!-- ===================== 3D CATEGORY CAROUSEL ===================== -->
+    <section class="categories-3d" id="categories">
       <div class="container">
         <div class="section-head reveal" data-reveal="up">
           <span class="eyebrow">What you can rent</span>
-          <h2>Spin the wheel. Pick your category.</h2>
-          <p>Drag with your mouse or swipe with your finger &mdash; the wheel
-             glides with momentum, just like flicking a dial.</p>
+          <h2>Explore categories, up close.</h2>
+          <p>Drag with your mouse or swipe with your finger &mdash; glide
+             through every category in smooth 3D.</p>
         </div>
       </div>
 
-      <div class="wheel-stage">
-        <div class="wheel-glow"></div>
-        <div class="wheel-outer" id="wheel-outer">
-          <div class="wheel-ring" id="wheel-ring">
-            <!-- category items injected by JS -->
-          </div>
-          <div class="wheel-hub">
-            <span id="wheel-hub-label">Drag</span>
+      <div class="carousel3d-stage" id="carousel3d-stage" role="region" aria-roledescription="carousel" aria-label="Property and rental categories" tabindex="0">
+        <button type="button" class="carousel3d-arrow carousel3d-arrow-left" id="carousel3d-prev" aria-label="Previous category">&larr;</button>
+
+        <div class="carousel3d-viewport" id="carousel3d-viewport">
+          <div class="carousel3d-track" id="carousel3d-track">
+            <!-- category 3D cards injected by JS -->
           </div>
         </div>
-        <p class="wheel-hint">Drag to rotate &middot; Tap a category to open it</p>
+
+        <button type="button" class="carousel3d-arrow carousel3d-arrow-right" id="carousel3d-next" aria-label="Next category">&rarr;</button>
       </div>
 
-      <!-- Horizontal sliding category carousel (mobile-friendly alternative to the wheel) -->
-      <div class="container">
-        <div class="slider-stage">
-          <button class="slider-arrow slider-arrow-left" id="slider-prev" aria-label="Previous categories">&larr;</button>
-          <div class="slider-track" id="slider-track">
-            <!-- category slide cards injected by JS -->
-          </div>
-          <button class="slider-arrow slider-arrow-right" id="slider-next" aria-label="Next categories">&rarr;</button>
-        </div>
-        <p class="wheel-hint">Swipe or drag &middot; Tap a card to open it</p>
-      </div>
+      <div class="carousel3d-dots" id="carousel3d-dots" role="tablist" aria-label="Choose category"></div>
+      <p class="wheel-hint">Drag to rotate &middot; Tap a card to open it</p>
 
       <!-- Detail card -->
       <div class="container">
