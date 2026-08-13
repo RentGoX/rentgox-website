@@ -55,11 +55,21 @@
     height:160px;
     background:linear-gradient(160deg, rgba(109,94,245,.22), rgba(52,209,191,.14));
     display:flex; align-items:center; justify-content:center; font-size:34px;
+    background-size:cover; background-position:center; position:relative; overflow:hidden;
   }
+  .listing-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
   .listing-body{ padding:20px 22px; }
   .listing-body h3{ font-size:17px; margin:0 0 6px; }
-  .listing-body p{ font-size:13.5px; margin:0 0 12px; }
+  .listing-body p{ font-size:13.5px; margin:0 0 12px; display:flex; align-items:center; gap:5px; color:var(--text-muted); }
   .listing-price{ font-family:var(--font-display); font-weight:700; color:var(--teal); font-size:16px; }
+  .listing-card{ display:flex; flex-direction:column; }
+  .listing-cta{
+    display:block; margin-top:14px; text-align:center; font-size:13px; font-weight:600;
+    padding:10px 14px; border-radius:12px; border:1px solid var(--border); color:var(--text);
+    text-decoration:none; transition:border-color .3s, color .3s;
+  }
+  .listing-cta:hover{ border-color:rgba(52,209,191,.5); color:var(--teal); }
+  .listing-locked-note{ font-size:11.5px; color:var(--text-muted); margin-top:8px; text-align:center; }
 
   .empty-state{
     text-align:center; padding:80px 20px; border-radius:24px;
@@ -234,46 +244,38 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     /* ---------------------------------------------------------
-       Category data. Each of Room / Apartment / PG / Hostel is a
-       LIVE category, so this page is what the carousel/other sections
-       link to instead of showing a "Coming Soon" popup.
+       Category meta (icon/title/subtitle only). Real listings are
+       fetched live from Supabase below — the website only ever shows
+       a teaser (1 photo, price, location text). Everything else
+       (video, exact GPS/map, amenities, phone number, description...)
+       is only visible inside the RentGoX app, on purpose.
 
-       Replace the empty `listings` arrays below with real data
-       (or fetch from an API) as soon as it's available — the
-       rendering logic already supports it.
-
-       NOTE: this is a page-local `CATEGORY_DATA` (listings per
-       category), separate from `CAROUSEL_CATEGORIES` in js/script.js
-       (the carousel's own card list) — keep the names distinct so a
-       future edit doesn't reintroduce a duplicate-declaration clash
-       between this inline script and js/script.js on this page.
+       NOTE: this is a page-local `CATEGORY_DATA`, separate from
+       `CAROUSEL_CATEGORIES` in js/script.js (the carousel's own card
+       list) — keep the names distinct so a future edit doesn't
+       reintroduce a duplicate-declaration clash between this inline
+       script and js/script.js on this page.
     --------------------------------------------------------- */
     const CATEGORY_DATA = {
-      room: {
-        icon: '🛏️',
-        title: 'Rooms',
-        subtitle: 'Verified single and shared rooms, ready to move in.',
-        listings: [] // TODO: populate with real room listings
-      },
-      apartment: {
-        icon: '🏢',
-        title: 'Apartments',
-        subtitle: 'Fully furnished apartments for short or long-term stays.',
-        listings: [] // TODO: populate with real apartment listings
-      },
-      pg: {
-        icon: '🏠',
-        title: 'PG Accommodations',
-        subtitle: 'Paying-guest stays with meals and amenities included.',
-        listings: [] // TODO: populate with real PG listings
-      },
-      hostel: {
-        icon: '🏨',
-        title: 'Hostels',
-        subtitle: 'Budget-friendly beds for students and travellers.',
-        listings: [] // TODO: populate with real hostel listings
-      }
+      room:      { icon: '🛏️', title: 'Rooms',              subtitle: 'Verified single and shared rooms, ready to move in.',        dbType: 'Room' },
+      apartment: { icon: '🏢', title: 'Apartments',          subtitle: 'Fully furnished apartments for short or long-term stays.',   dbType: 'Apartment' },
+      pg:        { icon: '🏠', title: 'PG Accommodations',   subtitle: 'Paying-guest stays with meals and amenities included.',      dbType: 'PG' },
+      hostel:    { icon: '🏨', title: 'Hostels',             subtitle: 'Budget-friendly beds for students and travellers.',          dbType: 'Hostel' }
     };
+
+    // Same Supabase project the app uses. This anon key is safe to use
+    // here — it's the public "anon" key (already shipped inside the
+    // Android app itself) and is meant to be called from client apps;
+    // access control happens via the table's Row Level Security
+    // policies on the Supabase side, not by hiding this key.
+    const SUPABASE_URL = 'https://uvkpanxzujecilwvxtid.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2a3Bhbnh6dWplY2lsd3Z4dGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2MjAzNjMsImV4cCI6MjA5ODE5NjM2M30.rCFvdYgtJjcEcej-Pfly2DXflAM3FgIKHSSUtQW0ycE';
+
+    // ONLY these columns are requested — no video_url, no latitude/
+    // longitude, no google_maps_link, no phone/address/amenities.
+    // That way the website literally never receives that data, instead
+    // of receiving it and just hiding it in the UI.
+    const LISTING_FIELDS = 'id,title,price,location,photo_url,type';
 
     const params = new URLSearchParams(window.location.search);
     const type = params.get('type');
@@ -285,8 +287,8 @@
     document.title = data.title + ' — RentGoX';
 
     // Empty-state copy references the specific category so it's clear
-    // this isn't a broken page — it's simply that this category's real
-    // listings live in the app first.
+    // this isn't a broken page — it's simply that no approved listing
+    // in this category exists right now.
     document.getElementById('empty-state-title').textContent =
       `No ${data.title} listings live here on the website yet`;
     document.getElementById('empty-state-desc').textContent =
@@ -297,38 +299,78 @@
     const emptyState = document.getElementById('empty-state');
     const skeletonGrid = document.getElementById('skeleton-grid');
 
-    if (data.listings && data.listings.length > 0) {
-      grid.innerHTML = data.listings.map(item => `
-        <div class="listing-card">
-          <div class="listing-thumb">${data.icon}</div>
-          <div class="listing-body">
-            <h3>${item.title}</h3>
-            <p>${item.location || ''}</p>
-            <span class="listing-price">${item.price || ''}</span>
-          </div>
-        </div>
-      `).join('');
+    function escapeHtml(str){
+      return String(str ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+      }[c]));
     }
 
-    // Swap the skeleton placeholders for the real content. The short delay
-    // is deliberate: it's where a real API fetch would happen, and it gives
-    // the loading shimmer a chance to actually be seen rather than flashing.
-    const showRealContent = () => {
+    function formatPrice(price){
+      if (price === null || price === undefined || price === '') return '';
+      const n = Number(price);
+      if (Number.isNaN(n)) return escapeHtml(price);
+      return '₹' + n.toLocaleString('en-IN') + '/mo';
+    }
+
+    function renderListings(items){
+      grid.innerHTML = items.map(item => {
+        const thumb = item.photo_url
+          ? `<img src="${escapeHtml(item.photo_url)}" alt="${escapeHtml(item.title || data.title)}" loading="lazy" onerror="this.parentElement.textContent='${data.icon}';">`
+          : data.icon;
+        return `
+        <div class="listing-card">
+          <div class="listing-thumb">${thumb}</div>
+          <div class="listing-body">
+            <h3>${escapeHtml(item.title || data.title)}</h3>
+            <p>📍 ${escapeHtml(item.location || 'Location available in app')}</p>
+            <span class="listing-price">${formatPrice(item.price)}</span>
+            <a class="listing-cta" href="property.html?id=${encodeURIComponent(item.id)}">View Full Details</a>
+            <p class="listing-locked-note">Photos, map location, amenities &amp; owner contact — open in the RentGoX app</p>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    async function loadListings(){
+      let items = [];
+      let fetchFailed = false;
+      try {
+        const url = `${SUPABASE_URL}/rest/v1/properties`
+          + `?select=${encodeURIComponent(LISTING_FIELDS)}`
+          + `&type=eq.${encodeURIComponent(data.dbType)}`
+          + `&is_available=eq.true`
+          + `&status=eq.approved`
+          + `&order=created_at.desc`
+          + `&limit=24`;
+
+        const res = await fetch(url, {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+
+        if (!res.ok) throw new Error('Supabase request failed: ' + res.status);
+        items = await res.json();
+      } catch (err) {
+        console.error('Failed to load listings:', err);
+        fetchFailed = true;
+      }
+
       skeletonGrid.hidden = true;
-      if (data.listings && data.listings.length > 0) {
+
+      if (!fetchFailed && Array.isArray(items) && items.length > 0) {
+        renderListings(items);
         grid.hidden = false;
         requestAnimationFrame(() => grid.classList.add('is-visible'));
       } else {
         emptyState.hidden = false;
         requestAnimationFrame(() => emptyState.classList.add('is-visible'));
       }
-    };
-    setTimeout(showRealContent, 350);
-  </script>
+    }
 
-  <a href="https://wa.me/8801XXXXXXXXX" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.2-.4.1-.2 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.3-.8.8-.8 1.9 0 1.1.8 2.2 1 2.4.1.2 1.6 2.5 4 3.4.6.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.2-.5 1.4-1 .2-.4.2-.8.1-.9 0-.1-.2-.2-.4-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.5.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3C4.1 14.9 3.7 13.5 3.7 12c0-4.6 3.7-8.3 8.3-8.3s8.3 3.7 8.3 8.3-3.7 8.2-8.3 8.2z"/></svg>
-  </a>
+    loadListings();
+  </script>
 
   <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top">
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
