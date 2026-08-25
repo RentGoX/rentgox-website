@@ -17,12 +17,15 @@
 
   <script>
     (function () {
-      const params = new URLSearchParams(window.location.search);
+            const params = new URLSearchParams(window.location.search);
       const propertyId = params.get('id');
-      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.rentgox.com';
-
+      // ✅ referrer param add kora holo — Google Play eta store kore rakhe
+      // ar fresh install-er por app-take (android_play_install_referrer
+      // diye) ferot dey. Eta chara install korar por app sudhu home
+      // screen-e khulto, oi property-te jeto na.
+      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.rentgox.com' +
+        (propertyId ? '&referrer=' + encodeURIComponent('id=' + propertyId) : '');
       document.getElementById('fallback-link').href = playStoreUrl;
-
       if (!propertyId) return;
 
       const isAndroid = /android/i.test(navigator.userAgent);
