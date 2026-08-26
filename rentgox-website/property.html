@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RentGoX Property</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container" style="padding-top:120px; text-align:center;">
+    <h1 style="color:var(--text);">Opening RentGoX...</h1>
+    <p style="color:var(--text-muted);">যদি অ্যাপ automatic না খোলে, নিচের বাটনে চাপুন।</p>
+    <a id="fallback-link" href="#" class="btn btn-primary" style="margin-top:20px;">
+      <span>Get RentGoX App</span>
+    </a>
+  </div>
+
+<script>
+    (function () {
+            const params = new URLSearchParams(window.location.search);
+      const propertyId = params.get('id');
+      // ✅ referrer param add kora holo — Google Play eta store kore rakhe
+      // ar fresh install-er por app-take (android_play_install_referrer
+      // diye) ferot dey. Eta chara install korar por app sudhu home
+      // screen-e khulto, oi property-te jeto na.
+      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.rentgox.com' +
+        (propertyId ? '&referrer=' + encodeURIComponent('id=' + propertyId) : '');
+      document.getElementById('fallback-link').href = playStoreUrl;
+      if (!propertyId) return;
+
+      const isAndroid = /android/i.test(navigator.userAgent);
+
+      if (isAndroid) {
+        // Android intent:// scheme — app thakle সরাসরি app khole, na
+        // thakle browser nijei (kono button click chara) Play Store-e
+        // pathiye dey. Eta age-r https+timeout system-er cheye onek
+        // beshi reliable, karon eta browser-er nijoshsho "chip" dekhanor
+        // upor nirbhor kore na.
+        const intentUrl =
+          'intent://rentgox.github.io/rentgox-website/property.html?id=' +
+          encodeURIComponent(propertyId) +
+          '#Intent;scheme=https;package=com.rentgox.com;' +
+          'S.browser_fallback_url=' + encodeURIComponent(playStoreUrl) + ';end';
+
+        window.location.href = intentUrl;
+      }
+    })();
+  </script>
+</body>
+</html>
