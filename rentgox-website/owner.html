@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RentGoX Owner Listings</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container" style="padding-top:120px; text-align:center;">
+    <h1 style="color:var(--text);">Opening RentGoX...</h1>
+    <p style="color:var(--text-muted);">যদি অ্যাপ automatic না খোলে, নিচের বাটনে চাপুন।</p>
+    <a id="fallback-link" href="#" class="btn btn-primary" style="margin-top:20px;">
+      <span>Get RentGoX App</span>
+    </a>
+  </div>
+
+<script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const ownerId = params.get('id');
+
+      // Same Play Store fallback pattern as property.html. The app does not
+      // currently read an "owner" install referrer after a fresh install
+      // (see install_referrer_service.dart — it only consumes a property
+      // "id"), so a not-installed user lands on the app's normal home
+      // screen after installing, rather than straight on this owner's
+      // listings. That's a separate, smaller follow-up if it's ever needed.
+      const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.rentgox.com' +
+        (ownerId ? '&referrer=' + encodeURIComponent('owner=' + ownerId) : '');
+      document.getElementById('fallback-link').href = playStoreUrl;
+      if (!ownerId) return;
+
+      const isAndroid = /android/i.test(navigator.userAgent);
+
+      if (isAndroid) {
+        // intent:// with an explicit package works even though owner.html
+        // isn't declared in the app's AndroidManifest App Links path —
+        // it directly asks Android "open this app if installed", which
+        // doesn't depend on Digital Asset Links verification the way a
+        // plain https:// tap does. So this works today, with no app
+        // rebuild needed.
+        const intentUrl =
+          'intent://rentgox.github.io/rentgox-website/owner.html?id=' +
+          encodeURIComponent(ownerId) +
+          '#Intent;scheme=https;package=com.rentgox.com;' +
+          'S.browser_fallback_url=' + encodeURIComponent(playStoreUrl) + ';end';
+
+        window.location.href = intentUrl;
+      }
+    })();
+  </script>
+</body>
+</html>
