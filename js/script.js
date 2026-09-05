@@ -108,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- 11. BACK TO TOP ---------- */
   initBackToTop();
 
+  /* ---------- 13. HERO PHONE PARALLAX TILT ---------- */
+  initHeroTilt();
+
   /* ---------- 12. SCREENSHOT SKELETON -> LOADED STATE ---------- */
   document.querySelectorAll('.screenshot-img').forEach(img => {
     const reveal = () => img.classList.add('is-loaded');
@@ -607,7 +610,38 @@ function initTestimonials() {
 }
 
 /* =========================================================
-   Back-to-top button
+   Hero phone-stack parallax tilt
+   - Desktop only: as the pointer moves across the hero, the
+     phone stack tilts gently toward it (max ~7deg), and eases
+     back to flat when the pointer leaves. One deliberate,
+     purposeful moment rather than motion sprinkled everywhere.
+   ========================================================= */
+function initHeroTilt() {
+  const hero = document.getElementById('hero');
+  const stack = document.getElementById('phone-stack');
+  if (!hero || !stack) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (prefersReducedMotion || !canHover) return;
+
+  const MAX_TILT = 7; // degrees
+
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;  // 0..1
+    const py = (e.clientY - rect.top) / rect.height;  // 0..1
+    const tiltX = (px - 0.5) * 2 * MAX_TILT;   // rotateY
+    const tiltY = (0.5 - py) * 2 * MAX_TILT;   // rotateX
+    stack.style.setProperty('--tilt-x', tiltX.toFixed(2) + 'deg');
+    stack.style.setProperty('--tilt-y', tiltY.toFixed(2) + 'deg');
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    stack.style.setProperty('--tilt-x', '0deg');
+    stack.style.setProperty('--tilt-y', '0deg');
+  });
+}
    - Fades in after the person scrolls past one viewport height,
      smooth-scrolls back to #top on click.
    ========================================================= */
