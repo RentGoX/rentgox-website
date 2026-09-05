@@ -642,6 +642,9 @@ function initHeroTilt() {
     stack.style.setProperty('--tilt-y', '0deg');
   });
 }
+
+/* =========================================================
+   Back-to-top button
    - Fades in after the person scrolls past one viewport height,
      smooth-scrolls back to #top on click.
    ========================================================= */
