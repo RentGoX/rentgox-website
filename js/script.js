@@ -29,11 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ---------- 2. PARTICLE BACKGROUND ----------
-     Disabled as part of the premium white theme (no glowing
-     particles/stars). initParticles() is left defined below,
-     untouched, in case it's ever needed again — it's simply
-     not invoked here. */
-  // initParticles();
+     Removed entirely as part of the premium white theme
+     (no glowing particles/stars) — was unused dead code. */
   initHeroSlideshow();
 
   /* ---------- 3. HEADER + MOBILE NAV ---------- */
@@ -141,60 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
-
-/* =========================================================
-   Particle background — lightweight canvas, no dependencies
-   ========================================================= */
-function initParticles() {
-  const canvas = document.getElementById('particle-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let w, h;
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = document.documentElement.scrollHeight;
-  }
-
-  function createParticles() {
-    const count = Math.min(70, Math.floor((w * h) / 32000));
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 1.6 + 0.4,
-      vx: (Math.random() - 0.5) * 0.15,
-      vy: (Math.random() - 0.5) * 0.15,
-      hue: Math.random() > 0.5 ? '109,94,245' : '52,209,191',
-      alpha: Math.random() * 0.5 + 0.15
-    }));
-  }
-
-  function tick() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > w) p.vx *= -1;
-      if (p.y < 0 || p.y > h) p.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${p.hue},${p.alpha})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(tick);
-  }
-
-  resize();
-  createParticles();
-  requestAnimationFrame(tick);
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => { resize(); createParticles(); }, 250);
-  });
-}
 
 /* =========================================================
    Hero background slideshow — crossfades between 3-4 photos.
