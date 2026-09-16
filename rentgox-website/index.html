@@ -4,22 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RentGoX — Rent Anything, Anytime</title>
-<meta name="description" content="RentGoX is the all-in-one rental marketplace for rooms, apartments, vehicles, electronics and more. Coming soon.">
+<meta name="description" content="RentGoX is the all-in-one rental marketplace for rooms, apartments, vehicles, electronics and more. Live now.">
 <meta name="google-site-verification" content="hXKZpa_9-O8X3uZ1noYfO5XUz25LiFvoCK8vuxUqFOk" />
 
 <!-- Open Graph -->
 <meta property="og:title" content="RentGoX — Rent Anything, Anytime">
-<meta property="og:description" content="One platform to rent rooms, vehicles, electronics and more. Coming soon.">
+<meta property="og:description" content="One platform to rent rooms, vehicles, electronics and more. Live now.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="assets/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FBF7EF">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://rentgox.github.io/rentgox-website/">
+<meta property="og:url" content="https://rentgox.github.io/rentgox-website/">
+<link rel="icon" href="assets/images/favicon.png" type="image/png">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <a href="#top" class="skip-link">Skip to main content</a>
 
   <!-- ===================== LOADER ===================== -->
   <div class="loader" id="loader" aria-hidden="true">
@@ -40,8 +49,8 @@
           <svg viewBox="0 0 40 40" width="34" height="34" role="img" aria-hidden="true">
             <defs>
               <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#6D5EF5"/>
-                <stop offset="100%" stop-color="#34D1BF"/>
+                <stop offset="0%" stop-color="#222D4A"/>
+                <stop offset="100%" stop-color="#D65430"/>
               </linearGradient>
             </defs>
             <rect x="1" y="1" width="38" height="38" rx="11" fill="url(#logoGrad)"/>
@@ -53,15 +62,15 @@
         <span class="brand-name">RentGo<span class="brand-x">X</span></span>
       </a>
 
-     <nav class="main-nav" id="main-nav" aria-label="Primary">
-  <a href="#categories">Categories</a>
-  <a href="#features">Features</a>
-  <a href="#screens">Preview</a>
-  <a href="#future">Roadmap</a>
-  <a href="#faq">FAQ</a>
-</nav>
+      <nav class="main-nav" id="main-nav" aria-label="Primary">
+        <a href="#categories">Categories</a>
+        <a href="#features">Features</a>
+        <a href="#screens">Preview</a>
+        <a href="#future">Roadmap</a>
+        <a href="#faq">FAQ</a>
+      </nav>
 
-      <a href="#hero" class="btn btn-ghost nav-cta"><span>Coming Soon</span></a>
+      <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" class="btn btn-ghost nav-cta" target="_blank" rel="noopener"><span>Get the App</span></a>
 
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -80,36 +89,36 @@
       <div class="floating-shape shape-3" aria-hidden="true"></div>
 
       <div class="container hero-inner">
-        <div class="hero-copy reveal" data-reveal="up">
-          <div class="eyebrow-pill">
+        <div class="hero-copy">
+          <div class="eyebrow-pill reveal" data-reveal="up" style="--d:0ms">
             <span class="dot-live"></span>
-            Launching soon &mdash; join the waitlist
+            Now live &mdash; start renting today
           </div>
-          <h1 class="hero-title">
+          <h1 class="hero-title reveal" data-reveal="up" style="--d:110ms">
             Rent almost <span class="text-gradient">anything,</span><br>
             in just a few taps.
           </h1>
-          <p class="hero-sub">
+          <p class="hero-sub reveal" data-reveal="up" style="--d:220ms">
             RentGoX brings rooms, apartments, vehicles, electronics and event
             spaces into one clean, trustworthy marketplace &mdash; built for
             people who'd rather rent smart than own everything.
           </p>
-          <div class="hero-actions">
-            <button class="btn btn-primary ripple">
-              <span>Coming Soon</span>
-            </button>
+          <div class="hero-actions reveal" data-reveal="up" style="--d:330ms">
+            <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" class="btn btn-primary ripple" target="_blank" rel="noopener">
+              <span>Download the App</span>
+            </a>
             <a href="#categories" class="btn btn-text">
               Explore categories <span class="arrow">&darr;</span>
             </a>
           </div>
 
-          <div class="hero-stats">
+          <div class="hero-stats reveal" data-reveal="up" style="--d:440ms">
             <div class="stat">
-              <span class="stat-num">9+</span>
+              <span class="stat-num" data-count="9" data-suffix="+">9+</span>
               <span class="stat-label">Categories at launch</span>
             </div>
             <div class="stat">
-              <span class="stat-num">100%</span>
+              <span class="stat-num" data-count="100" data-suffix="%">100%</span>
               <span class="stat-label">Verified listings</span>
             </div>
             <div class="stat">
@@ -119,23 +128,23 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal" data-reveal="zoom">
-          <div class="phone-stack">
+        <div class="hero-visual reveal" data-reveal="zoom" style="--d:180ms">
+          <div class="phone-stack" id="phone-stack">
             <div class="phone-mock phone-back">
               <div class="phone-screen placeholder-screen" data-label="Screen 03">
-                <img src="assets/images/hero-3.png" alt="RentGoX app screenshot 3" class="screenshot-img" onerror="this.style.display='none'">
+                <img src="assets/images/hero-3.png" alt="RentGoX app screenshot 3" class="screenshot-img" loading="lazy" decoding="async" onerror="this.style.display='none'">
               </div>
             </div>
-            <div class="phone-mock phone-front">
+            <div class="phone-mock phone-front phone-idle-float">
               <div class="phone-notch"></div>
               <div class="phone-screen placeholder-screen" data-label="RentGoX App">
-                <img src="assets/images/hero-1.png" alt="RentGoX app main screenshot" class="screenshot-img" onerror="this.style.display='none'">
+                <img src="assets/images/hero-1.png" alt="RentGoX app main screenshot" class="screenshot-img" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
               </div>
               <div class="phone-reflection"></div>
             </div>
             <div class="phone-mock phone-side">
               <div class="phone-screen placeholder-screen" data-label="Screen 02">
-                <img src="assets/images/hero-2.png" alt="RentGoX app screenshot 2" class="screenshot-img" onerror="this.style.display='none'">
+                <img src="assets/images/hero-2.png" alt="RentGoX app screenshot 2" class="screenshot-img" loading="lazy" decoding="async" onerror="this.style.display='none'">
               </div>
             </div>
           </div>
@@ -147,41 +156,31 @@
       </div>
     </section>
 
-    <!-- ===================== CIRCULAR CATEGORY WHEEL ===================== -->
-    <section class="wheel-section" id="categories">
+    <!-- ===================== 3D CATEGORY CAROUSEL ===================== -->
+    <section class="categories-3d" id="categories">
       <div class="container">
         <div class="section-head reveal" data-reveal="up">
           <span class="eyebrow">What you can rent</span>
-          <h2>Spin the wheel. Pick your category.</h2>
-          <p>Drag with your mouse or swipe with your finger &mdash; the wheel
-             glides with momentum, just like flicking a dial.</p>
+          <h2>Explore categories, up close.</h2>
+          <p>Drag with your mouse or swipe with your finger &mdash; glide
+             through every category in smooth 3D.</p>
         </div>
       </div>
 
-      <div class="wheel-stage">
-        <div class="wheel-glow"></div>
-        <div class="wheel-outer" id="wheel-outer">
-          <div class="wheel-ring" id="wheel-ring">
-            <!-- category items injected by JS -->
-          </div>
-          <div class="wheel-hub">
-            <span id="wheel-hub-label">Drag</span>
+      <div class="carousel3d-stage" id="carousel3d-stage" role="region" aria-roledescription="carousel" aria-label="Property and rental categories" tabindex="0">
+        <button type="button" class="carousel3d-arrow carousel3d-arrow-left" id="carousel3d-prev" aria-label="Previous category">&larr;</button>
+
+        <div class="carousel3d-viewport" id="carousel3d-viewport">
+          <div class="carousel3d-track" id="carousel3d-track">
+            <!-- category 3D cards injected by JS -->
           </div>
         </div>
-        <p class="wheel-hint">Drag to rotate &middot; Tap a category to open it</p>
+
+        <button type="button" class="carousel3d-arrow carousel3d-arrow-right" id="carousel3d-next" aria-label="Next category">&rarr;</button>
       </div>
 
-      <!-- Horizontal sliding category carousel (mobile-friendly alternative to the wheel) -->
-      <div class="container">
-        <div class="slider-stage">
-          <button class="slider-arrow slider-arrow-left" id="slider-prev" aria-label="Previous categories">&larr;</button>
-          <div class="slider-track" id="slider-track">
-            <!-- category slide cards injected by JS -->
-          </div>
-          <button class="slider-arrow slider-arrow-right" id="slider-next" aria-label="Next categories">&rarr;</button>
-        </div>
-        <p class="wheel-hint">Swipe or drag &middot; Tap a card to open it</p>
-      </div>
+      <div class="carousel3d-dots" id="carousel3d-dots" role="tablist" aria-label="Choose category"></div>
+      <p class="wheel-hint">Drag to rotate &middot; Tap a card to open it</p>
 
       <!-- Detail card -->
       <div class="container">
@@ -191,7 +190,7 @@
           <div class="detail-body">
             <h3 id="detail-title">Room</h3>
             <p id="detail-desc">Find verified single and shared rooms near you, ready to move in.</p>
-            <button class="btn btn-primary ripple btn-sm"><span>Coming Soon</span></button>
+            <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" id="detail-app-link" class="btn btn-primary ripple btn-sm" target="_blank" rel="noopener"><span>Get the App</span></a>
           </div>
         </div>
       </div>
@@ -207,34 +206,49 @@
 
         <div class="feature-grid">
           <div class="feature-card reveal" data-reveal="up" style="--d:0ms">
-            <div class="feature-icon">🔍</div>
-            <h3>Easy Search</h3>
-            <p>Filter by category, budget and distance in seconds &mdash; no clutter, no noise.</p>
+            <div class="feature-icon">🏠</div>
+            <h3>Multiple Rental Categories</h3>
+            <p>Rooms, apartments, PGs, hostels and marriage halls are live today, with vehicles, electronics, furniture and office space on the way.</p>
           </div>
           <div class="feature-card reveal" data-reveal="up" style="--d:80ms">
-            <div class="feature-icon">⚡</div>
-            <h3>Fast Listing</h3>
-            <p>List what you own in minutes with a guided, photo-first flow.</p>
+            <div class="feature-icon">✅</div>
+            <h3>Verified Listings &amp; Owners</h3>
+            <p>Every property is reviewed and approved before it goes live, and verified owners carry a badge so you know who you're renting from.</p>
           </div>
           <div class="feature-card reveal" data-reveal="up" style="--d:160ms">
-            <div class="feature-icon">🛡️</div>
-            <h3>Secure Platform</h3>
-            <p>Encrypted messaging and protected payments keep every deal safe.</p>
+            <div class="feature-icon">💬</div>
+            <h3>In-App Chat</h3>
+            <p>Message an owner directly inside RentGoX &mdash; no phone number to hand over before you're ready.</p>
           </div>
           <div class="feature-card reveal" data-reveal="up" style="--d:240ms">
-            <div class="feature-icon">✅</div>
-            <h3>Verified Listings</h3>
-            <p>Every host and listing passes a verification check before going live.</p>
+            <div class="feature-icon">📞</div>
+            <h3>Call &amp; WhatsApp in One Tap</h3>
+            <p>When you're ready to talk, reach the owner straight from the listing &mdash; by call or WhatsApp, no extra steps.</p>
           </div>
           <div class="feature-card reveal" data-reveal="up" style="--d:320ms">
-            <div class="feature-icon">📍</div>
-            <h3>Location Based Search</h3>
-            <p>See what's actually near you, ranked by real distance, not guesswork.</p>
+            <div class="feature-icon">🎥</div>
+            <h3>Photo &amp; Video Listings</h3>
+            <p>Browse up to ten photos and a full video walkthrough for every property, so there are no surprises on move-in day.</p>
           </div>
           <div class="feature-card reveal" data-reveal="up" style="--d:400ms">
-            <div class="feature-icon">💬</div>
-            <h3>Easy Contact</h3>
-            <p>Reach owners directly in-app &mdash; no hidden numbers, no middlemen.</p>
+            <div class="feature-icon">🗺️</div>
+            <h3>Interactive Map &amp; Directions</h3>
+            <p>See the exact location on an in-app map, then open it in Google Maps for turn-by-turn directions whenever you need them.</p>
+          </div>
+          <div class="feature-card reveal" data-reveal="up" style="--d:480ms">
+            <div class="feature-icon">🔍</div>
+            <h3>Smart Search &amp; Filters</h3>
+            <p>Narrow down by category, budget, location and amenities in seconds &mdash; no clutter, no noise.</p>
+          </div>
+          <div class="feature-card reveal" data-reveal="up" style="--d:560ms">
+            <div class="feature-icon">❤️</div>
+            <h3>Shortlist &amp; Recently Viewed</h3>
+            <p>Save properties you like to your shortlist, and pick up right where you left off on your last visit.</p>
+          </div>
+          <div class="feature-card reveal" data-reveal="up" style="--d:640ms">
+            <div class="feature-icon">🔁</div>
+            <h3>Similar Property Suggestions</h3>
+            <p>Every listing comes with matching alternatives nearby, so you're never stuck comparing just one option.</p>
           </div>
         </div>
       </div>
@@ -253,7 +267,7 @@
             <div class="phone-mock standalone">
               <div class="phone-notch"></div>
               <div class="phone-screen placeholder-screen" data-label="Browse">
-                <img src="assets/images/screen-browse.png" alt="Browse categories screenshot" class="screenshot-img" onerror="this.style.display='none'">
+                <img src="assets/images/screen-browse.png" alt="Browse categories screenshot" class="screenshot-img" loading="lazy" decoding="async" onerror="this.style.display='none'">
               </div>
               <div class="phone-reflection"></div>
             </div>
@@ -263,7 +277,7 @@
             <div class="phone-mock standalone">
               <div class="phone-notch"></div>
               <div class="phone-screen placeholder-screen" data-label="Details">
-                <img src="assets/images/screen-details.png" alt="Listing details screenshot" class="screenshot-img" onerror="this.style.display='none'">
+                <img src="assets/images/screen-details.png" alt="Listing details screenshot" class="screenshot-img" loading="lazy" decoding="async" onerror="this.style.display='none'">
               </div>
               <div class="phone-reflection"></div>
             </div>
@@ -273,7 +287,7 @@
             <div class="phone-mock standalone">
               <div class="phone-notch"></div>
               <div class="phone-screen placeholder-screen" data-label="Chat">
-                <img src="assets/images/screen-chat.png" alt="In-app chat screenshot" class="screenshot-img" onerror="this.style.display='none'">
+                <img src="assets/images/screen-chat.png" alt="In-app chat screenshot" class="screenshot-img" loading="lazy" decoding="async" onerror="this.style.display='none'">
               </div>
               <div class="phone-reflection"></div>
             </div>
@@ -364,6 +378,72 @@
       </div>
     </section>
 
+    <!-- ===================== TESTIMONIALS ===================== -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-head reveal" data-reveal="up">
+          <span class="eyebrow">From real users</span>
+          <h2>People are renting smarter already</h2>
+        </div>
+
+        <div class="testimonial-viewport reveal" data-reveal="up" id="testimonial-viewport">
+          <div class="testimonial-slide is-active">
+            <p class="testimonial-quote">"I listed my spare room on a Friday evening and had a verified tenant by Monday. The chat kept everything in one place, no random phone calls."</p>
+            <div class="testimonial-person">
+              <span class="testimonial-avatar">R</span>
+              <div>
+                <p class="testimonial-name">Rehana K.</p>
+                <p class="testimonial-role">Room host</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <p class="testimonial-quote">"Moving cities for a new job is stressful enough. Finding a verified PG through RentGoX before I even landed made it so much easier."</p>
+            <div class="testimonial-person">
+              <span class="testimonial-avatar">S</span>
+              <div>
+                <p class="testimonial-name">Sahil M.</p>
+                <p class="testimonial-role">PG resident</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <p class="testimonial-quote">"As a hostel owner, the verification badge alone brought in guests who used to hesitate before booking anything online."</p>
+            <div class="testimonial-person">
+              <span class="testimonial-avatar">A</span>
+              <div>
+                <p class="testimonial-name">Anika T.</p>
+                <p class="testimonial-role">Hostel owner</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-dots" id="testimonial-dots"></div>
+      </div>
+    </section>
+
+    <!-- ===================== FOUNDER / CEO ===================== -->
+    <section class="founder" id="founder" aria-labelledby="founder-heading">
+      <div class="container">
+        <div class="section-head reveal" data-reveal="up">
+          <span class="eyebrow">Straight from the founder</span>
+          <h2 id="founder-heading">Meet the Founder &amp; CEO</h2>
+        </div>
+
+        <div class="founder-card reveal" data-reveal="up" style="--d:120ms">
+          <div class="founder-photo-wrap">
+            <img src="assets/images/founder-ceo.jpg" alt="Kaushik Baidya, Founder and CEO of RentGoX" class="founder-photo" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          </div>
+          <div class="founder-info">
+            <h3 class="founder-name">Kaushik Baidya</h3>
+            <p class="founder-role">Founder &amp; CEO, RentGoX</p>
+            <p class="founder-meta">Agartala, Tripura, India &middot; Founded 2026</p>
+            <p class="founder-bio">Kaushik Baidya is the Founder &amp; CEO of RentGoX, a rental platform focused on making property discovery and listing simpler, faster, and more accessible for people in Tripura and beyond.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== FAQ ===================== -->
     <section class="faq" id="faq">
       <div class="container">
@@ -375,20 +455,20 @@
         <div class="accordion reveal" data-reveal="up">
           <div class="accordion-item">
             <button class="accordion-trigger" aria-expanded="false">
-              <span>When does RentGoX launch?</span>
+              <span>Is RentGoX live now?</span>
               <span class="accordion-plus"></span>
             </button>
             <div class="accordion-panel">
-              <p>We're finishing the final rounds of testing. Join the waitlist to be first to know the exact launch date.</p>
+              <p>Yes. Rooms, apartments, PGs and hostels are live today &mdash; browse and book directly through the app or website. More categories are rolling out soon.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-trigger" aria-expanded="false">
-              <span>Which cities will RentGoX support first?</span>
+              <span>Which cities does RentGoX support?</span>
               <span class="accordion-plus"></span>
             </button>
             <div class="accordion-panel">
-              <p>We're starting with a small set of launch cities and expanding quickly based on demand and host coverage.</p>
+              <p>We're live in a growing set of cities and expanding quickly based on demand and host coverage.</p>
             </div>
           </div>
           <div class="accordion-item">
@@ -426,9 +506,9 @@
     <section class="final-cta">
       <div class="container">
         <div class="cta-card reveal" data-reveal="zoom">
-          <h2>Be the first to rent, the smarter way.</h2>
-          <p>RentGoX is almost here. Reserve your spot on the waitlist.</p>
-          <button class="btn btn-primary btn-lg ripple"><span>Coming Soon</span></button>
+          <h2>Rent smarter, starting today.</h2>
+          <p>RentGoX is live &mdash; browse verified rooms, apartments, PGs and hostels now.</p>
+          <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" class="btn btn-primary btn-lg ripple" target="_blank" rel="noopener"><span>Download the App</span></a>
         </div>
       </div>
     </section>
@@ -453,10 +533,13 @@
       </div>
 
      <nav class="footer-links" aria-label="Footer">
+  <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" target="_blank" rel="noopener">Get the App</a>
+  <a href="terms.html">Terms of Service</a>
   <a href="privacy.html">Privacy Policy</a>
   <a href="refund.html">Refund Policy</a>
-  <a href="mailto:supportrentgox@gmail.com">Contact</a>
+  <a href="contact.html">Contact</a>
 </nav>
+
       <div class="footer-social" aria-label="Social media">
         <a href="#" aria-label="Instagram" class="social-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg>
@@ -473,6 +556,10 @@
       <p>&copy; <span id="year"></span> RentGoX. All rights reserved.</p>
     </div>
   </footer>
+
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
 
   <script src="js/script.js"></script>
 </body>
