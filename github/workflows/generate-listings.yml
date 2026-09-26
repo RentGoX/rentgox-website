@@ -1,0 +1,32 @@
+name: Generate listing pages
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # প্রতি ৬ ঘণ্টা পরপর অটোমেটিক রান হবে
+  workflow_dispatch:         # চাইলে GitHub-এর Actions ট্যাব থেকে ম্যানুয়ালিও রান করা যাবে
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Generate listing pages
+        run: python3 generate_listings.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "rentgox-bot"
+          git config user.email "actions@github.com"
+          git add listing/ sitemap.xml
+          git diff --cached --quiet || git commit -m "Auto-update listing pages and sitemap"
+          git push
