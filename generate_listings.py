@@ -89,7 +89,7 @@ def escape_html(value):
 
 def format_price(price):
     try:
-        return f"৳{int(float(price)):,}/mo"
+        return f"₹{int(float(price)):,}/mo"
     except (TypeError, ValueError):
         return ""
 
@@ -130,7 +130,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   "offers": {{
     "@type": "Offer",
     "price": "{price_number}",
-    "priceCurrency": "BDT",
+    "priceCurrency": "INR",
     "availability": "https://schema.org/InStock"
   }},
   "areaServed": {json_location}
