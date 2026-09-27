@@ -53,6 +53,10 @@ STATIC_PAGES = [
     ("privacy.html", "monthly", "0.3"),
     ("terms.html", "monthly", "0.3"),
     ("refund.html", "monthly", "0.3"),
+    ("app-privacy.html", "monthly", "0.3"),
+    ("app-terms.html", "monthly", "0.3"),
+    ("app-refund.html", "monthly", "0.3"),
+    ("delete-account.html", "monthly", "0.2"),
 ]
 
 
