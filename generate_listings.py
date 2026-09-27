@@ -144,17 +144,16 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <script type="application/ld+json">
 {{
   "@context": "https://schema.org",
-  "@type": "Product",
+  "@type": "RealEstateListing",
   "name": {json_title},
   "description": {json_description},
-  "category": {json_type},
-  "offers": {{
-    "@type": "Offer",
-    "price": "{price_number}",
-    "priceCurrency": "INR",
-    "availability": "https://schema.org/InStock"
-  }},
-  "areaServed": {json_location}
+  "url": "{canonical_url}",
+  "address": {{
+    "@type": "PostalAddress",
+    "addressLocality": {json_city},
+    "addressRegion": {json_state},
+    "addressCountry": "IN"
+  }}
 }}
 </script>
 </head>
@@ -231,6 +230,8 @@ def render_listing_page(item):
         json_title=json.dumps(smart_title(item.get("title", "Listing"))),
         json_description=json.dumps(item.get("description") or title),
         json_type=json.dumps(listing_type),
+        json_city=json.dumps(city or ""),
+        json_state=json.dumps(state or ""),
         price_number=item.get("price") or "0",
         json_location=json.dumps(item.get("location", "")),
         type_lower=listing_type.lower(),
