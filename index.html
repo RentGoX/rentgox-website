@@ -25,6 +25,59 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
+<style>
+  /* Live Listings preview (homepage) — same card design as category.html */
+  .listing-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:8px;
+  }
+  .listing-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:22px;
+    overflow:hidden; display:flex; flex-direction:column;
+    transition:transform .4s var(--ease-premium), border-color .4s, box-shadow .4s;
+  }
+  .listing-card:hover{
+    transform:translateY(-6px); border-color:rgba(52,209,191,.4);
+    box-shadow:0 22px 46px -22px rgba(52,209,191,.35);
+  }
+  .listing-thumb{
+    height:160px; background:linear-gradient(160deg, rgba(109,94,245,.22), rgba(52,209,191,.14));
+    display:flex; align-items:center; justify-content:center; font-size:34px;
+    background-size:cover; background-position:center; overflow:hidden;
+  }
+  .listing-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .listing-body{ padding:20px 22px; }
+  .listing-body h3{ font-size:17px; margin:0 0 6px; }
+  .listing-body p{ font-size:13.5px; margin:0 0 12px; display:flex; align-items:center; gap:5px; color:var(--text-muted); }
+  .listing-price{ font-family:var(--font-display); font-weight:700; color:var(--teal); font-size:16px; }
+  .listing-cta{
+    display:block; margin-top:14px; text-align:center; font-size:13px; font-weight:600;
+    padding:10px 14px; border-radius:12px; border:1px solid var(--border); color:var(--text);
+    text-decoration:none; transition:border-color .3s, color .3s;
+  }
+  .listing-cta:hover{ border-color:rgba(52,209,191,.5); color:var(--teal); }
+  .listing-locked-note{ font-size:11.5px; color:var(--text-muted); margin-top:8px; text-align:center; }
+  .listing-card.skeleton{ background:var(--surface-strong); }
+  .listing-card.skeleton .listing-thumb{ background:var(--border); animation:pulse 1.4s ease-in-out infinite; }
+  .listing-card.skeleton .listing-body{ display:flex; flex-direction:column; gap:10px; }
+  .listing-card.skeleton .sk-line{ height:12px; border-radius:6px; background:var(--border); animation:pulse 1.4s ease-in-out infinite; }
+  .listing-card.skeleton .sk-line.w60{ width:60%; }
+  .listing-card.skeleton .sk-line.w40{ width:40%; }
+  @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:.5; } }
+  .live-empty{
+    text-align:center; padding:48px 20px; border-radius:22px;
+    background:var(--surface); border:1px dashed var(--border); max-width:520px; margin:0 auto;
+  }
+  .live-empty p{ margin:0; color:var(--text-muted); font-size:14.5px; }
+  @media (max-width: 980px){ .listing-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width: 620px){ .listing-grid{ grid-template-columns:1fr; } }
+
+  /* Founder teaser (no photo on the homepage — full profile is one click away) */
+  .founder-teaser{
+    max-width:440px; margin:0 auto; text-align:center;
+    background:var(--surface); border:1px solid var(--border); border-radius:24px;
+    padding:40px 32px;
+  }
+</style>
 
 <!-- Structured Data: Organization, Founder (Person), WebSite, WebPage — linked via @id -->
 <script type="application/ld+json">
@@ -251,6 +304,51 @@
             <p id="detail-desc">Find verified single and shared rooms near you, ready to move in.</p>
             <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" id="detail-app-link" class="btn btn-primary ripple btn-sm" target="_blank" rel="noopener"><span>Get the App</span></a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LIVE LISTINGS PREVIEW ===================== -->
+    <section class="live-listings" id="live-listings">
+      <div class="container">
+        <div class="section-head reveal" data-reveal="up">
+          <span class="eyebrow">Live right now</span>
+          <h2>Real rooms, available today</h2>
+          <p>A few listings currently live on RentGoX — pulled straight from the app, updated automatically.</p>
+        </div>
+
+        <div id="home-listing-grid" class="listing-grid" hidden></div>
+
+        <div id="home-listing-skeleton" class="listing-grid" aria-hidden="true">
+          <div class="listing-card skeleton">
+            <div class="listing-thumb"></div>
+            <div class="listing-body">
+              <div class="sk-line w60"></div>
+              <div class="sk-line w40"></div>
+            </div>
+          </div>
+          <div class="listing-card skeleton">
+            <div class="listing-thumb"></div>
+            <div class="listing-body">
+              <div class="sk-line w60"></div>
+              <div class="sk-line w40"></div>
+            </div>
+          </div>
+          <div class="listing-card skeleton">
+            <div class="listing-thumb"></div>
+            <div class="listing-body">
+              <div class="sk-line w60"></div>
+              <div class="sk-line w40"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="home-listing-empty" class="live-empty" hidden>
+          <p>New listings are added every day. Download the RentGoX app to see everything that's live right now.</p>
+        </div>
+
+        <div style="text-align:center; margin-top:36px;">
+          <a href="category.html?type=room" class="btn btn-ghost ripple"><span>View All Listings</span></a>
         </div>
       </div>
     </section>
@@ -489,25 +587,13 @@
           <h2 id="founder-heading">Meet the Founder &amp; CEO</h2>
         </div>
 
-        <div class="founder-grid">
-          <div class="founder-photo-frame reveal" data-reveal="zoom" style="--d:60ms">
-            <img src="assets/images/founder-ceo.jpg" alt="Kaushik Baidya, Founder and CEO of RentGoX" class="founder-photo" loading="lazy" decoding="async" onerror="this.style.display='none'">
-          </div>
-          <div class="founder-info reveal" data-reveal="up" style="--d:140ms">
-            <p class="founder-role">Founder &amp; CEO, RentGoX</p>
-            <h3 class="founder-name">Kaushik Baidya</h3>
-            <p class="founder-meta">Agartala, Tripura, India &middot; Founded 2026</p>
-            <p class="founder-bio">Kaushik Baidya is the Founder &amp; CEO of RentGoX, a rental platform focused on making property discovery and listing simpler, faster, and more accessible for people in Tripura and beyond.</p>
-            <p class="founder-links">
-              <a href="https://play.google.com/store/apps/details?id=com.rentgox.com&pcampaignid=web_share" target="_blank" rel="noopener noreferrer">RentGoX on Google Play</a>
-              <span class="founder-dot" aria-hidden="true"></span>
-              <a href="https://www.linkedin.com/in/kaushik-baidya-463a77271" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <span class="founder-dot" aria-hidden="true"></span>
-              <a href="https://x.com/KAUSHIKBAIDYA07" target="_blank" rel="noopener noreferrer">X</a>
-              <span class="founder-dot" aria-hidden="true"></span>
-              <a href="founder.html">Full founder profile</a>
-            </p>
-          </div>
+        <div class="founder-teaser reveal" data-reveal="up" style="--d:80ms">
+          <p class="founder-role">Founder &amp; CEO, RentGoX</p>
+          <h3 class="founder-name">Kaushik Baidya</h3>
+          <p class="founder-meta">Agartala, Tripura, India &middot; Founded 2026</p>
+          <a href="founder.html" class="btn btn-primary ripple btn-sm" style="margin-top:18px; display:inline-block;">
+            <span>View Founder Profile</span>
+          </a>
         </div>
       </div>
     </section>
@@ -634,5 +720,90 @@
   </button>
 
   <script src="js/script.js"></script>
+
+  <script>
+    /* Live Listings preview — same public "anon" key and safe teaser-only
+       columns as category.html. Shows the 3 most recent approved,
+       available listings across any category, with a "View All" link
+       through to category.html for the rest. */
+    (function () {
+      const SUPABASE_URL = 'https://uvkpanxzujecilwvxtid.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2a3Bhbnh6dWplY2lsd3Z4dGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2MjAzNjMsImV4cCI6MjA5ODE5NjM2M30.rCFvdYgtJjcEcej-Pfly2DXflAM3FgIKHSSUtQW0ycE';
+      const LISTING_FIELDS = 'id,title,price,location,photo_url,type';
+
+      const grid = document.getElementById('home-listing-grid');
+      const skeleton = document.getElementById('home-listing-skeleton');
+      const empty = document.getElementById('home-listing-empty');
+      if (!grid) return;
+
+      function escapeHtml(str) {
+        return String(str ?? '').replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
+      function formatPrice(price) {
+        if (price === null || price === undefined || price === '') return '';
+        const n = Number(price);
+        if (Number.isNaN(n)) return escapeHtml(price);
+        return '₹' + n.toLocaleString('en-IN') + '/mo';
+      }
+
+      function renderListings(items) {
+        grid.innerHTML = items.map(item => {
+          const thumb = item.photo_url
+            ? `<img src="${escapeHtml(item.photo_url)}" alt="${escapeHtml(item.title || 'Listing')}" loading="lazy" onerror="this.parentElement.textContent='🏠';">`
+            : '🏠';
+          return `
+          <div class="listing-card">
+            <div class="listing-thumb">${thumb}</div>
+            <div class="listing-body">
+              <h3>${escapeHtml(item.title || 'Listing')}</h3>
+              <p>📍 ${escapeHtml(item.location || 'Location available in app')}</p>
+              <span class="listing-price">${formatPrice(item.price)}</span>
+              <a class="listing-cta" href="property.html?id=${encodeURIComponent(item.id)}">View Full Details</a>
+              <p class="listing-locked-note">Photos, map location, amenities &amp; owner contact — open in the RentGoX app</p>
+            </div>
+          </div>`;
+        }).join('');
+      }
+
+      async function loadHomeListings() {
+        let items = [];
+        let failed = false;
+        try {
+          const url = `${SUPABASE_URL}/rest/v1/properties`
+            + `?select=${encodeURIComponent(LISTING_FIELDS)}`
+            + `&is_available=eq.true`
+            + `&status=eq.approved`
+            + `&order=created_at.desc`
+            + `&limit=3`;
+
+          const res = await fetch(url, {
+            headers: {
+              apikey: SUPABASE_ANON_KEY,
+              Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+            }
+          });
+          if (!res.ok) throw new Error('Supabase request failed: ' + res.status);
+          items = await res.json();
+        } catch (err) {
+          console.error('Failed to load home listings:', err);
+          failed = true;
+        }
+
+        if (skeleton) skeleton.hidden = true;
+
+        if (!failed && Array.isArray(items) && items.length > 0) {
+          renderListings(items);
+          grid.hidden = false;
+        } else if (empty) {
+          empty.hidden = false;
+        }
+      }
+
+      loadHomeListings();
+    })();
+  </script>
 </body>
 </html>
