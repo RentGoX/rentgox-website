@@ -67,10 +67,22 @@
     <priority>0.2</priority>
   </url>
   <url>
+    <loc>https://rentgox.github.io/rentgox-website/hub/rooms-in-jolaibari-tripura.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://rentgox.github.io/rentgox-website/hub/rooms-in-agartala-tripura.html</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rentgox.github.io/rentgox-website/listing/3-bhk-agartala-jolaibari-tripura-9aafeab3.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://rentgox.github.io/rentgox-website/listing/single-room-ramthakur-college-near-agartala-tripura-07adb211.html</loc>
