@@ -3,375 +3,369 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RentGoX Android App — Privacy Policy</title>
-<meta name="description" content="Official Privacy Policy for the RentGoX Android application, explaining what data is collected from Property Owners and Rent Seekers, how it is used, and how it is protected.">
-<meta name="robots" content="index, follow">
+<title>Privacy Policy | RentGoX - Rental Property Listing Platform</title>
+<meta name="description" content="RentGoX Privacy Policy: how we collect, use, share and protect your personal, location and payment information in our rental listing app and website.">
+<meta name="keywords" content="RentGoX Privacy Policy, RentGoX data protection, Razorpay payments, rental app privacy, Google Sign-In privacy, RentGoX policy India">
 <meta name="author" content="RentGoX">
-<meta name="theme-color" content="#123B44">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://rentgox.github.io/rentgox-website/privacy.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy Policy | RentGoX">
+<meta property="og:description" content="RentGoX Privacy Policy: how we collect, use, share and protect your personal, location and payment information in our rental listing app and website.">
+<meta property="og:url" content="https://rentgox.github.io/rentgox-website/privacy.html">
+<meta property="og:site_name" content="RentGoX">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Privacy Policy | RentGoX">
+<meta name="twitter:description" content="RentGoX Privacy Policy: how we collect, use, share and protect your personal, location and payment information in our rental listing app and website.">
+
 <style>
-  :root{
-    --ink:#1F2A2C;
-    --ink-soft:#4B5B5D;
-    --primary:#123B44;
-    --primary-dark:#0B2A31;
-    --accent:#C7912F;
-    --accent-soft:#E9D6AC;
-    --paper:#FAF9F6;
-    --panel:#FFFFFF;
-    --line:#E4E1D8;
-    --radius:10px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
+:root{
+    --brand:#0A7CFF;
+    --brand-dark:#0057b8;
+    --bg:#f5f7fa;
+    --card:#ffffff;
+    --text:#333333;
+    --muted:#666666;
+    --border:#e6ebf2;
+}
+*{box-sizing:border-box;}
+body{
+    font-family:Arial,Helvetica,sans-serif;
     margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.65;
-    font-size:16px;
-  }
-  h1,h2,h3{
-    font-family:Georgia,"Times New Roman",serif;
-    color:var(--primary-dark);
-    line-height:1.25;
-    margin:0 0 .5em;
-  }
-  a{color:var(--primary);}
-  a:focus,button:focus,summary:focus{outline:3px solid var(--accent-soft);outline-offset:2px;}
-
-  .ribbon{
-    background:var(--primary-dark);
-    color:#EFE9DA;
-    font-size:.8rem;
-    text-align:center;
-    padding:.5rem 1rem;
-    letter-spacing:.03em;
-  }
-  .ribbon strong{color:var(--accent);}
-
-  header.masthead{
-    background:linear-gradient(155deg,var(--primary) 0%,var(--primary-dark) 100%);
-    color:#F4F1E8;
-    padding:2.6rem 1.25rem 3.4rem;
-    position:relative;
-  }
-  .wrap{max-width:1100px;margin:0 auto;}
-  .brandline{
-    display:flex;align-items:center;gap:.6rem;
-    font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;
-    color:var(--accent-soft);margin-bottom:1rem;
-  }
-  .brandline .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;}
-  header.masthead h1{color:#FFFDF8;font-size:2.3rem;margin-bottom:.35rem;}
-  header.masthead p.sub{color:#D9D3C2;max-width:640px;font-size:1.02rem;margin:0;}
-  .meta-strip{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem;}
-  .meta-chip{
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.18);
-    color:#EFE9DA;
-    padding:.4rem .8rem;
-    border-radius:999px;
-    font-size:.8rem;
-  }
-  .meta-chip b{color:var(--accent-soft);}
-
-  .layout{
-    max-width:1100px;margin:0 auto;
-    padding:0 1.25rem 4rem;
-    display:grid;
-    grid-template-columns:250px 1fr;
-    gap:2.5rem;
-    margin-top:-1.6rem;
-  }
-  nav.toc{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:1.1rem 1.2rem;
-    align-self:start;
+    padding:0;
+    line-height:1.7;
+    background:var(--bg);
+    color:var(--text);
+}
+.site-header{
+    background:#ffffff;
+    border-bottom:1px solid var(--border);
     position:sticky;
-    top:1.25rem;
-    box-shadow:0 8px 24px -18px rgba(18,59,68,.4);
-  }
-  nav.toc h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);font-family:inherit;margin-bottom:.7rem;}
-  nav.toc ol{margin:0;padding:0 0 0 1.1rem;}
-  nav.toc li{margin-bottom:.5rem;font-size:.88rem;}
-  nav.toc a{text-decoration:none;color:var(--ink);}
-  nav.toc a:hover{color:var(--primary);text-decoration:underline;}
-
-  main.doc{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:2.2rem 2.4rem;
-    box-shadow:0 8px 24px -18px rgba(18,59,68,.4);
-  }
-  main.doc section{padding:1.4rem 0;border-bottom:1px dashed var(--line);}
-  main.doc section:last-of-type{border-bottom:none;}
-  .num-tag{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:28px;height:28px;
-    background:var(--primary);color:#fff;
-    border-radius:6px;font-size:.85rem;font-weight:700;
-    margin-right:.6rem;flex:none;
-  }
-  section h2{display:flex;align-items:center;font-size:1.28rem;}
-  section h3{font-size:1.05rem;margin-top:1rem;color:var(--primary);}
-  section p, section li{color:var(--ink);font-size:.98rem;}
-  section ul{padding-left:1.4rem;margin:.5rem 0;}
-  section li{margin-bottom:.4rem;}
-  .callout{
-    background:#FBF6E9;
-    border:1px solid var(--accent-soft);
-    border-left:4px solid var(--accent);
-    padding:.9rem 1.1rem;
+    top:0;
+    z-index:100;
+}
+.nav-wrap{
+    max-width:1000px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 20px;
+    flex-wrap:wrap;
+}
+.brand{
+    font-size:1.3rem;
+    font-weight:bold;
+    color:var(--brand);
+    text-decoration:none;
+}
+nav.primary-nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+    margin:0;
+    padding:0;
+    flex-wrap:wrap;
+}
+nav.primary-nav a{
+    color:var(--text);
+    text-decoration:none;
+    font-size:15px;
+    font-weight:600;
+}
+nav.primary-nav a:hover,
+nav.primary-nav a:focus,
+nav.primary-nav a[aria-current="page"]{
+    color:var(--brand);
+}
+main{
+    max-width:900px;
+    margin:40px auto;
+    padding:0 20px;
+}
+.container{
+    background:var(--card);
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+h1,h2{
+    color:var(--brand);
+}
+h1{font-size:1.9rem;margin-top:0;}
+h2{
+    font-size:1.3rem;
+    margin-top:34px;
+    border-bottom:2px solid var(--border);
+    padding-bottom:6px;
+}
+a{color:var(--brand);text-decoration:none;}
+a:hover,a:focus{text-decoration:underline;}
+ul{padding-left:22px;}
+li{margin-bottom:6px;}
+.effective-date{color:var(--muted);font-size:15px;}
+.highlight-box{
+    background:#eef6ff;
+    border-left:4px solid var(--brand);
+    padding:14px 18px;
     border-radius:6px;
-    font-size:.92rem;
-    margin-top:.8rem;
-  }
-  table.info{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.92rem;}
-  table.info th,table.info td{border:1px solid var(--line);padding:.55rem .7rem;text-align:left;vertical-align:top;}
-  table.info th{background:#F3F1E9;color:var(--primary-dark);width:24%;}
-
-  details.mobile-toc{display:none;}
-
-  footer.site-footer{
-    background:var(--primary-dark);
-    color:#CFC9B8;
-    padding:2.4rem 1.25rem;
-    margin-top:2rem;
+    margin:16px 0;
+}
+.cross-links{
+    margin-top:24px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+    font-size:15px;
+}
+.cross-links a{margin-right:16px;font-weight:600;}
+.site-footer{
+    background:#0A1F3D;
+    color:#cbd6e6;
+    margin-top:60px;
+    padding:36px 20px;
+}
+.footer-wrap{
+    max-width:1000px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:24px;
+}
+.footer-col h3{
+    color:#ffffff;
+    font-size:15px;
+    margin:0 0 12px;
+}
+.footer-col a{
+    color:#cbd6e6;
+    display:block;
+    margin-bottom:8px;
+    text-decoration:none;
+    font-size:14px;
+}
+.footer-col a:hover{color:#ffffff;text-decoration:underline;}
+.footer-bottom{
+    max-width:1000px;
+    margin:24px auto 0;
+    padding-top:16px;
+    border-top:1px solid #1e355c;
+    font-size:13px;
+    color:#8fa3c2;
     text-align:center;
-    font-size:.85rem;
-  }
-  footer.site-footer .wrap{display:flex;flex-direction:column;gap:.5rem;align-items:center;}
-  footer.site-footer strong{color:#F4F1E8;}
-  footer.site-footer a{color:var(--accent-soft);text-decoration:none;}
-  footer.site-footer a:hover{text-decoration:underline;}
-  .footer-links{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:.4rem;}
-  .footer-rule{width:60px;height:2px;background:var(--accent);border:none;margin:.8rem 0;}
-
-  @media (max-width:860px){
-    .layout{grid-template-columns:1fr;margin-top:-1.2rem;}
-    nav.toc{display:none;}
-    details.mobile-toc{
-      display:block;background:var(--panel);border:1px solid var(--line);
-      border-radius:var(--radius);padding:.9rem 1.1rem;margin-bottom:1.2rem;
-      box-shadow:0 8px 24px -18px rgba(18,59,68,.4);
-    }
-    details.mobile-toc summary{cursor:pointer;font-weight:700;color:var(--primary-dark);font-size:.92rem;}
-    details.mobile-toc ol{margin:.8rem 0 0;padding-left:1.2rem;}
-    details.mobile-toc li{margin-bottom:.5rem;font-size:.9rem;}
-    main.doc{padding:1.5rem 1.25rem;}
-    header.masthead h1{font-size:1.7rem;}
-    table.info th{width:40%;}
-  }
+}
+@media (max-width:600px){
+    main{margin:20px auto;}
+    .container{padding:18px;border-radius:0;}
+    h1{font-size:1.5rem;}
+    h2{font-size:1.15rem;}
+    .nav-wrap{flex-direction:column;align-items:flex-start;gap:10px;}
+}
 </style>
 </head>
 <body>
 
-<div class="ribbon">RentGoX Android App &nbsp;•&nbsp; Policy Document for <strong>Google Play</strong> &amp; <strong>PhonePe Merchant Verification</strong></div>
-
-<header class="masthead">
-  <div class="wrap">
-    <div class="brandline"><span class="dot"></span> RentGoX — Legal &amp; Compliance</div>
-    <h1>Privacy Policy</h1>
-    <p class="sub">This Privacy Policy explains what information the RentGoX Android application collects from Property Owners and Rent Seekers, how it is used, stored, and protected, and what rights you have over your data.</p>
-    <div class="meta-strip">
-      <span class="meta-chip"><b>Effective Date:</b> 30 July 2026</span>
-      <span class="meta-chip"><b>Last Updated:</b> 30 July 2026</span>
-      <span class="meta-chip"><b>Platform:</b> Android (Google Play)</span>
-      <span class="meta-chip"><b>Governing Law:</b> India</span>
-    </div>
-  </div>
+<header class="site-header">
+<div class="nav-wrap">
+<a class="brand" href="index.html">RentGoX</a>
+<nav class="primary-nav" aria-label="Main navigation">
+<ul>
+<li><a href="terms.html">Terms of Service</a></li>
+<li><a href="privacy.html" aria-current="page">Privacy Policy</a></li>
+<li><a href="refund.html">Refund Policy</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+</div>
 </header>
 
-<div class="layout">
+<main>
+<div class="container">
 
-  <details class="mobile-toc">
-    <summary>Jump to a section</summary>
-    <ol>
-      <li><a href="#intro">Introduction</a></li>
-      <li><a href="#data-collected">Data We Collect</a></li>
-      <li><a href="#google">Google Sign-In</a></li>
-      <li><a href="#mobile">Mobile Number &amp; OTP</a></li>
-      <li><a href="#location">Location Permission</a></li>
-      <li><a href="#images">Uploaded Property Photos</a></li>
-      <li><a href="#payments">Payment Information</a></li>
-      <li><a href="#infra">Firebase, Supabase &amp; Cloudflare R2</a></li>
-      <li><a href="#use">How We Use Your Data</a></li>
-      <li><a href="#sharing">Data Sharing &amp; Disclosure</a></li>
-      <li><a href="#security">Data Security</a></li>
-      <li><a href="#retention">Data Retention</a></li>
-      <li><a href="#rights">Your Rights</a></li>
-      <li><a href="#children">Children's Privacy</a></li>
-      <li><a href="#changes">Changes to this Policy</a></li>
-      <li><a href="#contact">Contact Us</a></li>
-    </ol>
-  </details>
+<h1>Privacy Policy</h1>
+<p class="effective-date"><strong>Effective Date:</strong> November 11, 2026</p>
 
-  <nav class="toc" aria-label="Table of contents">
-    <h2>On this page</h2>
-    <ol>
-      <li><a href="#intro">Introduction</a></li>
-      <li><a href="#data-collected">Data We Collect</a></li>
-      <li><a href="#google">Google Sign-In</a></li>
-      <li><a href="#mobile">Mobile Number &amp; OTP</a></li>
-      <li><a href="#location">Location Permission</a></li>
-      <li><a href="#images">Uploaded Property Photos</a></li>
-      <li><a href="#payments">Payment Information</a></li>
-      <li><a href="#infra">Firebase, Supabase &amp; Cloudflare R2</a></li>
-      <li><a href="#use">How We Use Your Data</a></li>
-      <li><a href="#sharing">Data Sharing &amp; Disclosure</a></li>
-      <li><a href="#security">Data Security</a></li>
-      <li><a href="#retention">Data Retention</a></li>
-      <li><a href="#rights">Your Rights</a></li>
-      <li><a href="#children">Children's Privacy</a></li>
-      <li><a href="#changes">Changes to this Policy</a></li>
-      <li><a href="#contact">Contact Us</a></li>
-    </ol>
-  </nav>
+<p>RentGoX (“we”, “our”, or “us”) respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, share, and protect your information when you use the RentGoX mobile application, the RentGoX website, and related services (together, the “Service”). It should be read together with our Terms of Service and Refund &amp; Cancellation Policy.</p>
 
-  <main class="doc">
+<p>By using the Service you agree to the practices described here. If you do not agree, please do not use the Service.</p>
 
-    <section id="intro">
-      <h2><span class="num-tag">1</span>Introduction</h2>
-      <p>RentGoX ("we", "us", "our") operates the RentGoX Android mobile application (the "App"), a rental property listing platform connecting Property Owners and Rent Seekers across India. This Privacy Policy describes how we collect, use, store, and protect personal information when you use the App. By installing, registering on, or using the App, you consent to the data practices described in this Policy.</p>
-    </section>
+<section aria-labelledby="1-information-we-collect">
+<h2 id="1-information-we-collect">1. Information We Collect</h2>
+<p>Depending on how you use RentGoX (as a room seeker, a property owner, or a marriage hall owner/customer), we may collect:</p>
+<ul>
+<li>Account information: your name, mobile number, and city/area/state. Property owners sign in with Google, so we also receive your name, email address, and profile picture as authorised by you.</li>
+<li>Property listing information: photos, video, address, GPS location, rent, deposit, description, amenities, and the contact number you choose to show on a listing.</li>
+<li>Marriage hall information: hall details, photos, availability, booking details (such as event date and amounts), and, for hall owners, basic business details you submit (full name, mobile number, email, address, business name, business type, and GSTIN if you have one). We do not store your PAN, bank account numbers, or identity documents; any such verification required for settlement is handled directly by our payment partner.</li>
+<li>Communications: in-app chat messages, visit requests, call requests, property reports you submit, messages you send through our Contact form, and messages you type to the RentGoX AI assistant.</li>
+<li>Activity and preferences: favourites, saved searches and alerts, and similar choices you make in the app.</li>
+<li>Payment information: the plan or booking purchased, amount, currency, coupon used, order and payment reference IDs, and payment status. Your UPI payment is completed on your UPI app through our payment gateway, and we never receive or store your UPI PIN or bank details. For a Boost, we also record which property was boosted and for how many days.</li>
+<li>Device and diagnostic information: device model, operating system version, app version, device identifiers, push-notification token, install referrer, crash reports, and app usage analytics.</li>
+<li>Location (with your permission): approximate or precise location, used to show nearby properties and to capture a property’s location when an owner lists it.</li>
+</ul>
+</section>
 
-    <section id="data-collected">
-      <h2><span class="num-tag">2</span>Data We Collect</h2>
-      <p>We collect only the data necessary to operate the App's core features. Depending on whether you use the App as a Property Owner or a Rent Seeker, this includes:</p>
-      <table class="info">
-        <tr><th>Category</th><td>Examples collected within the App</td></tr>
-        <tr><th>Account Data</th><td>Google account name, email address, and profile photo (for Property Owners); mobile number (for Rent Seekers)</td></tr>
-        <tr><th>Listing Data</th><td>Property description, rent amount, address/locality, and photographs uploaded by Property Owners</td></tr>
-        <tr><th>Location Data</th><td>Device GPS location, collected only with your permission, to help you discover nearby properties</td></tr>
-        <tr><th>Payment Data</th><td>Transaction ID, payment status, and amount for Premium Membership purchases (processed via PhonePe)</td></tr>
-        <tr><th>Usage Data</th><td>App interactions such as listings viewed, contacted, or saved, and basic device/app diagnostic information</td></tr>
-      </table>
-    </section>
+<section aria-labelledby="2-permissions-the-app-requests">
+<h2 id="2-permissions-the-app-requests">2. Permissions the App Requests</h2>
+<ul>
+<li>Location: to help you discover nearby properties and to capture a listing’s GPS position. You can turn this off in your device settings.</li>
+<li>Camera: only when you choose to take a photo for a listing or profile, or to scan a QR code.</li>
+<li>Notifications: to send visit requests, chat messages, listing updates, and service alerts.</li>
+<li>Biometrics / screen lock: only if you enable App Lock. Fingerprint or face matching is performed by your device; RentGoX never receives or stores your biometric data.</li>
+<li>Photos and files: you select images or videos through your device’s picker. We do not request broad access to your storage.</li>
+<li>Internet and network state: to load listings and keep your account in sync.</li>
+</ul>
+</section>
 
-    <section id="google">
-      <h2><span class="num-tag">3</span>Google Sign-In (Property Owners)</h2>
-      <p>Property Owners register and sign in to the App using Google Sign-In. When you sign in, Google shares your basic profile information — name, email address, and profile picture — with the App, strictly for the purpose of creating and authenticating your RentGoX account. We do not access your Gmail inbox, Google Drive, Google contacts, or any other Google service beyond the basic profile details required for authentication. Authentication and session handling for Google Sign-In are managed through Firebase Authentication.</p>
-    </section>
+<section aria-labelledby="3-how-we-use-your-information">
+<h2 id="3-how-we-use-your-information">3. How We Use Your Information</h2>
+<ul>
+<li>Create, verify, and manage your account.</li>
+<li>Display, review, and manage property and marriage hall listings.</li>
+<li>Connect seekers with owners through chat, visit requests, and calls.</li>
+<li>Show nearby properties and nearby places using location data.</li>
+<li>Process payments for Premium plans, Boosts, subscriptions, and bookings through our payment gateway.</li>
+<li>Show boosted properties in the Featured section and manage Boost periods.</li>
+<li>Send transaction confirmations, service-related notifications, and push notifications.</li>
+<li>Provide customer support, including the RentGoX AI assistant and callback requests.</li>
+<li>Improve app performance, fix crashes, and understand how features are used.</li>
+<li>Detect, investigate, and prevent fraud, fake listings, abuse, and security incidents.</li>
+<li>Comply with applicable legal and regulatory obligations.</li>
+</ul>
+<p>We process your personal data based on your consent and, where applicable, for legitimate uses permitted by Indian law, such as providing the service you asked for, preventing fraud, and meeting legal obligations. You may withdraw consent at any time by deleting your account or by changing the relevant permission on your device, although some features may then stop working.</p>
+</section>
 
-    <section id="mobile">
-      <h2><span class="num-tag">4</span>Mobile Number &amp; OTP (Rent Seekers)</h2>
-      <p>Rent Seekers register using their mobile number. We send a one-time password (OTP) to verify ownership of the number before account creation. Your mobile number is used to authenticate your account, identify you within the App, and, where you choose to contact a Property Owner, may be shared with that Property Owner to facilitate communication about the property. Mobile number verification is handled through Firebase Authentication.</p>
-    </section>
+<section aria-labelledby="4-information-visible-to-other-users">
+<h2 id="4-information-visible-to-other-users">4. Information Visible to Other Users</h2>
+<p>RentGoX is a listing platform, so some information is shared with other users by design:</p>
+<ul>
+<li>Property listings (photos, video, address, price, description, location, and the contact number shown on the listing) can be seen by anyone using the app or website.</li>
+<li>Properties with an active Boost are shown to all users in the Featured section with a “Featured” label.</li>
+<li>Your name and profile details may be shown to the other person in a chat, visit request, or booking.</li>
+<li>Chat messages are visible to the people in that conversation and may be reviewed by RentGoX when needed to investigate a report or abuse.</li>
+</ul>
+<p>Please do not post information you do not want to be public in a listing, and do not share sensitive personal information in chats.</p>
+</section>
 
-    <section id="location">
-      <h2><span class="num-tag">5</span>Location Permission</h2>
-      <p>The App requests access to your device's location permission to help you discover rental properties near your current location. Location access is used only to power the "nearby properties" discovery feature within the App and is not collected in the background when the App is not in use. You may deny or revoke location permission at any time through your device's Android system settings; doing so may limit the App's ability to show properties near you, but will not otherwise prevent you from using the App.</p>
-    </section>
+<section aria-labelledby="5-data-sharing">
+<h2 id="5-data-sharing">5. Data Sharing</h2>
+<p>We do not sell your personal information. We share information only as described below:</p>
+<ul>
+<li>Google / Firebase: sign-in, push notifications, analytics, and crash reporting.</li>
+<li>Supabase: database and server functions that store account, listing, booking, and payment records.</li>
+<li>Appwrite: delivery of in-app chat messages.</li>
+<li>Cloudflare R2: storage of listing photos and videos.</li>
+<li>Razorpay: processing of payments and refunds, and confirmation of payment status.</li>
+<li>Google Gemini (RentGoX AI assistant): the messages you type to the assistant are sent to Google’s Gemini service to generate replies. Please do not enter sensitive personal information into the assistant.</li>
+<li>OpenStreetMap services: map display and nearby-places lookup, which use the coordinates of a property or search area.</li>
+<li>Web3Forms: delivery of messages you send through the Contact form to our support inbox.</li>
+<li>Google Play: app distribution and install-referrer information.</li>
+<li>RentGoX team: authorised team members may access an account for support, security checks, and complaints, and every such access is logged.</li>
+<li>Authorities: government, law-enforcement, or regulatory bodies where required by law or legal process, or to protect the rights, safety, or property of RentGoX, our users, or others.</li>
+</ul>
+<p>These providers process data on our behalf or under their own privacy policies, and may store it on servers located outside India.</p>
+</section>
 
-    <section id="images">
-      <h2><span class="num-tag">6</span>Uploaded Property Photos</h2>
-      <p>Property Owners can upload photographs of their properties as part of a Listing. These images are uploaded directly from your device through the App and stored using Cloudflare R2 object storage. Uploaded photographs are displayed publicly within the App to Rent Seekers browsing Listings. Please do not upload photographs containing identifiable people, sensitive documents, or content unrelated to the property being listed.</p>
-    </section>
+<section aria-labelledby="6-payment-security">
+<h2 id="6-payment-security">6. Payment Security</h2>
+<p>Payments are made through UPI and processed by Razorpay, an RBI-authorised payment aggregator. We never receive or store your UPI PIN or bank login details. These stay with your UPI app, your bank, and the payment gateway under their own security standards.</p>
+</section>
 
-    <section id="payments">
-      <h2><span class="num-tag">7</span>Payment Information</h2>
-      <p>Payments for Premium Membership are processed through the PhonePe Payment Gateway. RentGoX does not collect, view, or store your card numbers, UPI PIN, or net-banking credentials — these are entered directly into PhonePe's own secure payment interface and governed by PhonePe's privacy and security practices. RentGoX only receives and stores the transaction reference ID, payment status (success/failure), and amount, which are used to activate your Premium Membership and to maintain records for accounting and dispute resolution.</p>
-    </section>
+<section aria-labelledby="7-data-retention">
+<h2 id="7-data-retention">7. Data Retention</h2>
+<ul>
+<li>We keep your account and listing information while your account is active.</li>
+<li>When you delete your account, your personal information, listings, and related data are removed as described in the app’s Delete Account screen.</li>
+<li>Chat messages are deleted automatically 10 days after they are sent, and a conversation is deleted 10 days after its last message.</li>
+<li>To prevent misuse of free-listing limits, we retain the mobile numbers (current and previous), the email address, and the number of listings used by an owner whose listings or account were deleted.</li>
+<li>Payment, transaction, and Boost records are retained for as long as required by applicable tax, accounting, and legal obligations.</li>
+<li>Some information may remain in secure backups for a limited period, or be kept longer where needed to resolve disputes, enforce our agreements, or comply with law.</li>
+</ul>
+</section>
 
-    <section id="infra">
-      <h2><span class="num-tag">8</span>Firebase, Supabase &amp; Cloudflare R2</h2>
-      <p>To operate the App reliably and securely, RentGoX relies on the following trusted infrastructure providers, each acting as a data processor on our behalf:</p>
-      <ul>
-        <li><strong>Firebase Authentication (Google)</strong> — used to manage Google Sign-In for Property Owners and mobile number/OTP verification for Rent Seekers.</li>
-        <li><strong>Supabase</strong> — used as our database and storage backend to securely store account records, Listing details, and application data.</li>
-        <li><strong>Cloudflare R2</strong> — used to store and deliver property photographs uploaded by Property Owners.</li>
-      </ul>
-      <div class="callout">These providers process data solely to deliver the App's functionality and are contractually and technically restricted from using your data for any purpose beyond providing their respective services to RentGoX.</div>
-    </section>
+<section aria-labelledby="8-data-security">
+<h2 id="8-data-security">8. Data Security</h2>
+<p>We use reasonable technical and organisational safeguards, including encryption in transit, access controls, server-side verification of payments, and secure cloud infrastructure, to protect your information against unauthorised access, alteration, loss, misuse, or disclosure. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
+</section>
 
-    <section id="use">
-      <h2><span class="num-tag">9</span>How We Use Your Data</h2>
-      <ul>
-        <li>To create, authenticate, and maintain your RentGoX account.</li>
-        <li>To display and manage property Listings created by Property Owners.</li>
-        <li>To help Rent Seekers discover properties near their location.</li>
-        <li>To facilitate contact between Rent Seekers and Property Owners regarding a Listing.</li>
-        <li>To process Premium Membership payments and activate the corresponding benefits.</li>
-        <li>To maintain the security, integrity, and proper functioning of the App.</li>
-        <li>To communicate important updates, transaction confirmations, or policy changes.</li>
-        <li>To comply with applicable Indian legal and regulatory requirements.</li>
-      </ul>
-    </section>
+<section aria-labelledby="9-your-rights-and-choices">
+<h2 id="9-your-rights-and-choices">9. Your Rights and Choices</h2>
+<p>Subject to applicable law, including the Digital Personal Data Protection Act, 2023, you may:</p>
+<ul>
+<li>Access the personal information we hold about you.</li>
+<li>Request correction of inaccurate or incomplete information.</li>
+<li>Request deletion of your account and personal data. You can do this yourself in the app under Settings → Delete Account, or on our website’s Delete Account page.</li>
+<li>Withdraw permissions (location, camera, notifications) at any time in your device settings.</li>
+<li>Nominate another person to exercise your rights in the event of your death or incapacity.</li>
+<li>Raise a complaint with us (see Section 13).</li>
+</ul>
+<p>To make a request, email us from your registered contact details at <a href="mailto:supportrentgox@gmail.com.">supportrentgox@gmail.com.</a></p>
+</section>
 
-    <section id="sharing">
-      <h2><span class="num-tag">10</span>Data Sharing &amp; Disclosure</h2>
-      <p>We do not sell your personal data. We share data only in the following circumstances:</p>
-      <ul>
-        <li><strong>Between Users:</strong> When a Rent Seeker contacts a Property Owner about a Listing, relevant contact details (such as mobile number) may be shared between the two Users to facilitate that specific interaction.</li>
-        <li><strong>Service Providers:</strong> With infrastructure providers described in Section 8 (Firebase, Supabase, Cloudflare R2) and with PhonePe for payment processing, strictly to operate the App.</li>
-        <li><strong>Legal Requirements:</strong> Where required to comply with applicable law, a court order, or a lawful request from a government or regulatory authority in India.</li>
-        <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of business assets, subject to equivalent privacy protections.</li>
-      </ul>
-    </section>
+<section aria-labelledby="10-children-s-privacy">
+<h2 id="10-children-s-privacy">10. Children’s Privacy</h2>
+<p>RentGoX is intended for people aged 18 and above. We do not knowingly collect personal information from anyone under 18. When you sign in, you confirm by ticking the box on the login screen that you are 18 or older. If we learn that a child’s information has been provided to us, we will delete it. If you believe a child has used the Service, please contact us.</p>
+</section>
 
-    <section id="security">
-      <h2><span class="num-tag">11</span>Data Security</h2>
-      <p>We implement industry-standard technical and organizational safeguards to protect your data, including encrypted data transmission (HTTPS/TLS), secure authentication through Firebase, access-controlled database policies within Supabase, and restricted-access object storage through Cloudflare R2. Payment data is handled entirely within PhonePe's PCI-DSS compliant infrastructure. While we take reasonable steps to protect your information, no method of electronic transmission or storage is completely secure, and we cannot guarantee absolute security.</p>
-    </section>
+<section aria-labelledby="11-third-party-services-and-links">
+<h2 id="11-third-party-services-and-links">11. Third-Party Services and Links</h2>
+<p>The Service may link to or rely on third-party services such as Google, Razorpay, and map providers. Their handling of your data is governed by their own privacy policies, and we encourage you to read them.</p>
+</section>
 
-    <section id="retention">
-      <h2><span class="num-tag">12</span>Data Retention</h2>
-      <p>We retain your account and Listing data for as long as your account remains active, and for a reasonable period thereafter to comply with legal, accounting, or dispute-resolution obligations. Property photographs and Listing details are retained until you delete the Listing or your account. Upon account deletion, we will delete or anonymize your personal data within a reasonable timeframe, except where retention is required by law.</p>
-    </section>
+<section aria-labelledby="12-changes-to-this-policy">
+<h2 id="12-changes-to-this-policy">12. Changes to This Policy</h2>
+<p>We may update this Privacy Policy from time to time to reflect changes in our practices, features, or legal requirements. The updated version will be posted in the app and on our website with a new effective date. Continued use of the Service after a change means you accept the updated policy.</p>
+</section>
 
-    <section id="rights">
-      <h2><span class="num-tag">13</span>Your Rights</h2>
-      <p>As a User, you have the right to:</p>
-      <ul>
-        <li>Access the personal data we hold about you.</li>
-        <li>Request correction of inaccurate or incomplete data.</li>
-        <li>Request deletion of your account and associated personal data.</li>
-        <li>Withdraw location permission at any time through your device settings.</li>
-        <li>Withdraw consent to data processing, subject to the App's ability to continue providing services to you.</li>
-      </ul>
-      <p>To exercise any of these rights, please contact us using the details in Section 16. We will respond within a reasonable time in accordance with applicable Indian data protection law, including the Digital Personal Data Protection Act, 2023, where applicable.</p>
-    </section>
+<section aria-labelledby="13-contact-and-complaints">
+<h2 id="13-contact-and-complaints">13. Contact and Complaints</h2>
+<p>For privacy questions, requests, or complaints, contact us:</p>
+<ul>
+<li>Email: <a href="mailto:supportrentgox@gmail.com">supportrentgox@gmail.com</a></li>
+<li>Support hours: Monday to Saturday, 10:00 AM to 4:00 PM IST (closed on public holidays)</li>
+<li>Website: <a href="https://rentgox.github.io/rentgox-website/">https://rentgox.github.io/rentgox-website/</a></li>
+<li>App: <a href="https://play.google.com/store/apps/details?id=com.rentgox.com">https://play.google.com/store/apps/details?id=com.rentgox.com</a></li>
+<li>Business, sponsorship, advertising, and all other enquiries: <a href="mailto:rentgox.review@gmail.com">rentgox.review@gmail.com</a></li>
+<li>We do not provide any phone number. Please contact us by email only.</li>
+</ul>
+<p>We acknowledge privacy complaints within 48 hours and aim to resolve them within 15 days, and in any case within one month.</p>
+</section>
 
-    <section id="children">
-      <h2><span class="num-tag">14</span>Children's Privacy</h2>
-      <p>The App is intended for use only by individuals aged 18 years and above. We do not knowingly collect personal data from minors. If we become aware that we have inadvertently collected data from a minor, we will take steps to promptly delete such data.</p>
-    </section>
+<section aria-labelledby="14-governing-law">
+<h2 id="14-governing-law">14. Governing Law</h2>
+<p>This Privacy Policy is governed by the laws of India, including the Information Technology Act, 2000, the Digital Personal Data Protection Act, 2023, and the rules made under them.</p>
+</section>
 
-    <section id="changes">
-      <h2><span class="num-tag">15</span>Changes to this Policy</h2>
-      <p>We may update this Privacy Policy from time to time to reflect changes in our data practices, App features, or legal requirements. Any updates will be posted within the App or on this page with a revised "Last Updated" date. We encourage you to review this Policy periodically.</p>
-    </section>
-
-    <section id="contact">
-      <h2><span class="num-tag">16</span>Contact Us</h2>
-      <p>For any questions, requests, or concerns regarding this Privacy Policy or your personal data, please contact us:</p>
-      <table class="info">
-        <tr><th>Privacy / Support Email</th><td>privacy@rentgox.com</td></tr>
-        <tr><th>Grievance Officer Email</th><td>grievance@rentgox.com</td></tr>
-        <tr><th>App Name</th><td>RentGoX (Android)</td></tr>
-        <tr><th>Availability</th><td>Google Play Store</td></tr>
-      </table>
-    </section>
-
-  </main>
+<div class="cross-links">
+<a href="terms.html">Terms of Service</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="refund.html">Refund &amp; Cancellation Policy</a>
+<a href="contact.html">Contact Us</a>
 </div>
 
+</div>
+</main>
+
 <footer class="site-footer">
-  <div class="wrap">
-    <strong>RentGoX</strong>
-    <span>Rental Property Listing Platform — Android App</span>
-    <hr class="footer-rule">
-    <div class="footer-links">
-      <a href="app-terms.html">Terms of Service</a>
-      <a href="app-privacy.html">Privacy Policy</a>
-      <a href="app-refund.html">Refund Policy</a>
-    </div>
-    <span>© 2026 RentGoX. All rights reserved.</span>
-  </div>
+<div class="footer-wrap">
+<div class="footer-col">
+<h3>RentGoX</h3>
+<p style="font-size:14px;">Find rooms, houses, apartments, hostels, PGs, shops and offices for rent, all in one place.</p>
+</div>
+<div class="footer-col">
+<h3>Legal</h3>
+<a href="terms.html">Terms of Service</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="refund.html">Refund &amp; Cancellation Policy</a>
+</div>
+<div class="footer-col">
+<h3>Support</h3>
+<a href="contact.html">Contact Us</a>
+<a href="mailto:supportrentgox@gmail.com">supportrentgox@gmail.com</a>
+</div>
+</div>
+<div class="footer-bottom">© 2026 RentGoX. All Rights Reserved.</div>
 </footer>
 
 </body>
