@@ -3,397 +3,383 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RentGoX Android App — Terms of Service</title>
-<meta name="description" content="Official Terms of Service for the RentGoX Android application — a rental property listing platform for property owners and rent seekers in India.">
-<meta name="robots" content="index, follow">
+<title>Terms &amp; Conditions | RentGoX - Rental Property Listing Platform</title>
+<meta name="description" content="RentGoX Terms of Service: eligibility, what RentGoX is and is not, owner listings, seeker safety, premium plans, boosts, acceptable use and grievances.">
+<meta name="keywords" content="RentGoX Terms of Service, RentGoX terms and conditions, rental listing platform terms India">
 <meta name="author" content="RentGoX">
-<meta name="theme-color" content="#123B44">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://rentgox.github.io/rentgox-website/terms.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Terms &amp; Conditions | RentGoX">
+<meta property="og:description" content="RentGoX Terms of Service: eligibility, what RentGoX is and is not, owner listings, seeker safety, premium plans, boosts, acceptable use and grievances.">
+<meta property="og:url" content="https://rentgox.github.io/rentgox-website/terms.html">
+<meta property="og:site_name" content="RentGoX">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Terms &amp; Conditions | RentGoX">
+<meta name="twitter:description" content="RentGoX Terms of Service: eligibility, what RentGoX is and is not, owner listings, seeker safety, premium plans, boosts, acceptable use and grievances.">
+
 <style>
-  :root{
-    --ink:#1F2A2C;
-    --ink-soft:#4B5B5D;
-    --primary:#123B44;
-    --primary-dark:#0B2A31;
-    --accent:#C7912F;
-    --accent-soft:#E9D6AC;
-    --paper:#FAF9F6;
-    --panel:#FFFFFF;
-    --line:#E4E1D8;
-    --radius:10px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
+:root{
+    --brand:#0A7CFF;
+    --brand-dark:#0057b8;
+    --bg:#f5f7fa;
+    --card:#ffffff;
+    --text:#333333;
+    --muted:#666666;
+    --border:#e6ebf2;
+}
+*{box-sizing:border-box;}
+body{
+    font-family:Arial,Helvetica,sans-serif;
     margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.65;
-    font-size:16px;
-  }
-  h1,h2,h3{
-    font-family:Georgia,"Times New Roman",serif;
-    color:var(--primary-dark);
-    line-height:1.25;
-    margin:0 0 .5em;
-  }
-  a{color:var(--primary);}
-  a:focus,button:focus,summary:focus{outline:3px solid var(--accent-soft);outline-offset:2px;}
-
-  /* Top ribbon */
-  .ribbon{
-    background:var(--primary-dark);
-    color:#EFE9DA;
-    font-size:.8rem;
-    text-align:center;
-    padding:.5rem 1rem;
-    letter-spacing:.03em;
-  }
-  .ribbon strong{color:var(--accent);}
-
-  /* Header */
-  header.masthead{
-    background:linear-gradient(155deg,var(--primary) 0%,var(--primary-dark) 100%);
-    color:#F4F1E8;
-    padding:2.6rem 1.25rem 3.4rem;
-    position:relative;
-  }
-  .wrap{max-width:1100px;margin:0 auto;}
-  .brandline{
-    display:flex;align-items:center;gap:.6rem;
-    font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;
-    color:var(--accent-soft);margin-bottom:1rem;
-  }
-  .brandline .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;}
-  header.masthead h1{color:#FFFDF8;font-size:2.3rem;margin-bottom:.35rem;}
-  header.masthead p.sub{color:#D9D3C2;max-width:640px;font-size:1.02rem;margin:0;}
-  .meta-strip{
-    display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem;
-  }
-  .meta-chip{
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.18);
-    color:#EFE9DA;
-    padding:.4rem .8rem;
-    border-radius:999px;
-    font-size:.8rem;
-  }
-  .meta-chip b{color:var(--accent-soft);}
-
-  /* Layout */
-  .layout{
-    max-width:1100px;margin:0 auto;
-    padding:0 1.25rem 4rem;
-    display:grid;
-    grid-template-columns:250px 1fr;
-    gap:2.5rem;
-    margin-top:-1.6rem;
-  }
-  nav.toc{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:1.1rem 1.2rem;
-    align-self:start;
+    padding:0;
+    line-height:1.7;
+    background:var(--bg);
+    color:var(--text);
+}
+.site-header{
+    background:#ffffff;
+    border-bottom:1px solid var(--border);
     position:sticky;
-    top:1.25rem;
-    box-shadow:0 8px 24px -18px rgba(18,59,68,.4);
-  }
-  nav.toc h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);font-family:inherit;margin-bottom:.7rem;}
-  nav.toc ol{margin:0;padding:0 0 0 1.1rem;}
-  nav.toc li{margin-bottom:.5rem;font-size:.88rem;}
-  nav.toc a{text-decoration:none;color:var(--ink);}
-  nav.toc a:hover{color:var(--primary);text-decoration:underline;}
-
-  main.doc{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:2.2rem 2.4rem;
-    box-shadow:0 8px 24px -18px rgba(18,59,68,.4);
-  }
-  main.doc section{
-    padding:1.4rem 0;
-    border-bottom:1px dashed var(--line);
-  }
-  main.doc section:last-of-type{border-bottom:none;}
-  .num-tag{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:28px;height:28px;
-    background:var(--primary);color:#fff;
-    border-radius:6px;font-size:.85rem;font-weight:700;
-    margin-right:.6rem;flex:none;
-  }
-  section h2{
-    display:flex;align-items:center;font-size:1.28rem;
-  }
-  section h3{font-size:1.05rem;margin-top:1rem;color:var(--primary);}
-  section p, section li{color:var(--ink);font-size:.98rem;}
-  section ul, section ol.sublist{padding-left:1.4rem;margin:.5rem 0;}
-  section li{margin-bottom:.4rem;}
-  .callout{
-    background:#FBF6E9;
-    border:1px solid var(--accent-soft);
-    border-left:4px solid var(--accent);
-    padding:.9rem 1.1rem;
+    top:0;
+    z-index:100;
+}
+.nav-wrap{
+    max-width:1000px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 20px;
+    flex-wrap:wrap;
+}
+.brand{
+    font-size:1.3rem;
+    font-weight:bold;
+    color:var(--brand);
+    text-decoration:none;
+}
+nav.primary-nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+    margin:0;
+    padding:0;
+    flex-wrap:wrap;
+}
+nav.primary-nav a{
+    color:var(--text);
+    text-decoration:none;
+    font-size:15px;
+    font-weight:600;
+}
+nav.primary-nav a:hover,
+nav.primary-nav a:focus,
+nav.primary-nav a[aria-current="page"]{
+    color:var(--brand);
+}
+main{
+    max-width:900px;
+    margin:40px auto;
+    padding:0 20px;
+}
+.container{
+    background:var(--card);
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+h1,h2{
+    color:var(--brand);
+}
+h1{font-size:1.9rem;margin-top:0;}
+h2{
+    font-size:1.3rem;
+    margin-top:34px;
+    border-bottom:2px solid var(--border);
+    padding-bottom:6px;
+}
+a{color:var(--brand);text-decoration:none;}
+a:hover,a:focus{text-decoration:underline;}
+ul{padding-left:22px;}
+li{margin-bottom:6px;}
+.effective-date{color:var(--muted);font-size:15px;}
+.highlight-box{
+    background:#eef6ff;
+    border-left:4px solid var(--brand);
+    padding:14px 18px;
     border-radius:6px;
-    font-size:.92rem;
-    margin-top:.8rem;
-  }
-  table.info{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.92rem;}
-  table.info th,table.info td{border:1px solid var(--line);padding:.55rem .7rem;text-align:left;}
-  table.info th{background:#F3F1E9;color:var(--primary-dark);}
-
-  details.mobile-toc{display:none;}
-
-  footer.site-footer{
-    background:var(--primary-dark);
-    color:#CFC9B8;
-    padding:2.4rem 1.25rem;
-    margin-top:2rem;
+    margin:16px 0;
+}
+.cross-links{
+    margin-top:24px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+    font-size:15px;
+}
+.cross-links a{margin-right:16px;font-weight:600;}
+.site-footer{
+    background:#0A1F3D;
+    color:#cbd6e6;
+    margin-top:60px;
+    padding:36px 20px;
+}
+.footer-wrap{
+    max-width:1000px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:24px;
+}
+.footer-col h3{
+    color:#ffffff;
+    font-size:15px;
+    margin:0 0 12px;
+}
+.footer-col a{
+    color:#cbd6e6;
+    display:block;
+    margin-bottom:8px;
+    text-decoration:none;
+    font-size:14px;
+}
+.footer-col a:hover{color:#ffffff;text-decoration:underline;}
+.footer-bottom{
+    max-width:1000px;
+    margin:24px auto 0;
+    padding-top:16px;
+    border-top:1px solid #1e355c;
+    font-size:13px;
+    color:#8fa3c2;
     text-align:center;
-    font-size:.85rem;
-  }
-  footer.site-footer .wrap{display:flex;flex-direction:column;gap:.5rem;align-items:center;}
-  footer.site-footer strong{color:#F4F1E8;}
-  footer.site-footer a{color:var(--accent-soft);text-decoration:none;}
-  footer.site-footer a:hover{text-decoration:underline;}
-  .footer-links{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:.4rem;}
-  .footer-rule{width:60px;height:2px;background:var(--accent);border:none;margin:.8rem 0;}
-
-  @media (max-width:860px){
-    .layout{grid-template-columns:1fr;margin-top:-1.2rem;}
-    nav.toc{display:none;}
-    details.mobile-toc{
-      display:block;background:var(--panel);border:1px solid var(--line);
-      border-radius:var(--radius);padding:.9rem 1.1rem;margin-bottom:1.2rem;
-      box-shadow:0 8px 24px -18px rgba(18,59,68,.4);
-    }
-    details.mobile-toc summary{cursor:pointer;font-weight:700;color:var(--primary-dark);font-size:.92rem;}
-    details.mobile-toc ol{margin:.8rem 0 0;padding-left:1.2rem;}
-    details.mobile-toc li{margin-bottom:.5rem;font-size:.9rem;}
-    main.doc{padding:1.5rem 1.25rem;}
-    header.masthead h1{font-size:1.7rem;}
-  }
+}
+@media (max-width:600px){
+    main{margin:20px auto;}
+    .container{padding:18px;border-radius:0;}
+    h1{font-size:1.5rem;}
+    h2{font-size:1.15rem;}
+    .nav-wrap{flex-direction:column;align-items:flex-start;gap:10px;}
+}
 </style>
 </head>
 <body>
 
-<div class="ribbon">RentGoX Android App &nbsp;•&nbsp; Policy Document for <strong>Google Play</strong> &amp; <strong>PhonePe Merchant Verification</strong></div>
-
-<header class="masthead">
-  <div class="wrap">
-    <div class="brandline"><span class="dot"></span> RentGoX — Legal &amp; Compliance</div>
-    <h1>Terms of Service</h1>
-    <p class="sub">These Terms govern your use of the RentGoX Android mobile application, available on Google Play, for listing, discovering, and renting residential and commercial properties in India.</p>
-    <div class="meta-strip">
-      <span class="meta-chip"><b>Effective Date:</b> 30 July 2026</span>
-      <span class="meta-chip"><b>Last Updated:</b> 30 July 2026</span>
-      <span class="meta-chip"><b>Platform:</b> Android (Google Play)</span>
-      <span class="meta-chip"><b>Governing Law:</b> India</span>
-    </div>
-  </div>
+<header class="site-header">
+<div class="nav-wrap">
+<a class="brand" href="index.html">RentGoX</a>
+<nav class="primary-nav" aria-label="Main navigation">
+<ul>
+<li><a href="terms.html" aria-current="page">Terms of Service</a></li>
+<li><a href="privacy.html">Privacy Policy</a></li>
+<li><a href="refund.html">Refund Policy</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+</div>
 </header>
 
-<div class="layout">
+<main>
+<div class="container">
 
-  <details class="mobile-toc">
-    <summary>Jump to a section</summary>
-    <ol>
-      <li><a href="#acceptance">Acceptance of Terms</a></li>
-      <li><a href="#definitions">Definitions</a></li>
-      <li><a href="#eligibility">User Eligibility</a></li>
-      <li><a href="#accounts">Account Registration &amp; Rules</a></li>
-      <li><a href="#listings">Property Listing Rules</a></li>
-      <li><a href="#premium">Premium Membership</a></li>
-      <li><a href="#payments">Payments &amp; PhonePe</a></li>
-      <li><a href="#acceptable-use">Acceptable Use Policy</a></li>
-      <li><a href="#suspension">Suspension &amp; Termination</a></li>
-      <li><a href="#ip">Intellectual Property</a></li>
-      <li><a href="#liability">Limitation of Liability</a></li>
-      <li><a href="#disclaimer">Disclaimer of Warranties</a></li>
-      <li><a href="#indemnity">Indemnification</a></li>
-      <li><a href="#law">Governing Law &amp; Jurisdiction</a></li>
-      <li><a href="#changes">Changes to these Terms</a></li>
-      <li><a href="#contact">Contact Us</a></li>
-    </ol>
-  </details>
+<h1>Terms &amp; Conditions</h1>
+<p class="effective-date"><strong>Last Updated:</strong> November 11, 2026</p>
 
-  <nav class="toc" aria-label="Table of contents">
-    <h2>On this page</h2>
-    <ol>
-      <li><a href="#acceptance">Acceptance of Terms</a></li>
-      <li><a href="#definitions">Definitions</a></li>
-      <li><a href="#eligibility">User Eligibility</a></li>
-      <li><a href="#accounts">Account Registration &amp; Rules</a></li>
-      <li><a href="#listings">Property Listing Rules</a></li>
-      <li><a href="#premium">Premium Membership</a></li>
-      <li><a href="#payments">Payments &amp; PhonePe</a></li>
-      <li><a href="#acceptable-use">Acceptable Use Policy</a></li>
-      <li><a href="#suspension">Suspension &amp; Termination</a></li>
-      <li><a href="#ip">Intellectual Property</a></li>
-      <li><a href="#liability">Limitation of Liability</a></li>
-      <li><a href="#disclaimer">Disclaimer of Warranties</a></li>
-      <li><a href="#indemnity">Indemnification</a></li>
-      <li><a href="#law">Governing Law &amp; Jurisdiction</a></li>
-      <li><a href="#changes">Changes to these Terms</a></li>
-      <li><a href="#contact">Contact Us</a></li>
-    </ol>
-  </nav>
+<p>Welcome to RentGoX. These Terms of Service (“Terms”) govern your use of the RentGoX mobile application, website, and related services (the “Service”). By creating an account or using the Service, you agree to these Terms, our Privacy Policy, and our Refund &amp; Cancellation Policy. If you do not agree, please do not use the Service.</p>
 
-  <main class="doc">
+<section aria-labelledby="1-eligibility">
+<h2 id="1-eligibility">1. Eligibility</h2>
+<p>You must be at least 18 years old and legally able to enter into a binding contract under Indian law to use RentGoX. If you use the Service on behalf of a business, you confirm you are authorised to bind it. By ticking the box on the login screen, you confirm that you are at least 18 and that you accept these Terms and our Privacy Policy.</p>
+</section>
 
-    <section id="acceptance">
-      <h2><span class="num-tag">1</span>Acceptance of Terms</h2>
-      <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User", "you") and RentGoX ("RentGoX", "we", "us", "our") governing your download, installation, and use of the RentGoX Android application (the "App") distributed through the Google Play Store.</p>
-      <p>By creating an account, signing in, or otherwise using any feature of the App, you confirm that you have read, understood, and agreed to be bound by these Terms, along with our Privacy Policy and Refund Policy, which are incorporated herein by reference. If you do not agree with any part of these Terms, you must not use the App.</p>
-    </section>
+<section aria-labelledby="2-what-rentgox-is-and-is-not">
+<h2 id="2-what-rentgox-is-and-is-not">2. What RentGoX Is (and Is Not)</h2>
+<p>RentGoX is an online platform that lets property owners list rooms, houses, apartments, hostels, PGs, shops, offices, and marriage halls, and lets seekers discover them and get in touch. RentGoX acts only as an intermediary.</p>
+<ul>
+<li>RentGoX is not a broker, agent, landlord, or tenant, and is not a party to any rental, sale, deposit, or booking arrangement between owners and seekers.</li>
+<li>Listings are created by owners. We may review listings before or after publication, but we do not guarantee that any listing, price, photo, availability, or “Reviewed” label is accurate, complete, or current.</li>
+<li>A “Reviewed” label means our team looked at the listing before it went live. It does not mean that the owner’s identity, ownership of the property, or any detail has been verified.</li>
+<li>You are responsible for your own decisions and for checking a property, owner, or hall in person before paying any money.</li>
+</ul>
+</section>
 
-    <section id="definitions">
-      <h2><span class="num-tag">2</span>Definitions</h2>
-      <ul>
-        <li><strong>"Property Owner"</strong> — a User who registers on the App using Google Sign-In to create and manage property listings.</li>
-        <li><strong>"Rent Seeker"</strong> — a User who registers on the App using their mobile number to browse listings and contact Property Owners.</li>
-        <li><strong>"Listing"</strong> — a property record created by a Property Owner, including photographs, description, rent amount, and location details.</li>
-        <li><strong>"Premium Membership"</strong> — a paid subscription tier that grants additional listing benefits within the App.</li>
-        <li><strong>"Payment Gateway"</strong> — the PhonePe Payment Gateway, used to process all payments within the App.</li>
-      </ul>
-    </section>
+<section aria-labelledby="3-accounts">
+<h2 id="3-accounts">3. Accounts</h2>
+<ul>
+<li>Seekers sign in with a mobile number. Property owners sign in with Google and provide a mobile number.</li>
+<li>You must give accurate information and keep it up to date. You are responsible for all activity under your account and for keeping your device and App Lock secure.</li>
+<li>Changing an owner’s registered mobile number requires a request that RentGoX may verify and approve.</li>
+<li>One person may not create multiple accounts to avoid listing limits or restrictions.</li>
+<li>To help with support, security, and complaints, authorised RentGoX team members may access an account, and every such access is logged.</li>
+</ul>
+</section>
 
-    <section id="eligibility">
-      <h2><span class="num-tag">3</span>User Eligibility</h2>
-      <ul>
-        <li>You must be at least 18 years of age and legally capable of entering into a binding contract under the Indian Contract Act, 1872, to use the App.</li>
-        <li>Property Owners must sign in using a valid and active Google account and must have a genuine, lawful right to list the property being advertised (as owner, authorized landlord, or authorized property manager/agent).</li>
-        <li>Rent Seekers must register using a valid, active Indian mobile number capable of receiving an OTP (one-time password) for verification.</li>
-        <li>You must not use the App if you have previously been suspended or removed from the App for violation of these Terms.</li>
-        <li>By using the App, you represent that all information you provide is accurate, current, and truthful.</li>
-      </ul>
-    </section>
+<section aria-labelledby="4-owner-listings-and-content">
+<h2 id="4-owner-listings-and-content">4. Owner Listings and Content</h2>
+<ul>
+<li>You may list only properties you own or are legally authorised to rent out, and you must follow all laws that apply to you, including rent, tenancy, tenant-verification, and local registration rules.</li>
+<li>Listings must be truthful: correct rent, deposit, address, photos, and availability. Use only photos and videos you have the right to use.</li>
+<li>When you submit a new listing, you must confirm that you are the owner of the property or are legally authorised by the owner to list it, and that the details, price, and photos are true. A false confirmation can lead to removal of the listing, suspension of your account, and legal action where the law allows.</li>
+<li>Free accounts can list a limited number of properties. Premium plans increase these limits as shown at checkout.</li>
+<li>You must keep availability up to date and mark a property as rented or unavailable when it is no longer open. We may ask you to confirm availability.</li>
+<li>RentGoX may approve, reject, edit, hide, or remove any listing that breaks these Terms, appears misleading, is reported, or is inactive. Changes to an approved listing may be re-reviewed before they go live.</li>
+<li>In some cases RentGoX may list a property on an owner’s behalf using details the owner provided. The owner can then claim it by signing in with the same mobile number.</li>
+<li>You keep ownership of your content. By posting it, you give RentGoX a free, non-exclusive, worldwide licence to host, display, reproduce, and promote it within the Service and on our website and channels.</li>
+</ul>
+</section>
 
-    <section id="accounts">
-      <h2><span class="num-tag">4</span>Account Registration &amp; Rules</h2>
-      <h3>4.1 Sign-In Methods</h3>
-      <p>Property Owners register and sign in exclusively via Google Sign-In. Rent Seekers register using their mobile number, verified through an OTP-based authentication flow. Account creation and session management are handled through Firebase Authentication.</p>
-      <h3>4.2 Account Responsibility</h3>
-      <ul>
-        <li>You are solely responsible for maintaining the confidentiality of your account and for all activity that occurs under your account.</li>
-        <li>You must notify us immediately of any unauthorized access to, or use of, your account.</li>
-        <li>One individual or legal entity may not maintain more than one account for the same user role without our prior written consent.</li>
-        <li>Impersonating another person, or creating an account on behalf of someone without authorization, is strictly prohibited.</li>
-      </ul>
-    </section>
+<section aria-labelledby="5-seeker-responsibilities-and-safety">
+<h2 id="5-seeker-responsibilities-and-safety">5. Seeker Responsibilities and Safety</h2>
+<ul>
+<li>Visit and verify a property, and meet the owner, before paying any advance, deposit, or rent.</li>
+<li>Do not pay money to anyone outside the app on the promise of “holding” a property. RentGoX staff will never ask for your rent, deposit, OTP, or UPI PIN.</li>
+<li>Report suspicious listings using the Report option in the app.</li>
+</ul>
+</section>
 
-    <section id="listings">
-      <h2><span class="num-tag">5</span>Property Listing Rules</h2>
-      <ul>
-        <li>Property Owners may create Listings by providing accurate details of the property, including description, rent, location, and photographs of the actual property being offered.</li>
-        <li>Photographs uploaded must genuinely represent the property. Uploading misleading, unrelated, copyrighted-without-permission, or stock images as if they depict the actual property is prohibited.</li>
-        <li>A Listing must not advertise a property that the Property Owner does not have the legal right to rent out.</li>
-        <li>RentGoX does not verify property ownership documents and does not guarantee the accuracy, availability, or legality of any Listing. Rent Seekers are advised to independently verify all property and ownership details before entering into any rental arrangement.</li>
-        <li>RentGoX acts solely as a listing and discovery platform and is not a party to any rental agreement, lease, or transaction between a Property Owner and a Rent Seeker.</li>
-        <li>We reserve the right to remove, edit, or reject any Listing that violates these Terms, applicable law, or that we reasonably believe to be fraudulent, misleading, or inappropriate.</li>
-      </ul>
-    </section>
+<section aria-labelledby="6-premium-plans-and-payments">
+<h2 id="6-premium-plans-and-payments">6. Premium Plans and Payments</h2>
+<ul>
+<li>Premium plans for owners are paid, fixed-term digital services (for example, 6 months or 1 year). The plan’s features, validity, and price are shown before you pay. Prices are in Indian Rupees and may change for future purchases.</li>
+<li>Plans do not renew automatically. A plan is activated on your account after successful payment confirmation.</li>
+<li>Chat: owners on the Free plan can send up to 20 chat messages per calendar month (the count restarts every month) and can receive unlimited messages. Premium plans include unlimited sending. Seekers are not limited.</li>
+<li>Chat messages are deleted automatically 10 days after they are sent, and a conversation is deleted 10 days after its last message.</li>
+<li>If you buy a new plan while another is active, the new plan applies from its activation date, and the remaining validity of the earlier plan is not added.</li>
+<li>When a plan expires, your account returns to the Free plan. Properties above the Free limit are hidden, not deleted, and become visible again if you renew.</li>
+<li>Coupon codes and discounts apply only as stated, may expire, and cannot be exchanged for cash.</li>
+<li>All payments are made through UPI and processed by Razorpay. Refunds are governed by our Refund &amp; Cancellation Policy.</li>
+</ul>
+</section>
 
-    <section id="premium">
-      <h2><span class="num-tag">6</span>Premium Membership</h2>
-      <ul>
-        <li>Premium Membership is an optional, paid subscription available to Property Owners that unlocks additional listing benefits within the App (such as increased listing capacity or enhanced listing visibility, as displayed in the App at the time of purchase).</li>
-        <li>Premium Membership fees are payable in advance through the PhonePe Payment Gateway and are subject to the applicable plan duration displayed in the App at checkout.</li>
-        <li>Benefits associated with Premium Membership are available only for the active subscription period and do not carry forward automatically unless expressly stated in the App at the time of purchase.</li>
-        <li>RentGoX reserves the right to modify the features, pricing, or duration of Premium Membership plans for future purchases, with reasonable notice provided in the App.</li>
-        <li>Refunds relating to Premium Membership are governed exclusively by our Refund Policy.</li>
-      </ul>
-    </section>
+<section aria-labelledby="7-boost-featured-listings">
+<h2 id="7-boost-featured-listings">7. Boost / Featured Listings</h2>
+<p>A Boost is an optional paid service that shows one of your approved properties in the “Featured” section at the top of the app for the number of days you choose.</p>
+<ul>
+<li>The available durations and the price of each are shown in the app before you pay. Prices may change for future purchases.</li>
+<li>Only approved and visible properties can be boosted, and only by their owner.</li>
+<li>A Boost starts when your payment is confirmed. If you buy another Boost while one is running, the new one starts when the running one ends.</li>
+<li>A Boost is advertising. Featured placement does not guarantee views, calls, enquiries, or a tenant.</li>
+<li>We may stop a Boost at any time, without a refund, if the listing breaks these Terms, is misleading, or is reported and found to be false.</li>
+<li>Coupons and discounts do not apply to Boosts.</li>
+<li>Payments are made through UPI and processed by Razorpay. Refunds are governed by our Refund &amp; Cancellation Policy.</li>
+</ul>
+</section>
 
-    <section id="payments">
-      <h2><span class="num-tag">7</span>Payments &amp; PhonePe Payment Gateway</h2>
-      <p>All payments made within the App, including Premium Membership fees, are processed securely through the PhonePe Payment Gateway. RentGoX does not store your card, UPI, or net-banking credentials; these are handled directly by PhonePe and its associated banking partners in accordance with applicable RBI guidelines.</p>
-      <div class="callout">By making a payment through the App, you agree to PhonePe's own terms of use and privacy policy applicable to payment processing, in addition to these Terms.</div>
-    </section>
+<section aria-labelledby="8-marriage-hall-services">
+<h2 id="8-marriage-hall-services">8. Marriage Hall Services</h2>
+<ul>
+<li>Marriage hall features are being rolled out step by step and may not be available to everyone yet.</li>
+<li>Hall owners list a hall by purchasing a subscription (one subscription per hall) and may be asked to submit basic business details before subscribing.</li>
+<li>Customers may pay a booking advance online through the app. RentGoX only provides the technology and payment facility; the hall owner is solely responsible for providing the hall and its services.</li>
+<li>If you cancel a booking within 48 hours of paying the advance, the advance is refunded in full. After 48 hours the advance is non-refundable. See the Refund &amp; Cancellation Policy for details.</li>
+<li>Disputes about the hall, event, or services are between the customer and the hall owner.</li>
+</ul>
+</section>
 
-    <section id="acceptable-use">
-      <h2><span class="num-tag">8</span>Acceptable Use Policy</h2>
-      <p>While using the App, you agree that you will not:</p>
-      <ul>
-        <li>Upload false, misleading, defamatory, obscene, or unlawful content, including fake property Listings or manipulated photographs.</li>
-        <li>Use the App for any purpose other than genuine property listing, discovery, or rental-related communication.</li>
-        <li>Harass, threaten, defraud, or mislead Property Owners or Rent Seekers contacted through the App.</li>
-        <li>Attempt to reverse-engineer, decompile, tamper with, or gain unauthorized access to the App or its backend systems.</li>
-        <li>Use automated tools, bots, or scripts to scrape, extract, or mass-download Listing data or photographs from the App.</li>
-        <li>Circumvent, disable, or interfere with the App's location permission, authentication, or payment security features.</li>
-        <li>Violate any applicable Indian law, including but not limited to the Information Technology Act, 2000, and rules made thereunder.</li>
-      </ul>
-    </section>
+<section aria-labelledby="9-rentgox-ai-assistant">
+<h2 id="9-rentgox-ai-assistant">9. RentGoX AI Assistant</h2>
+<p>The in-app AI assistant gives automated replies and can request a callback from our team. Replies may be inaccurate or incomplete and are not legal, financial, or professional advice. Messages you send to the assistant are processed by Google Gemini as described in our Privacy Policy. Do not share passwords, OTPs, card details, or other sensitive information with it.</p>
+</section>
 
-    <section id="suspension">
-      <h2><span class="num-tag">9</span>Suspension &amp; Termination</h2>
-      <ul>
-        <li>We reserve the right to suspend, restrict, or permanently terminate your account, with or without prior notice, if we reasonably believe you have violated these Terms, engaged in fraudulent activity, or posted unlawful content.</li>
-        <li>You may stop using the App and request deletion of your account at any time by contacting us using the details in Section 16.</li>
-        <li>Upon termination, your right to use the App ceases immediately; however, provisions relating to Limitation of Liability, Indemnification, and Governing Law shall survive termination.</li>
-        <li>Termination of your account does not entitle you to a refund of any Premium Membership fee except as expressly provided in our Refund Policy.</li>
-      </ul>
-    </section>
+<section aria-labelledby="10-acceptable-use">
+<h2 id="10-acceptable-use">10. Acceptable Use</h2>
+<p>You agree not to:</p>
+<ul>
+<li>Post false, misleading, duplicate, or fraudulent listings, or list properties you are not authorised to rent.</li>
+<li>Buy a Boost to promote a false, misleading, or unlawful listing.</li>
+<li>Collect money under false pretences or pressure users to pay outside the platform.</li>
+<li>Harass, threaten, abuse, or discriminate against any user, or post unlawful, obscene, hateful, or infringing content.</li>
+<li>Send spam or unsolicited promotions, or scrape, copy, or resell listings or user data.</li>
+<li>Attempt to bypass limits, payments, or security, reverse engineer the app, or interfere with the Service.</li>
+<li>Use the Service for any unlawful purpose or in violation of Indian law.</li>
+</ul>
+</section>
 
-    <section id="ip">
-      <h2><span class="num-tag">10</span>Intellectual Property</h2>
-      <p>The App, including its name "RentGoX", logo, design, source code, and underlying technology, is the exclusive property of RentGoX and is protected under applicable Indian copyright and trademark laws. You are granted a limited, non-exclusive, non-transferable, revocable license to use the App solely for its intended personal or business purpose. You retain ownership of the property photographs and descriptions you upload, but by uploading them you grant RentGoX a non-exclusive, royalty-free license to display such content within the App for the purpose of operating the platform.</p>
-    </section>
+<section aria-labelledby="11-reporting-takedown-and-grievances">
+<h2 id="11-reporting-takedown-and-grievances">11. Reporting, Takedown, and Grievances</h2>
+<p>You can report a listing or user from within the app, or email <a href="mailto:supportrentgox@gmail.com.">supportrentgox@gmail.com.</a> We acknowledge complaints about content within 24 hours and aim to resolve them within 15 days. We acknowledge other grievances within 48 hours and aim to resolve them within one month. We may remove content or restrict accounts in line with the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021.</p>
+</section>
 
-    <section id="liability">
-      <h2><span class="num-tag">11</span>Limitation of Liability</h2>
-      <p>To the maximum extent permitted under applicable Indian law, RentGoX, its founders, employees, and affiliates shall not be liable for any indirect, incidental, special, or consequential damages, or any loss of profits, data, goodwill, or business opportunity arising out of or in connection with your use of the App, including but not limited to disputes between Property Owners and Rent Seekers, inaccuracies in Listings, or reliance on any information displayed in the App.</p>
-      <p>RentGoX's total aggregate liability arising from any claim relating to the App shall not exceed the amount, if any, actually paid by you to RentGoX as Premium Membership fees in the twelve (12) months preceding the claim.</p>
-    </section>
+<section aria-labelledby="12-suspension-termination-and-account-deletion">
+<h2 id="12-suspension-termination-and-account-deletion">12. Suspension, Termination, and Account Deletion</h2>
+<p>We may suspend or terminate your access, remove content, or refuse service if you breach these Terms, misuse the Service, or if required by law. You can delete your account at any time from Settings → Delete Account in the app, or from the Delete Account page on our website. Deletion is permanent and cannot be undone. Deleting your account does not by itself entitle you to a refund, and certain records are kept as described in the Privacy Policy.</p>
+</section>
 
-    <section id="disclaimer">
-      <h2><span class="num-tag">12</span>Disclaimer of Warranties</h2>
-      <p>The App is provided on an "as is" and "as available" basis. RentGoX makes no warranty, express or implied, regarding the accuracy, completeness, availability, or reliability of any Listing, photograph, or user-provided information. We do not guarantee uninterrupted or error-free operation of the App.</p>
-    </section>
+<section aria-labelledby="13-intellectual-property">
+<h2 id="13-intellectual-property">13. Intellectual Property</h2>
+<p>The RentGoX name, logo, app, website, design, and software are owned by RentGoX and protected by law. You may not copy, modify, or use them except as these Terms allow. Content posted by users remains the property of those users, subject to the licence in Section 4.</p>
+</section>
 
-     <section id="indemnity">
-      <h2><span class="num-tag">13</span>Indemnification</h2>
-      <p>You agree to indemnify and hold harmless RentGoX and its affiliates from any claims, damages, losses, or expenses (including reasonable legal fees) arising out of your breach of these Terms, your Listing content, or your interactions with other Users of the App.</p>
-    </section>
+<section aria-labelledby="14-disclaimers">
+<h2 id="14-disclaimers">14. Disclaimers</h2>
+<p>The Service is provided on an “as is” and “as available” basis. To the extent permitted by law, RentGoX does not warrant that the Service will be uninterrupted or error-free, or that listings, prices, photos, availability, or user statements are accurate or reliable. RentGoX does not verify every owner, seeker, hall, or listing and is not responsible for any agreement, payment, dispute, or loss arising between users. A “Reviewed” or “Featured” label is not a guarantee of accuracy, quality, or results.</p>
+</section>
 
-    <section id="law">
-      <h2><span class="num-tag">14</span>Governing Law &amp; Jurisdiction</h2>
-      <p>These Terms shall be governed by and construed in accordance with the laws of India. Subject to any applicable consumer protection provisions, the courts located in India shall have exclusive jurisdiction over any dispute arising out of or relating to these Terms or your use of the App, and the parties submit to the jurisdiction of such courts at the registered place of business of RentGoX.</p>
-    </section>
+<section aria-labelledby="15-limitation-of-liability">
+<h2 id="15-limitation-of-liability">15. Limitation of Liability</h2>
+<p>To the maximum extent permitted by law, RentGoX and its founder, employees, and partners will not be liable for any indirect, incidental, special, consequential, or punitive loss, or for loss of profit, data, or goodwill, arising from your use of the Service or from dealings with other users. Where liability cannot be excluded, our total liability for any claim is limited to the amount you paid to RentGoX in the 12 months before the claim. Nothing in these Terms limits any right you have under the Consumer Protection Act, 2019 or other law that cannot be waived.</p>
+</section>
 
-    <section id="changes">
-      <h2><span class="num-tag">15</span>Changes to these Terms</h2>
-      <p>We may update these Terms from time to time to reflect changes in our App, business practices, or legal requirements. The updated Terms will be posted within the App or on this page with a revised "Last Updated" date. Continued use of the App after such changes constitutes your acceptance of the revised Terms.</p>
-    </section>
+<section aria-labelledby="16-indemnity">
+<h2 id="16-indemnity">16. Indemnity</h2>
+<p>You agree to compensate RentGoX for losses, claims, and expenses (including reasonable legal fees) arising from your content, your breach of these Terms, or your violation of any law or third-party right.</p>
+</section>
 
-    <section id="contact">
-      <h2><span class="num-tag">16</span>Contact Us</h2>
-      <p>If you have any questions about these Terms, please contact us:</p>
-      <table class="info">
-        <tr><th>Support Email</th><td>support@rentgox.com</td></tr>
-        <tr><th>Legal / Grievance Email</th><td>legal@rentgox.com</td></tr>
-        <tr><th>App Name</th><td>RentGoX (Android)</td></tr>
-        <tr><th>Availability</th><td>Google Play Store</td></tr>
-      </table>
-    </section>
+<section aria-labelledby="17-changes-to-these-terms">
+<h2 id="17-changes-to-these-terms">17. Changes to These Terms</h2>
+<p>We may update these Terms from time to time. The updated version will be posted in the app and on our website with a new effective date. Continued use after the update means you accept the new Terms. If you do not agree, stop using the Service and delete your account.</p>
+</section>
 
-  </main>
+<section aria-labelledby="18-governing-law-and-disputes">
+<h2 id="18-governing-law-and-disputes">18. Governing Law and Disputes</h2>
+<p>These Terms are governed by the laws of India. Please contact us first at <a href="mailto:supportrentgox@gmail.com">supportrentgox@gmail.com</a> so we can try to resolve any dispute informally. This does not affect any right you have under consumer protection law, including the right to approach a Consumer Commission or a competent court.</p>
+</section>
+
+<section aria-labelledby="19-contact">
+<h2 id="19-contact">19. Contact</h2>
+<ul>
+<li>Email: <a href="mailto:supportrentgox@gmail.com">supportrentgox@gmail.com</a></li>
+<li>Support hours: Monday to Saturday, 10:00 AM to 4:00 PM IST (closed on public holidays)</li>
+<li>Website: <a href="https://rentgox.github.io/rentgox-website/">https://rentgox.github.io/rentgox-website/</a></li>
+<li>App: <a href="https://play.google.com/store/apps/details?id=com.rentgox.com">https://play.google.com/store/apps/details?id=com.rentgox.com</a></li>
+<li>Business, sponsorship, advertising, and all other enquiries: <a href="mailto:rentgox.review@gmail.com">rentgox.review@gmail.com</a></li>
+<li>We do not provide any phone number. Please contact us by email only.</li>
+</ul>
+</section>
+
+<div class="highlight-box"><strong>Acknowledgment:</strong> By using RentGoX, you acknowledge that you have read these Terms of Service and agree to be bound by them.</div>
+
+<div class="cross-links">
+<a href="terms.html">Terms of Service</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="refund.html">Refund &amp; Cancellation Policy</a>
+<a href="contact.html">Contact Us</a>
 </div>
 
+</div>
+</main>
+
 <footer class="site-footer">
-  <div class="wrap">
-    <strong>RentGoX</strong>
-    <span>Rental Property Listing Platform — Android App</span>
-    <hr class="footer-rule">
-    <div class="footer-links">
-      <a href="app-terms.html">Terms of Service</a>
-      <a href="app-privacy.html">Privacy Policy</a>
-      <a href="app-refund.html">Refund Policy</a>
-    </div>
-    <span>© 2026 RentGoX. All rights reserved.</span>
-  </div>
+<div class="footer-wrap">
+<div class="footer-col">
+<h3>RentGoX</h3>
+<p style="font-size:14px;">Find rooms, houses, apartments, hostels, PGs, shops and offices for rent, all in one place.</p>
+</div>
+<div class="footer-col">
+<h3>Legal</h3>
+<a href="terms.html">Terms of Service</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="refund.html">Refund &amp; Cancellation Policy</a>
+</div>
+<div class="footer-col">
+<h3>Support</h3>
+<a href="contact.html">Contact Us</a>
+<a href="mailto:supportrentgox@gmail.com">supportrentgox@gmail.com</a>
+</div>
+</div>
+<div class="footer-bottom">© 2026 RentGoX. All Rights Reserved.</div>
 </footer>
 
 </body>
