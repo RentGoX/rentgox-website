@@ -93,6 +93,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ---------- 6b. FAQ: VIEW ALL / SHOW FEWER ---------- */
+  const faqToggle = document.getElementById('faq-toggle');
+  const faqMore = document.getElementById('faq-more');
+  if (faqToggle && faqMore) {
+    faqToggle.addEventListener('click', () => {
+      const opening = faqMore.hidden;
+      faqMore.hidden = !opening;
+      faqToggle.setAttribute('aria-expanded', String(opening));
+      faqToggle.querySelector('span').textContent = opening ? faqToggle.dataset.less : faqToggle.dataset.more;
+      if (!opening) {
+        document.getElementById('faq').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
   /* ---------- 7. 3D CATEGORY CAROUSEL ---------- */
   initCategoryCarousel3D();
 
