@@ -790,3 +790,6 @@ section{ position:relative; z-index:1; padding:100px 0; }
 @media (max-width:620px){
   .download-float{ right:16px; bottom:16px; height:46px; padding:0 18px; font-size:14px; }
 }
+
+.accordion-item.faq-extra[hidden]{ display:none; }
+.accordion-item:has(+ .faq-extra[hidden]){ border-bottom:0; }
